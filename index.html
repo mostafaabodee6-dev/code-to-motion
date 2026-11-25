@@ -354,6 +354,16 @@ footer .wrap{display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-con
   <h2 data-t="gal.h">معرض أعمال الحضور</h2>
   <p class="lead" data-t="gal.p">فيديوهات سوّاها الحضور في تحدي الورشة. صوّت لأحلى عمل.</p>
   <div class="info"><h3 data-t="gal.share">شارك عملك</h3><span data-t="gal.how">سوّ فيديو «عن نفسي» من قالب AboutMe، وانشره على حساباتك مع منشن @mostafaabodee8. الأعمال المختارة تنضاف هنا.</span></div>
+  <form class="admin" id="pubForm" hidden>
+    <h3 data-t="pub.h">ارفع عملك</h3>
+    <p class="full" style="margin:0;color:var(--mute)" data-t="pub.p">يوصلني عملك، وبعد المراجعة ينضاف للمعرض.</p>
+    <label><span data-t="gal.f.name">اسم صاحب العمل</span><input id="pName" required maxlength="60"></label>
+    <label><span data-t="gal.f.title">عنوان العمل</span><input id="pTitle" required maxlength="80"></label>
+    <label class="full"><span data-t="gal.f.link">رابط المنشور (اختياري، يبدأ بـ https://)</span><input id="pLink" type="url" maxlength="300" dir="ltr"></label>
+    <label class="full"><span data-t="pub.file">ملف الفيديو (اختياري، أقل من 50MB)</span><input id="pFile" type="file" accept="video/mp4,video/webm,video/quicktime"></label>
+    <label class="full" style="flex-direction:row;align-items:center;gap:10px"><input type="checkbox" required style="width:22px;height:22px;min-height:0;accent-color:var(--pink)"><span data-t="pub.ok2">أوافق على نشر عملي واسمي في المعرض</span></label>
+    <div class="full row"><button class="btn p" type="submit" id="pSave" data-t="pub.btn">أرسل عملي</button><span class="msg" id="pMsg" role="status"></span></div>
+  </form>
   <form class="admin" id="admin" hidden>
     <h3 data-t="gal.add">إضافة عمل (تظهر لك بس)</h3>
     <label><span data-t="gal.f.name">اسم صاحب العمل</span><input id="wName" required maxlength="60"></label>
@@ -394,6 +404,8 @@ npm run dev<button class="ib" data-copy="cd code-to-motion&#10;npm install&#10;n
 <script src="catalog.js"></script>
 <script src="catalog_en.js"></script>
 <script src="scenes.js"></script>
+<script src="vendor/supabase-2.119.0.js"></script>
+<script src="backend.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

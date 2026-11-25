@@ -21,7 +21,7 @@ const T = {
     'tile4.h':'عندك فكرة؟','tile4.p':'اكتب فكرتك وخذ برومبت كامل لوكيلك.','tile4.b':'مولّد البرومبت',
     'next.soon':'الورشة الجاية… قريبًا','next.follow':'تابع حساباتي عشان يوصلك موعدها أول بأول.','next.cta':'صفحة الورشة على Luma','next.reg':'سجّل الحين','next.admin':'تعديل الورشة الجاية (تظهر لك بس)','next.f.title':'عنوان الورشة','next.started':'بدأت الورشة! 🎬',
     'cd.d':'يوم','cd.h':'ساعة','cd.m':'دقيقة','cd.s':'ثانية','save':'احفظ','saved':'انحفظ ✓','saveFail':'ما انحفظ، جرّب مرة ثانية',
-    'news.h':'جديد المكتبة يوصلك','news.p':'كل ما نضيف Skill أو درس أو ورشة جديدة، نرسل لك إيميل قصير. بدون إزعاج.','news.btn':'اشترك','news.ok':'تم الاشتراك ✓ شكرًا لك','news.no':'الاشتراك من هنا متاح للأعضاء المسجلين. تقدر تتابعني على @mostafaabodee8 أو تراسلني على mostafaabodee9@gmail.com','news.count':'عدد المشتركين: ','news.copy':'انسخ الإيميلات','news.mail':'فتحنا لك رسالة إيميل جاهزة، اضغط إرسال وتنضاف للقائمة ✓',
+    'news.h':'جديد المكتبة يوصلك','news.p':'كل ما نضيف Skill أو درس أو ورشة جديدة، نرسل لك إيميل قصير. بدون إزعاج.','news.btn':'اشترك','news.ok':'تم الاشتراك ✓ شكرًا لك','news.no':'الاشتراك من هنا متاح للأعضاء المسجلين. تقدر تتابعني على @mostafaabodee8 أو تراسلني على mostafaabodee9@gmail.com','news.count':'عدد المشتركين: ','news.copy':'انسخ الإيميلات','pub.h':'ارفع عملك','pub.p':'يوصلني عملك، وبعد المراجعة ينضاف للمعرض.','pub.need':'حط رابط المنشور أو ارفع الفيديو','pub.big':'الفيديو أكبر من 50MB','pub.type':'الصيغ المقبولة: MP4 أو WebM أو MOV','pub.ok':'وصلنا عملك ✓ بيظهر في المعرض بعد المراجعة','pub.ok2':'أوافق على نشر عملي واسمي في المعرض','pub.btn':'أرسل عملي','pub.file':'ملف الفيديو (اختياري، أقل من 50MB)','news.mail':'فتحنا لك رسالة إيميل جاهزة، اضغط إرسال وتنضاف للقائمة ✓',
     'lib.h':'المكتبة','lib.p':'اضغط + عشان تضيف للسلة، أو التفاصيل عشان تشوف الشرح والبرومبت والملف كامل.','lib.search':'ابحث في المكتبة…','lib.empty':'ما فيه نتائج هنا. جرّب تصنيف أو كلمة ثانية.',
     'type.skill':'Skills','type.agent':'وكلاء','type.command':'أوامر','type.mcp':'MCP','type.prompt':'برومبتات',
     'cat.all':'الكل','cat.video':'فيديو وموشن','cat.design':'تصميم','cat.docs':'عروض ومستندات','cat.dev':'تطوير','star':' · ننصح فيها',
@@ -51,7 +51,7 @@ const T = {
     'tile4.h':'Got an idea?','tile4.p':'Describe it and get a complete prompt for your agent.','tile4.b':'Prompt generator',
     'next.soon':'Next workshop… coming soon','next.follow':'Follow my accounts to hear the date first.','next.cta':'Workshop page on Luma','next.reg':'Register now','next.admin':'Edit the next workshop (only you see this)','next.f.title':'Workshop title','next.started':'The workshop has started! 🎬',
     'cd.d':'days','cd.h':'hours','cd.m':'minutes','cd.s':'seconds','save':'Save','saved':'Saved ✓','saveFail':'Not saved, try again',
-    'news.h':'Get library updates','news.p':'When we add a skill, lesson or workshop, we send you a short email. No spam.','news.btn':'Subscribe','news.ok':'Subscribed ✓ Thank you','news.no':'Subscribing here is open to signed-in members. Follow @mostafaabodee8 or email mostafaabodee9@gmail.com','news.count':'Subscribers: ','news.copy':'Copy emails','news.mail':'We opened a ready email for you. Press send and you are on the list ✓',
+    'news.h':'Get library updates','news.p':'When we add a skill, lesson or workshop, we send you a short email. No spam.','news.btn':'Subscribe','news.ok':'Subscribed ✓ Thank you','news.no':'Subscribing here is open to signed-in members. Follow @mostafaabodee8 or email mostafaabodee9@gmail.com','news.count':'Subscribers: ','news.copy':'Copy emails','pub.h':'Submit your work','pub.p':'Your work reaches me and appears in the gallery after review.','pub.need':'Add a post link or upload the video','pub.big':'The video is larger than 50MB','pub.type':'Accepted formats: MP4, WebM or MOV','pub.ok':'Received ✓ It will appear in the gallery after review','pub.ok2':'I agree to show my work and name in the gallery','pub.btn':'Send my work','pub.file':'Video file (optional, under 50MB)','news.mail':'We opened a ready email for you. Press send and you are on the list ✓',
     'lib.h':'Library','lib.p':'Press + to add to your install stack, or Details for the full explanation, prompt and file.','lib.search':'Search the library…','lib.empty':'Nothing here. Try another category or word.',
     'type.skill':'Skills','type.agent':'Agents','type.command':'Commands','type.mcp':'MCP','type.prompt':'Prompts',
     'cat.all':'All','cat.video':'Video & motion','cat.design':'Design','cat.docs':'Docs & decks','cat.dev':'Development','star':' · Recommended',
@@ -340,12 +340,19 @@ $('#certMake').addEventListener('click', makeCert);
 $('#certSave').addEventListener('click', async () => { if (!certBlob) return; try { const ok = await saveFile('certificate-code-to-motion.png', certBlob); if (!ok) $('#certMsg').textContent = t('cert.dlno'); } catch (e) { $('#certMsg').textContent = t('cert.dlno'); } });
 
 // ═════ قاعدة البيانات: الورشة الجاية، النشرة، المعرض ═════
+const B = window.CTM_BACKEND;
+function loadWorks() { B.approvedWorks().then(list => { works = list; galState = 'ok'; renderGallery(); }).catch(() => { galState = 'fail'; renderGallery(); }); }
 let STATIC = false, db = null, user = null, me = null, isEditor = false, nextData = null, works = [], votes = {}, subs = [], galState = 'loading';
 async function initDb() {
   if (!(window.claude && window.claude.use)) { // موقع عادي (GitHub Pages): البيانات من مجلد data
     STATIC = true;
-    fetch('data/next.json').then(r => r.json()).then(d => { nextData = d && d.date ? d : null; renderNext(); }).catch(() => {});
-    fetch('data/gallery.json').then(r => r.json()).then(d => { works = (d || []).map((w, k) => ({id: 'g' + k, ...w})); galState = 'ok'; renderGallery(); }).catch(() => { galState = 'fail'; renderGallery(); });
+    if (B) {
+      B.getSettings().then(d => { nextData = d && d.next_date ? {title: d.next_title, date: d.next_date, link: d.next_link} : null; renderNext(); }).catch(() => {});
+      loadWorks(); $('#pubForm').hidden = false;
+    } else {
+      fetch('data/next.json').then(r => r.json()).then(d => { nextData = d && d.date ? d : null; renderNext(); }).catch(() => {});
+      fetch('data/gallery.json').then(r => r.json()).then(d => { works = (d || []).map((w, k) => ({id: 'g' + k, ...w})); galState = 'ok'; renderGallery(); }).catch(() => { galState = 'fail'; renderGallery(); });
+    }
     return;
   }
   const timer = setTimeout(() => { if (galState === 'loading') { galState = 'fail'; renderGallery(); } }, 10000);
@@ -394,6 +401,7 @@ $('#nextAdmin').addEventListener('submit', async e => {
 // النشرة البريدية
 $('#newsForm').addEventListener('submit', async e => {
   e.preventDefault(); const email = $('#newsEmail').value.trim(), msg = $('#newsMsg');
+  if (STATIC && B) { try { await B.subscribe(email, lang); msg.textContent = t('news.ok'); $('#newsForm').reset(); } catch (err) { msg.textContent = t('saveFail'); } return; }
   if (STATIC) { location.href = 'mailto:mostafaabodee9@gmail.com?subject=' + encodeURIComponent('اشتراك في نشرة CODE TO MOTION') + '&body=' + encodeURIComponent(email); msg.textContent = t('news.mail'); return; }
   if (!db || !me) { msg.textContent = t('news.no'); return; }
   try { await db.doc('subs/' + me).set({email, at: Date.now()}); msg.textContent = t('news.ok'); $('#newsForm').reset(); } catch (err) { msg.textContent = t('news.no'); }
@@ -404,18 +412,20 @@ $('#newsCopy').addEventListener('click', () => copy(subs.join(', ')));
 function renderGallery() {
   const el = $('#gal');
   if (galState !== 'ok') { el.innerHTML = `<div class="empty">${t({loading: 'gal.loading', out: 'gal.out', signin: 'gal.signin', fail: 'gal.fail'}[galState])}</div>`; return; }
-  const count = id => Object.values(votes).filter(v => (v.ids || []).includes(id)).length;
-  const mine = (votes[me] && votes[me].ids) || [];
-  const list = [...works].sort((a, b) => count(b.id) - count(a.id));
+  const vc = id => Object.values(votes).filter(v => (v.ids || []).includes(id)).length;
+  const mineIds = (votes[me] && votes[me].ids) || [];
+  const count = w => STATIC ? (w.votes || 0) : vc(w.id), isMine = w => STATIC ? !!w.mine : mineIds.includes(w.id);
+  const list = [...works].sort((a, b) => count(b) - count(a));
   el.innerHTML = list.length ? list.map(w => {
     const link = /^https:\/\//.test(w.link || '') ? w.link : '';
-    const media = w.video && /^[\w\-./]+$/.test(w.video) ? `<video src="${esc(w.video)}" controls playsinline preload="metadata"></video>` : w.asset ? `<video src="/_blob/${encodeURIComponent(w.asset)}" controls playsinline preload="metadata"></video>` : `<div class="ph">${esc((w.name || '?').slice(0, 1))}</div>`;
+    const media = /^https:\/\//.test(w.videoUrl || '') ? `<video src="${esc(w.videoUrl)}" controls playsinline preload="metadata"></video>` : w.video && /^[\w\-./]+$/.test(w.video) ? `<video src="${esc(w.video)}" controls playsinline preload="metadata"></video>` : w.asset ? `<video src="/_blob/${encodeURIComponent(w.asset)}" controls playsinline preload="metadata"></video>` : `<div class="ph">${esc((w.name || '?').slice(0, 1))}</div>`;
     return `<article class="work">${media}<div class="in"><h3>${esc(w.title)}</h3><div class="by">${esc(w.name)}</div>
-      <div class="row">${STATIC ? '' : `<button class="vote ${mine.includes(w.id) ? 'on' : ''}" type="button" data-vote="${esc(w.id)}" aria-pressed="${mine.includes(w.id)}">♥ ${count(w.id)}</button>`}${link ? `<a style="margin-inline-start:auto;color:var(--pink);font-weight:900" href="${esc(link)}">${t('gal.watch')}</a>` : ''}</div></div></article>`;
+      <div class="row">${STATIC && !B ? '' : `<button class="vote ${isMine(w) ? 'on' : ''}" type="button" data-vote="${esc(w.id)}" aria-pressed="${isMine(w)}">♥ ${count(w)}</button>`}${link ? `<a style="margin-inline-start:auto;color:var(--pink);font-weight:900" href="${esc(link)}">${t('gal.watch')}</a>` : ''}</div></div></article>`;
   }).join('') : `<div class="empty">${t('gal.empty')}</div>`;
 }
 let voting = false;
 async function vote(id) {
+  if (STATIC && B) { if (voting) return; voting = true; try { await B.toggleVote(id); loadWorks(); } catch (e) { toast(t('saveFail')); } voting = false; return; }
   if (!db || !me) { toast(t('gal.voteNo')); return; }
   if (voting) return; voting = true;
   const cur = (votes[me] && votes[me].ids) || [];
@@ -439,6 +449,19 @@ async function setupGalleryAdmin() {
     btn.disabled = false;
   });
 }
+
+// نموذج رفع الأعمال للزوار (يظهر على الموقع العام)
+$('#pubForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const msg = $('#pMsg'), btn = $('#pSave'), link = $('#pLink').value.trim(), file = $('#pFile').files[0];
+  if (link && !/^https:\/\//.test(link)) { msg.textContent = t('gal.https'); return; }
+  if (!link && !file) { msg.textContent = t('pub.need'); return; }
+  if (file && file.size > 50 * 1024 * 1024) { msg.textContent = t('pub.big'); return; }
+  btn.disabled = true; msg.textContent = file ? t('gal.up') : '…';
+  try { await B.submitWork({name: $('#pName').value.trim(), title: $('#pTitle').value.trim(), link, file}); $('#pubForm').reset(); msg.textContent = t('pub.ok'); }
+  catch (err) { msg.textContent = err.message === 'type' ? t('pub.type') : t('saveFail'); }
+  btn.disabled = false;
+});
 
 // ═════ تحميل المشروع ═════
 $('#dl').addEventListener('click', async () => {
