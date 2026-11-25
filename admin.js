@@ -4,25 +4,39 @@ const B = window.CTM_BACKEND, sb = B.sb;
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt = d => new Date(d).toLocaleString('ar-SA-u-nu-latn', {day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit'});
-const show = id => ['login', 'denied', 'panel'].forEach(x => $('#' + x).hidden = x !== id);
+
 let status = 'pending', subs = [];
 
-// ── الدخول
-$('#loginForm').addEventListener('submit', async e => {
-  e.preventDefault();
-  const {error} = await sb.auth.signInWithOtp({email: $('#email').value.trim(), options: {emailRedirectTo: location.origin + location.pathname, shouldCreateUser: true}});
+// ── الدخول بكلمة مرور (ورابط إيميل لأول مرة أو لو نسيت)
+const show2 = id => ['login', 'denied', 'panel', 'setpw'].forEach(x => $('#' + x).hidden = x !== id);
+$('#pwForm').addEventListener('submit', async e => {
+  e.preventDefault(); $('#loginMsg').textContent = '…';
+  const {error} = await sb.auth.signInWithPassword({email: $('#email').value.trim(), password: $('#pw').value});
+  $('#loginMsg').textContent = error ? (error.message.includes('Invalid') ? 'الإيميل أو كلمة المرور غلط' : 'ما قدرت أدخلك: ' + error.message) : '';
+});
+$('#linkBtn').addEventListener('click', async () => {
+  const email = $('#email').value.trim(); if (!email) { $('#loginMsg').textContent = 'اكتب إيميلك فوق أول'; return; }
+  const {error} = await sb.auth.signInWithOtp({email, options: {emailRedirectTo: location.origin + location.pathname, shouldCreateUser: true}});
   $('#loginMsg').textContent = error ? 'ما انرسل: ' + error.message : 'أرسلت لك رابط على إيميلك ✓ افتحه من نفس الجهاز.';
 });
+async function setPassword(p1, p2, msgEl) {
+  if (p1 !== p2) { msgEl.textContent = 'الكلمتين مو متطابقتين'; return false; }
+  const {error} = await sb.auth.updateUser({password: p1});
+  msgEl.textContent = error ? 'ما انحفظت: ' + error.message : 'انحفظت ✓ من الحين تدخل بالإيميل وكلمة المرور.';
+  return !error;
+}
+$('#newPwForm').addEventListener('submit', async e => { e.preventDefault(); if (await setPassword($('#np1').value, $('#np2').value, $('#npMsg'))) setTimeout(() => location.reload(), 1200); });
+$('#acctForm').addEventListener('submit', async e => { e.preventDefault(); if (await setPassword($('#ap1').value, $('#ap2').value, $('#apMsg'))) e.target.reset(); });
 $('#out').addEventListener('click', async () => { await sb.auth.signOut(); location.reload(); });
 
 async function start(session) {
-  if (!session) { show('login'); $('#out').hidden = true; $('#me').textContent = ''; return; }
+  if (!session) { show2('login'); $('#out').hidden = true; $('#me').textContent = ''; return; }
   $('#me').textContent = session.user.email; $('#out').hidden = false;
   const {data: ok} = await sb.rpc('is_admin');
-  if (!ok) { show('denied'); return; }
-  show('panel'); loadWorks(); loadSubs(); loadNext(); counts();
+  if (!ok) { show2('denied'); return; }
+  show2('panel'); loadWorks(); loadSubs(); loadNext(); counts();
 }
-sb.auth.onAuthStateChange((_e, session) => start(session));
+sb.auth.onAuthStateChange((ev, session) => { if (ev === 'PASSWORD_RECOVERY') { show2('setpw'); return; } start(session); });
 
 // ── التبويبات
 document.addEventListener('click', e => {

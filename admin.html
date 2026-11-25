@@ -57,9 +57,26 @@ a{color:var(--pink)}
 <main class="wrap">
   <section id="login" class="login card" hidden>
     <h1>تسجيل الدخول</h1>
-    <p class="mute">اكتب إيميل المشرف، ويوصلك رابط دخول. بدون كلمة مرور.</p>
-    <form id="loginForm"><input class="f" id="email" type="email" required dir="ltr" placeholder="you@email.com" autocomplete="email"><button class="btn p" style="width:100%" type="submit">أرسل رابط الدخول</button></form>
+    <form id="pwForm">
+      <label>الإيميل<input class="f" id="email" type="email" required dir="ltr" autocomplete="username"></label>
+      <label>كلمة المرور<input class="f" id="pw" type="password" required minlength="8" dir="ltr" autocomplete="current-password"></label>
+      <button class="btn p" style="width:100%" type="submit">دخول</button>
+    </form>
     <p class="msg" id="loginMsg" role="status"></p>
+    <details style="margin-top:14px"><summary class="mute" style="cursor:pointer">أول مرة أو نسيت كلمة المرور؟</summary>
+      <p class="mute" style="font-size:14px">اكتب إيميلك فوق واضغط الزر، يوصلك رابط دخول. بعد ما تدخل، حط كلمة المرور من تبويب «الحساب».</p>
+      <button class="btn" style="width:100%" type="button" id="linkBtn">أرسل لي رابط دخول</button>
+    </details>
+  </section>
+
+  <section id="setpw" class="login card" hidden>
+    <h1>كلمة مرور جديدة</h1>
+    <form id="newPwForm">
+      <label>كلمة المرور (8 أحرف على الأقل)<input class="f" id="np1" type="password" required minlength="8" dir="ltr" autocomplete="new-password"></label>
+      <label>أعد كتابتها<input class="f" id="np2" type="password" required minlength="8" dir="ltr" autocomplete="new-password"></label>
+      <button class="btn p" style="width:100%" type="submit">احفظ كلمة المرور</button>
+    </form>
+    <p class="msg" id="npMsg" role="status"></p>
   </section>
 
   <section id="denied" class="login card" hidden>
@@ -74,6 +91,7 @@ a{color:var(--pink)}
       <button type="button" data-tab="works" aria-pressed="true">الأعمال<small id="cPending"></small></button>
       <button type="button" data-tab="subs" aria-pressed="false">المشتركين<small id="cSubs"></small></button>
       <button type="button" data-tab="next" aria-pressed="false">الورشة الجاية</button>
+      <button type="button" data-tab="account" aria-pressed="false">الحساب</button>
     </div>
 
     <div data-panel="works">
@@ -97,6 +115,15 @@ a{color:var(--pink)}
         <label>رابط التسجيل<input class="f" id="nLink" type="url" dir="ltr" placeholder="https://lu.ma/..."></label>
         <div class="bar"><button class="btn p" type="submit">احفظ</button><button class="btn" type="button" id="nClear">امسح الموعد (يطلع «قريبًا»)</button></div>
         <p class="msg" id="nMsg" role="status"></p>
+      </form>
+    </div>
+    <div data-panel="account" hidden>
+      <form class="form card" id="acctForm">
+        <h3 style="margin:0 0 8px">تغيير كلمة المرور</h3>
+        <label>كلمة المرور الجديدة (8 أحرف على الأقل)<input class="f" id="ap1" type="password" required minlength="8" dir="ltr" autocomplete="new-password"></label>
+        <label>أعد كتابتها<input class="f" id="ap2" type="password" required minlength="8" dir="ltr" autocomplete="new-password"></label>
+        <button class="btn p" type="submit">احفظ</button>
+        <p class="msg" id="apMsg" role="status"></p>
       </form>
     </div>
   </section>
