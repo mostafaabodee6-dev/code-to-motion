@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CODE TO MOTION · مكتبة الأدوات</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: حماسي وعملي، مثل استوديو موشن مفتوح للمتعلمين
+   IDEA: لوحة تحكم استوديو: مكتبة، أدوات تجربة، دروس، معرض
+   PICTURE: تيرمنال يكتب الأوامر، ومسرح معاينة يتحرك لايف
+   COLOUR and TYPE: هوية الورشة — كحلي عميق، وردي، أزرق، سماوي، أصفر · Cairo + JetBrains Mono
+   LAYOUT: شريط علوي بست صفحات وزر اللغة، ونافذة تفاصيل لكل عنصر */
+
+:root{color-scheme:light dark;--bg:light-dark(#f6f3ff,#10052f);--bg2:light-dark(#ffffff,#1a0b47);--ink:light-dark(#170a3a,#f4f0ff);--mute:light-dark(#5b5280,#c9bff0);--line:light-dark(#e2dbfb,#33236e);--pink:#ff2e9a;--blue:#2f6bff;--cyan:light-dark(#007a8f,#4ff0ff);--yel:#ffd84d;--vio:#7b2cff;--card:light-dark(#ffffff,#170942);--codebg:light-dark(#f1ecff,#0b0720)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Cairo,Tahoma,sans-serif;overflow-x:clip}
+a{color:inherit}
+code,.mono{font-family:'JetBrains Mono',Consolas,monospace;direction:ltr;unicode-bidi:isolate}
+.band{padding:clamp(28px,4vw,64px) max(5vw,16px)}
+.wrap{max-width:1240px;margin:0 auto}
+html{scroll-padding-top:72px}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
+h2{font-size:clamp(28px,3.4vw,40px);line-height:1.15;margin:0 0 8px;font-weight:900;text-wrap:balance}
+.lead{color:var(--mute);margin:0 0 24px;max-width:46em}
+/* nav */
+.nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:16px;padding:10px max(5vw,16px);flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;text-decoration:none}
+.brand img{width:38px;height:38px;border-radius:10px}
+.nav nav{display:flex;gap:4px;margin-inline-start:auto;flex-wrap:wrap}
+.nav nav a{text-decoration:none;padding:8px 14px;border-radius:999px;font-weight:700;font-size:15px}
+.nav nav a:hover{background:var(--line)}
+.nav nav a[aria-current=page]{background:var(--ink);color:var(--bg)}
+.view[hidden]{display:none}
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:10px 24px;border-radius:999px;border:0;font-weight:900;font-size:16px;text-decoration:none}
+.btn.p{background:linear-gradient(90deg,var(--vio),var(--pink));color:#fff}
+.btn.s{background:#ffffff1f;color:#fff;border:1.5px solid #ffffff55}
+.btn.o{background:var(--bg2);color:var(--ink);border:1.5px solid var(--line)}
+.btn:disabled{opacity:.5;cursor:default}
+.ib{min-width:44px;min-height:40px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg2);color:var(--ink);font-weight:700;font-size:13px;padding:0 10px}
+.ib.on{background:var(--pink);border-color:var(--pink);color:#fff}
+/* hero */
+.hero{background:radial-gradient(900px 500px at 15% 10%,#ff2e9a55,transparent 60%),radial-gradient(800px 600px at 90% 90%,#2f6bff66,transparent 60%),#14063f;color:#fff}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(24px,4vw,56px);align-items:center}
+.hero h1{font-size:clamp(34px,5vw,52px);line-height:1.15;margin:0 0 14px;font-weight:900;text-wrap:balance}
+.hero p{font-size:17px;color:#d8d0ff;max-width:34em;margin:0 0 24px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.stats{display:flex;gap:28px;margin-top:28px;flex-wrap:wrap}
+.stats b{display:block;font-size:30px;font-weight:900;color:var(--yel);line-height:1.1}
+.stats span{font-size:14px;color:#cfc6f5}
+.term{background:#0b0720;border-radius:22px;border:1px solid #ffffff26;box-shadow:0 40px 90px #0008,0 0 0 8px #ffffff0a;overflow:hidden;direction:ltr}
+.term .bar{display:flex;gap:8px;padding:14px 18px;background:#ffffff0d}
+.term .bar i{width:12px;height:12px;border-radius:50%}
+.term pre{margin:0;padding:22px 24px 30px;font:15px/1.9 'JetBrains Mono',monospace;color:#d6d0f5;min-height:300px;white-space:pre-wrap;text-align:left}
+.term .c{color:#4ff0ff}.term .g{color:#5cffb0}.term .d{color:#8f84c4}
+.cur{display:inline-block;width:9px;height:18px;background:#4ff0ff;vertical-align:-3px;animation:b 1s steps(1) infinite}
+@keyframes b{50%{opacity:0}}
+/* home tiles */
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.tile{display:flex;flex-direction:column;gap:8px;text-decoration:none;background:var(--card);border:1.5px solid var(--line);border-radius:22px;padding:22px;transition:transform .2s}
+.tile:hover{transform:translateY(-3px)}
+.tile .ico{width:52px;height:52px}
+.tile h3{margin:0;font-size:20px}
+.tile p{margin:0;color:var(--mute);font-size:15px}
+.tile b{color:var(--pink);font-size:14px;margin-top:auto}
+/* library */
+.types{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;border-bottom:1.5px solid var(--line);padding-bottom:12px}
+.types button{min-height:44px;padding:8px 18px;border-radius:12px;border:0;background:transparent;color:var(--mute);font-weight:900;font-size:16px}
+.types button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.types small{font-weight:700;opacity:.7;margin-inline-start:4px}
+.tools{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:20px}
+.search{flex:1 1 280px;display:flex;align-items:center;gap:10px;background:var(--bg2);border:1.5px solid var(--line);border-radius:14px;padding:0 14px;min-height:50px}
+.search input{flex:1;border:0;background:transparent;color:var(--ink);font:16px Cairo,sans-serif;outline:none;min-height:46px}
+.search kbd{font:12px 'JetBrains Mono',monospace;color:var(--mute);border:1px solid var(--line);border-radius:6px;padding:2px 6px}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filters button{min-height:44px;padding:8px 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg2);color:var(--ink);font-weight:700;font-size:15px}
+.filters button[aria-pressed=true]{background:var(--pink);color:#fff;border-color:var(--pink)}
+.lib{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:24px;align-items:start}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:10px;transition:transform .2s,border-color .2s}
+.card:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--pink) 50%,var(--line))}
+.card .top{display:flex;align-items:center;gap:10px}
+.ico{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;flex:none;color:#fff}
+.ico svg{width:24px;height:24px}
+.card h3{margin:0;font-size:18px;font-weight:900}
+.card .src{font-size:13px;color:var(--mute)}
+.card p{margin:0;color:var(--mute);font-size:15px;flex:1}
+.tag{font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--line);align-self:flex-start}
+.cmd{display:flex;align-items:center;gap:8px;background:var(--codebg);border-radius:12px;padding:8px 12px;direction:ltr}
+.cmd code{flex:1;font-size:12.5px;color:var(--cyan);overflow-x:auto;white-space:nowrap;scrollbar-width:thin}
+.row{display:flex;gap:8px;align-items:center}
+.row .more{margin-inline-start:auto;font-size:14px;font-weight:900;color:var(--pink);background:none;border:0;min-height:40px}
+.empty{grid-column:1/-1;text-align:center;padding:40px;color:var(--mute);border:1.5px dashed var(--line);border-radius:20px}
+.stack{position:sticky;top:84px;background:#14063f;color:#fff;border-radius:22px;padding:20px;box-shadow:0 30px 60px #14063f40}
+.stack h3{margin:0 0 4px;font-size:20px;font-weight:900}
+.stack small{color:#cfc6f5}
+.stack ul{list-style:none;margin:14px 0;padding:0;display:flex;flex-direction:column;gap:8px;max-height:260px;overflow:auto}
+.stack li{display:flex;align-items:center;gap:8px;background:#ffffff12;border-radius:12px;padding:6px 10px;font:13px 'JetBrains Mono',monospace;direction:ltr}
+.stack li span{flex:1}
+.stack li button{border:0;background:#ffffff22;color:#fff;border-radius:8px;min-width:32px;min-height:32px}
+.stack pre{margin:0 0 12px;background:#0b0720;border-radius:12px;padding:12px;font:12px/1.8 'JetBrains Mono',monospace;color:#4ff0ff;white-space:pre-wrap;direction:ltr;text-align:left;max-height:180px;overflow:auto}
+.stack .none{color:#cfc6f5;font-size:14px;padding:16px;text-align:center;border:1.5px dashed #ffffff33;border-radius:12px;margin:14px 0}
+.stack .note{font-size:13px;color:#cfc6f5;margin:10px 0 0}
+/* modal */
+dialog{border:0;padding:0;border-radius:24px;width:min(760px,calc(100vw - 24px));max-height:calc(100vh - 40px);background:var(--bg2);color:var(--ink);box-shadow:0 40px 120px #000a}
+dialog::backdrop{background:#0a0320b3;backdrop-filter:blur(4px)}
+.md{padding:clamp(20px,3vw,32px);overflow:auto;max-height:calc(100vh - 40px)}
+.md header{display:flex;gap:14px;align-items:center;margin-bottom:14px}
+.md header .ico{width:56px;height:56px;border-radius:16px}
+.md h3{margin:0;font-size:26px;line-height:1.2}
+.md .x{margin-inline-start:auto;width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font-size:22px;flex:none}
+.md h4{margin:22px 0 8px;font-size:17px}
+.md ul{margin:0;padding-inline-start:20px;color:var(--mute)}
+.md pre{position:relative;background:var(--codebg);border-radius:14px;padding:16px;margin:0;font:13px/1.8 'JetBrains Mono',monospace;color:var(--cyan);white-space:pre-wrap;direction:ltr;text-align:left;max-height:340px;overflow:auto}
+.md .path{font-size:13px;color:var(--mute);margin:0 0 6px}
+.md .acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+/* lessons */
+.lessons{display:grid;grid-template-columns:240px minmax(0,1fr);gap:28px;align-items:start}
+.ltoc{position:sticky;top:84px;display:flex;flex-direction:column;gap:6px}
+.ltoc button{display:flex;gap:10px;align-items:center;text-align:start;min-height:48px;padding:8px 14px;border-radius:14px;border:1.5px solid transparent;background:transparent;color:var(--ink);font-weight:700}
+.ltoc button span{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--line);font-size:14px;flex:none}
+.ltoc button[aria-current=true]{background:var(--bg2);border-color:var(--line)}
+.ltoc button[aria-current=true] span{background:var(--yel);color:#14063f}
+.lesson{background:var(--bg2);border:1.5px solid var(--line);border-radius:24px;overflow:hidden}
+.lesson img,.lesson video{width:100%;display:block;aspect-ratio:16/9;object-fit:cover;background:#000}
+.lesson .in{padding:clamp(20px,3vw,32px)}
+.lesson h3{font-size:clamp(24px,3vw,32px);margin:0 0 4px}
+.lesson .sub{color:var(--pink);font-weight:700;margin:0 0 14px}
+.lesson p{margin:0 0 10px}
+.lesson pre{background:var(--codebg);border-radius:14px;padding:16px;font:14px/1.8 'JetBrains Mono',monospace;color:var(--cyan);direction:ltr;text-align:left;white-space:pre-wrap;margin:16px 0}
+.ex{background:color-mix(in srgb,var(--yel) 22%,var(--bg2));border-radius:14px;padding:14px 16px;font-weight:700}
+.lnav{display:flex;justify-content:space-between;gap:12px;margin-top:20px;flex-wrap:wrap}
+.faq{margin-top:48px}
+.faq details{background:var(--bg2);border:1.5px solid var(--line);border-radius:16px;padding:4px 18px;margin-bottom:10px}
+.faq summary{cursor:pointer;font-weight:900;min-height:48px;display:flex;align-items:center}
+.faq details p{margin:0 0 14px;color:var(--mute)}
+/* gallery */
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
+.work{background:var(--card);border:1.5px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column}
+.work video,.work .ph{width:100%;aspect-ratio:16/9;background:linear-gradient(135deg,#7b2cff,#ff2e9a);display:grid;place-items:center;color:#fff;font-weight:900;font-size:22px}
+.work .in{padding:16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.work h3{margin:0;font-size:18px}
+.work .by{color:var(--mute);font-size:14px}
+.work .row{margin-top:auto;padding-top:8px}
+.vote{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:6px 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg2);color:var(--ink);font-weight:900}
+.vote.on{background:var(--pink);border-color:var(--pink);color:#fff}
+.info{background:var(--bg2);border:1.5px dashed var(--line);border-radius:20px;padding:22px;margin-bottom:24px}
+.info h3{margin:0 0 6px}
+.admin{background:var(--bg2);border:1.5px solid var(--pink);border-radius:20px;padding:22px;margin-bottom:24px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.admin h3{grid-column:1/-1;margin:0}
+.admin label{display:flex;flex-direction:column;gap:4px;font-weight:700;font-size:14px}
+.admin input{min-height:46px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:16px Cairo,sans-serif;padding:0 12px}
+.admin .full{grid-column:1/-1}
+/* project */
+.proj{background:linear-gradient(135deg,#2a0a73,#14063f 55%,#3a0c5c);color:#fff}
+.proj .wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(24px,4vw,48px);align-items:center}
+.proj h2{color:#fff}.proj .lead{color:#d8d0ff}
+.proj video{width:100%;border-radius:20px;box-shadow:0 30px 80px #0009;background:#000;display:block}
+.inside{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:18px 0 22px;padding:0;list-style:none}
+.inside li{background:#ffffff12;border:1px solid #ffffff22;border-radius:14px;padding:10px 14px;font-size:15px}
+.inside li b{display:block;color:var(--yel)}
+.quick{white-space:pre;background:#0b0720;border-radius:16px;padding:16px 18px;direction:ltr;text-align:left;font:14px/2 'JetBrains Mono',monospace;color:#4ff0ff;margin:16px 0 0;position:relative}
+.quick .ib{position:absolute;top:10px;right:10px;background:#ffffff1a;color:#fff;border-color:#ffffff33}
+.msg{font-size:14px;color:var(--yel);min-height:22px;margin-top:8px}
+footer{border-top:1px solid var(--line)}
+footer .wrap{display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between;color:var(--mute);font-size:14px}
+.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,30px);background:#14063f;color:#fff;padding:10px 22px;border-radius:999px;font-weight:700;opacity:0;transition:.25s;pointer-events:none;z-index:60}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:960px){.lib,.lessons{grid-template-columns:minmax(0,1fr)}.stack,.ltoc{position:static}.ltoc{flex-direction:row;overflow-x:auto}.ltoc button{flex:none}.hero .wrap,.proj .wrap{grid-template-columns:minmax(0,1fr)}.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.nav nav{width:100%;margin:0;overflow-x:auto;flex-wrap:nowrap}.nav nav a{flex:none}.inside,.tiles,.admin{grid-template-columns:minmax(0,1fr)}.term pre{font-size:13px;min-height:240px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+</style>
+<link rel="stylesheet" href="extra.css">
+</head>
+<body>
+
+<header class="nav"><div class="wrap">
+  <a class="brand" href="#home"><img src="logo.png" alt=""><span>CODE TO MOTION</span></a>
+  <nav aria-label="Pages">
+    <a href="#home" data-t="nav.home">الرئيسية</a>
+    <a href="#library" data-t="nav.library">المكتبة</a>
+    <a href="#tools" data-t="nav.tools">الأدوات</a>
+    <a href="#lessons" data-t="nav.lessons">الدروس</a>
+    <a href="#gallery" data-t="nav.gallery">معرض الأعمال</a>
+    <a href="#project" data-t="nav.project">ملفات الورشة</a>
+  </nav>
+  <button class="lang" id="lang" type="button">English</button>
+</div></header>
+
+<main>
+<!-- ═════ الرئيسية ═════ -->
+<section class="view" data-view="home">
+  <div class="hero band"><div class="wrap">
+    <div>
+      <h1 data-t="home.h1">كل اللي تحتاجه عشان تصنع موشن جرافيك بالكود والذكاء الاصطناعي</h1>
+      <p data-t="home.p">Skills ووكلاء وأوامر وبرومبتات جاهزة لـ Claude Code و Codex و Cursor، وأدوات تجربة لايف، ودروس الورشة كاملة.</p>
+      <div class="cta"><a class="btn p" href="#library" data-t="home.cta1">تصفّح المكتبة</a><a class="btn s" href="#tools" data-t="home.cta2">جرّب الحركة لايف</a></div>
+      <div class="stats" id="stats"></div>
+    </div>
+    <div class="term" aria-hidden="true">
+      <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+      <pre id="typed"></pre>
+    </div>
+  </div></div>
+  <div class="band"><div class="wrap">
+    <div class="next" id="next">
+      <div>
+        <h2 id="nextTitle" data-t="next.soon">الورشة الجاية… قريبًا</h2>
+        <p class="when" id="nextWhen" data-t="next.follow">تابع حساباتي عشان يوصلك موعدها أول بأول.</p>
+        <a class="btn" id="nextLink" href="https://lu.ma/34qf5z1h" data-t="next.cta">صفحة الورشة على Luma</a>
+      </div>
+      <div class="cd" id="cd" aria-live="off"></div>
+    </div>
+    <form class="ownerbox" id="nextAdmin" hidden>
+      <h4 data-t="next.admin">تعديل الورشة الجاية (تظهر لك بس)</h4>
+      <input class="field" id="nTitle" maxlength="80" data-tp="next.f.title" placeholder="عنوان الورشة">
+      <input class="field" id="nDate" type="datetime-local">
+      <input class="field" id="nLink" type="url" dir="ltr" maxlength="300" placeholder="https://lu.ma/...">
+      <div class="row"><button class="btn p" type="submit" data-t="save">احفظ</button><span class="msg" id="nMsg" role="status"></span></div>
+    </form>
+  </div></div>
+  <div class="band" style="padding-top:0"><div class="wrap">
+    <h2 data-t="home.start">من وين تبدأ؟</h2>
+    <p class="lead" data-t="home.startp">أربع طرق تختصر عليك الطريق، حسب وين أنت الحين.</p>
+    <div class="tiles" id="tiles"></div>
+    <div class="news">
+      <div><h2 data-t="news.h">جديد المكتبة يوصلك</h2><p class="lead" style="margin:0" data-t="news.p">كل ما نضيف Skill أو درس أو ورشة جديدة، نرسل لك إيميل قصير. بدون إزعاج.</p></div>
+      <div>
+        <form id="newsForm"><input id="newsEmail" type="email" required maxlength="120" dir="ltr" placeholder="you@email.com" aria-label="Email"><button class="btn p" type="submit" data-t="news.btn">اشترك</button></form>
+        <div class="msg" id="newsMsg" role="status" style="color:var(--pink)"></div>
+        <div class="ownerbox" id="newsAdmin" hidden><h4 id="newsCount"></h4><div class="row"><button class="btn o" type="button" id="newsCopy" data-t="news.copy">انسخ الإيميلات</button></div></div>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ═════ المكتبة ═════ -->
+<section class="view band" data-view="library" hidden><div class="wrap">
+  <h2 data-t="lib.h">المكتبة</h2>
+  <p class="lead" data-t="lib.p">اضغط + عشان تضيف للسلة، أو التفاصيل عشان تشوف الشرح والبرومبت والملف كامل.</p>
+  <div class="types" id="types" role="group"></div>
+  <div class="tools">
+    <label class="search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" data-tp="lib.search" placeholder="ابحث في المكتبة…"><kbd>Ctrl K</kbd></label>
+    <div class="filters" id="filters" role="group"></div>
+  </div>
+  <div class="lib">
+    <div class="grid" id="grid"></div>
+    <aside class="stack">
+      <h3 data-t="stack.h">سلة التثبيت</h3>
+      <small id="stackCount"></small>
+      <div id="stackBody"></div>
+      <button class="btn p" id="copyAll" type="button" style="width:100%" data-t="stack.copy">انسخ كل الأوامر</button>
+      <button class="btn s" id="zipAgents" type="button" style="width:100%;margin-top:10px" data-t="stack.zip">حمّل كل الوكلاء والأوامر (ZIP)</button>
+      <p class="note" id="zipMsg" data-t="stack.note">فك الضغط داخل مجلد مشروعك، وتنحط الملفات في .claude تلقائيًا.</p>
+    </aside>
+  </div>
+</div></section>
+
+<!-- ═════ الأدوات ═════ -->
+<section class="view band" data-view="tools" hidden><div class="wrap">
+  <h2 data-t="tools.h">أدوات تجربة لايف</h2>
+  <p class="lead" data-t="tools.p">غيّر الأرقام وشوف الحركة تتغيّر قدامك، وانسخ كود Remotion جاهز.</p>
+  <div class="tabs" id="toolTabs" role="group">
+    <button type="button" data-tab="play" aria-pressed="true" data-t="tab.play">ملعب الحركة</button>
+    <button type="button" data-tab="scenes" aria-pressed="false" data-t="tab.scenes">مشاهد جاهزة</button>
+    <button type="button" data-tab="prompt" aria-pressed="false" data-t="tab.prompt">مولّد البرومبت</button>
+  </div>
+
+  <div class="panel" data-panel="play">
+    <div class="play">
+      <div class="ctl">
+        <div class="seg" id="mode"><button type="button" data-mode="spring" aria-pressed="true">spring</button><button type="button" data-mode="interpolate" aria-pressed="false">interpolate</button></div>
+        <label><span data-t="play.prop">الخاصية</span><select id="prop"><option value="scale">scale</option><option value="y">translateY</option><option value="x">translateX</option><option value="rotate">rotate</option><option value="opacity">opacity</option></select></label>
+        <div id="springCtl">
+          <div class="presets" id="presets"></div>
+          <label><span>damping <output id="o_damping"></output></span><input type="range" id="damping" min="1" max="200" value="10"></label>
+          <label><span>stiffness <output id="o_stiffness"></output></span><input type="range" id="stiffness" min="10" max="400" value="100"></label>
+          <label><span>mass <output id="o_mass"></output></span><input type="range" id="mass" min="0.1" max="5" step="0.1" value="1"></label>
+          <label><span>delay <output id="o_delay"></output></span><input type="range" id="delay" min="0" max="30" value="0"></label>
+        </div>
+        <div id="interpCtl" hidden>
+          <label><span data-t="play.from">من فريم</span><input type="range" id="f0" min="0" max="80" value="0"><output id="o_f0"></output></label>
+          <label><span data-t="play.to">إلى فريم</span><input type="range" id="f1" min="5" max="90" value="30"><output id="o_f1"></output></label>
+          <label><span>easing</span><select id="easing"><option>linear</option><option selected>out(cubic)</option><option>in(cubic)</option><option>inOut(cubic)</option><option>out(back)</option></select></label>
+          <label class="chk"><input type="checkbox" id="clamp" checked><span>clamp</span></label>
+        </div>
+      </div>
+      <div class="viewer">
+        <div class="stage" id="pStage"><div class="inner"><div class="ghost"></div><div class="obj" id="pObj"></div></div></div>
+        <div class="scrub"><button class="pbtn" id="pPlay" type="button" aria-label="Play">❚❚</button><input type="range" id="pFrame" min="0" max="90" value="0" aria-label="Frame"><span class="fr" id="pFr">frame 0</span></div>
+        <div class="chart" id="pChart"><svg id="pSvg"></svg></div>
+        <div class="codebox"><pre id="pCode"></pre><button class="ib" type="button" id="pCopy" data-t="copy">نسخ</button></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel" data-panel="scenes" hidden><div class="scgrid" id="scgrid"></div></div>
+
+  <div class="panel" data-panel="prompt" hidden>
+    <div class="pf">
+      <form id="pform">
+        <label><span data-t="pg.type">نوع الفيديو</span><select id="g_type"></select></label>
+        <label><span data-t="pg.dur">المدة (ثواني)</span><input type="number" id="g_dur" min="3" max="120" value="15"></label>
+        <label><span data-t="pg.size">المقاس</span><select id="g_size"><option value="1920x1080">16:9 · YouTube</option><option value="1080x1920">9:16 · Shorts / Reels</option><option value="1080x1080">1:1 · Instagram</option></select></label>
+        <label><span data-t="pg.lang">لغة النص</span><select id="g_lang"><option value="ar">العربية</option><option value="en">English</option></select></label>
+        <label class="full"><span data-t="pg.text">النص أو الفكرة الأساسية</span><textarea id="g_text" maxlength="600"></textarea></label>
+        <label><span data-t="pg.c1">اللون الأساسي</span><input type="color" id="g_c1" value="#7b2cff"></label>
+        <label><span data-t="pg.c2">لون التمييز</span><input type="color" id="g_c2" value="#ffd84d"></label>
+        <label><span data-t="pg.style">الستايل</span><select id="g_style"></select></label>
+        <label><span data-t="pg.audio">الصوت</span><select id="g_audio"></select></label>
+        <div class="full"><span style="font-weight:700;font-size:14px" data-t="pg.extras">إضافات</span><div class="chips" id="g_extras"></div></div>
+      </form>
+      <div class="pout">
+        <div class="codebox"><pre id="g_out"></pre><button class="ib" type="button" id="g_copy" data-t="copy">نسخ</button></div>
+        <p class="lead" style="margin:0;font-size:14px" data-t="pg.tip">البرومبت بالإنجليزي لأن الوكلاء يفهمونه أدق، والنص اللي في الفيديو يطلع باللغة اللي اخترتها.</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ═════ الدروس ═════ -->
+<section class="view band" data-view="lessons" hidden><div class="wrap">
+  <h2 data-t="les.h">دروس الورشة</h2>
+  <p class="lead" data-t="les.p">كل درس فيه الفكرة والكود وتمرين قصير. علّم على الدرس لما تخلّصه، وفي الآخر تاخذ شهادتك.</p>
+  <div class="lessons">
+    <div>
+      <div class="progt" id="progT"></div><div class="prog"><i id="progBar"></i></div>
+      <div class="ltoc" id="ltoc" role="tablist"></div>
+    </div>
+    <article class="lesson" id="lesson" aria-live="polite"></article>
+  </div>
+  <div class="cert" id="cert">
+    <div>
+      <h3 data-t="cert.h">شهادة إتمام الدروس</h3>
+      <p id="certP"></p>
+      <input id="certName" maxlength="40" data-tp="cert.name" placeholder="اكتب اسمك كما تبغاه في الشهادة">
+      <div class="row" style="flex-wrap:wrap"><button class="btn p" id="certMake" type="button" data-t="cert.make">اصنع الشهادة</button><button class="btn s" id="certSave" type="button" hidden data-t="cert.save">حمّل الشهادة</button></div>
+      <div class="msg" id="certMsg" role="status"></div>
+    </div>
+    <div id="certView"></div>
+  </div>
+  <div class="faq"><h2 data-t="faq.h">أسئلة شائعة</h2><div id="faq"></div></div>
+</div></section>
+
+<!-- ═════ المعرض ═════ -->
+<section class="view band" data-view="gallery" hidden><div class="wrap">
+  <h2 data-t="gal.h">معرض أعمال الحضور</h2>
+  <p class="lead" data-t="gal.p">فيديوهات سوّاها الحضور في تحدي الورشة. صوّت لأحلى عمل.</p>
+  <div class="info"><h3 data-t="gal.share">شارك عملك</h3><span data-t="gal.how">سوّ فيديو «عن نفسي» من قالب AboutMe، وانشره على حساباتك مع منشن @mostafaabodee8. الأعمال المختارة تنضاف هنا.</span></div>
+  <form class="admin" id="admin" hidden>
+    <h3 data-t="gal.add">إضافة عمل (تظهر لك بس)</h3>
+    <label><span data-t="gal.f.name">اسم صاحب العمل</span><input id="wName" required maxlength="60"></label>
+    <label><span data-t="gal.f.title">عنوان العمل</span><input id="wTitle" required maxlength="80"></label>
+    <label class="full"><span data-t="gal.f.link">رابط المنشور (اختياري، يبدأ بـ https://)</span><input id="wLink" type="url" maxlength="300" dir="ltr"></label>
+    <label class="full"><span data-t="gal.f.file">ملف الفيديو (اختياري، أقل من 20MB)</span><input id="wFile" type="file" accept="video/mp4,video/webm"></label>
+    <div class="full row"><button class="btn p" type="submit" id="wSave" data-t="gal.f.save">أضف للمعرض</button><span class="msg" id="wMsg" role="status"></span></div>
+  </form>
+  <div class="gal" id="gal"></div>
+</div></section>
+
+<!-- ═════ الملفات ═════ -->
+<section class="view proj band" data-view="project" hidden><div class="wrap">
+  <div><video src="final.mp4" controls playsinline preload="metadata"></video></div>
+  <div>
+    <h2 data-t="proj.h">ملفات ورشة CODE TO MOTION</h2>
+    <p class="lead" data-t="proj.p">المشروع كامل جاهز للتشغيل: كل الدروس، والمشروع النهائي اللي في الفيديو، وقالب التحدي.</p>
+    <ul class="inside" id="inside"></ul>
+    <button class="btn p" id="dl" type="button" data-t="proj.dl">حمّل المشروع (ZIP)</button>
+    <div class="msg" id="dlMsg" role="status"></div>
+    <div class="quick">cd code-to-motion
+npm install
+npm run dev<button class="ib" data-copy="cd code-to-motion&#10;npm install&#10;npm run dev" type="button" data-t="copy">نسخ</button></div>
+  </div>
+</div></section>
+</main>
+
+<footer class="band"><div class="wrap">
+  <span><span data-t="foot.by">إعداد: عبدالرحمن مصطفى</span> · <span class="mono">@mostafaabodee8</span></span>
+  <span><span data-t="foot.src">المصادر:</span> <a href="https://github.com/remotion-dev/skills">remotion-dev/skills</a> · <a href="https://github.com/anthropics/skills">anthropics/skills</a></span>
+</div></footer>
+
+<dialog id="dlg" aria-labelledby="dTitle"><div class="md" id="md"></div></dialog>
+<div class="toast" id="toast" role="status"></div>
+<canvas id="certCanvas" width="1600" height="1131" hidden></canvas>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="catalog.js"></script>
+<script src="catalog_en.js"></script>
+<script src="scenes.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
