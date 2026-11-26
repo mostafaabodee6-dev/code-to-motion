@@ -11,7 +11,12 @@ const store = {get(k, d) { try { return JSON.parse(localStorage.getItem('ctm-' +
 let lang = store.get('lang', 'ar');
 const T = {
   ar: {
-    'nav.home':'الرئيسية','nav.library':'المكتبة','nav.tools':'الأدوات','nav.lessons':'الدروس','nav.gallery':'معرض الأعمال','nav.project':'ملفات الورشة',
+    'nav.glossary':'المصطلحات','nav.mytools':'أدواتي','try.h':'جرّب تطلب','try.p':'اضغط على أي فكرة، وخذ برومبت جاهز تلصقه لوكيلك.','try.s1':'افتح الـ Terminal داخل مجلد مشروعك','try.s2':'اكتب claude (أو شغّل Codex)','try.s3':'الصق البرومبت واضغط Enter، وراجع النتيجة في Studio',
+    'glo.h':'قاموس المصطلحات','glo.p':'كل كلمة تسمعها في الموشن والذكاء الاصطناعي، بشرح بسيط بجملتين.','glo.search':'ابحث عن مصطلح…','gc.all':'الكل','gc.motion':'موشن','gc.ai':'ذكاء اصطناعي','gc.dev':'برمجة','glo.eg':'مثال: ',
+    'mt.h':'الأدوات اللي أستخدمها','mt.p':'الأدوات اللي نشتغل فيها في الورشة، وش تسوي كل وحدة، ومتى تحتاجها.','mt.op':'رأيي: ','mt.visit':'الموقع الرسمي ←','tc.motion':'موشن','tc.ai':'ذكاء اصطناعي','tc.dev':'برمجة ونشر','tc.audio':'صوت','tc.video':'فيديو',
+    'sr.h':'ابحث في الموقع','sr.ph':'دروس، Skills، مصطلحات، أدوات…','sr.none':'ما لقيت شي. جرّب كلمة ثانية.','sr.hint':'اكتب كلمة، مثل spring أو صوت أو prompt.','sr.les':'الدروس','sr.lib':'المكتبة','sr.glo':'المصطلحات','sr.tools':'أدواتي','sr.sc':'مشاهد جاهزة',
+    'foot.about':'من أنا','foot.contact':'تواصل','foot.privacy':'الخصوصية','theme':'تبديل الوضع',
+    'nav.home':'الرئيسية','nav.library':'المكتبة','nav.tools':'المختبر','nav.lessons':'الدروس','nav.gallery':'معرض الأعمال','nav.project':'ملفات الورشة',
     'home.h1':'كل اللي تحتاجه عشان تصنع موشن جرافيك بالكود والذكاء الاصطناعي','home.p':'Skills ووكلاء وأوامر وبرومبتات جاهزة لـ Claude Code و Codex و Cursor، وأدوات تجربة لايف، ودروس الورشة كاملة.',
     'home.cta1':'تصفّح المكتبة','home.cta2':'جرّب الحركة لايف','home.start':'من وين تبدأ؟','home.startp':'أربع طرق تختصر عليك الطريق، حسب وين أنت الحين.',
     'st.skills':'Skill','st.agents':'وكيل وأمر','st.prompts':'برومبت جاهز','st.scenes':'مشهد جاهز',
@@ -41,7 +46,12 @@ const T = {
     'foot.by':'إعداد: عبدالرحمن مصطفى','foot.src':'المصادر:','copied':'تم النسخ ✓','copyFail':'ما قدرت أنسخ، حدّد النص وانسخه يدوي','langBtn':'English',
   },
   en: {
-    'nav.home':'Home','nav.library':'Library','nav.tools':'Tools','nav.lessons':'Lessons','nav.gallery':'Gallery','nav.project':'Workshop files',
+    'nav.glossary':'Glossary','nav.mytools':'My tools','try.h':'Try asking','try.p':'Tap any idea and get a ready prompt to paste into your agent.','try.s1':'Open the Terminal inside your project folder','try.s2':'Type claude (or start Codex)','try.s3':'Paste the prompt, press Enter, and check the result in Studio',
+    'glo.h':'Glossary','glo.p':'Every word you hear in motion and AI, explained simply in two sentences.','glo.search':'Search a term…','gc.all':'All','gc.motion':'Motion','gc.ai':'AI','gc.dev':'Coding','glo.eg':'Example: ',
+    'mt.h':'Tools I use','mt.p':'The tools we use in the workshop, what each one does, and when you need it.','mt.op':'My take: ','mt.visit':'Official site →','tc.motion':'Motion','tc.ai':'AI','tc.dev':'Code & publishing','tc.audio':'Audio','tc.video':'Video',
+    'sr.h':'Search the site','sr.ph':'Lessons, skills, terms, tools…','sr.none':'Nothing found. Try another word.','sr.hint':'Type a word, like spring, audio or prompt.','sr.les':'Lessons','sr.lib':'Library','sr.glo':'Glossary','sr.tools':'My tools','sr.sc':'Ready scenes',
+    'foot.about':'About','foot.contact':'Contact','foot.privacy':'Privacy','theme':'Toggle theme',
+    'nav.home':'Home','nav.library':'Library','nav.tools':'Lab','nav.lessons':'Lessons','nav.gallery':'Gallery','nav.project':'Workshop files',
     'home.h1':'Everything you need to make motion graphics with code and AI','home.p':'Ready-made skills, agents, commands and prompts for Claude Code, Codex and Cursor, live playgrounds, and the full workshop lessons.',
     'home.cta1':'Browse the library','home.cta2':'Try motion live','home.start':'Where to start?','home.startp':'Four shortcuts, depending on where you are now.',
     'st.skills':'Skills','st.agents':'Agents & commands','st.prompts':'Ready prompts','st.scenes':'Ready scenes',
@@ -82,7 +92,7 @@ function applyLang() {
   $('#lang').textContent = t('langBtn');
   $('#g_text').placeholder = t('pg.ph');
   $('#inside').innerHTML = ['in1', 'in2', 'in3', 'in4'].map(k => { const [b, s] = t(k).split('|'); return `<li><b>${esc(b)}</b>${esc(s)}</li>`; }).join('');
-  renderHome(); renderTypes(); renderLib(); renderLesson(); renderFaq(); renderScenes(); setupPromptForm(); renderCertPanel(); renderNext(); renderGallery(); drawPlay();
+  renderHome(); renderTypes(); renderLib(); renderLesson(); renderFaq(); renderScenes(); setupPromptForm(); renderCertPanel(); renderNext(); renderGallery(); drawPlay(); renderX();
 }
 $('#lang').addEventListener('click', () => { lang = lang === 'ar' ? 'en' : 'ar'; store.set('lang', lang); applyLang(); });
 
@@ -478,7 +488,7 @@ $('#dl').addEventListener('click', async () => {
 });
 
 // ═════ التنقل ═════
-const VIEWS = ['home', 'library', 'tools', 'lessons', 'gallery', 'project'];
+const VIEWS = ['home', 'library', 'tools', 'lessons', 'gallery', 'project', 'glossary', 'mytools', 'search', 'about', 'contact', 'privacy'];
 let toolTab = 'play';
 function setTab(tab) { toolTab = tab; $$('#toolTabs button').forEach(b => b.setAttribute('aria-pressed', b.dataset.tab === tab)); $$('.panel').forEach(p => p.hidden = p.dataset.panel !== tab); observeStages(); if (tab === 'play') drawPlay(); }
 function route() {
@@ -489,6 +499,8 @@ function route() {
   if (item) { if (type !== item.type) { type = item.type; cat = 'all'; renderTypes(); renderLib(); } openItem(h, false); }
   else { if (dlg.open) dlg.close(); window.scrollTo(0, 0); }
   if (v === 'tools') { observeStages(); drawPlay(); }
+  if (v === 'search') setTimeout(() => $('#sq').focus(), 60);
+  if (v === 'glossary' && gHL) setTimeout(() => { const el = document.getElementById('g-' + gHL); if (el) el.scrollIntoView({block: 'center'}); }, 60);
 }
 addEventListener('hashchange', route);
 
@@ -543,6 +555,69 @@ else { let l = 0, ci = 0, out = ''; const tick = () => {
   pre.innerHTML = out + `<span class="${k}">${esc(s.slice(0, ci))}</span><span class="cur"></span>`;
   if (ci >= s.length) { out += `<span class="${k}">${esc(s)}</span>\n`; l++; ci = 0; setTimeout(tick, fast ? 380 : 500); } else setTimeout(tick, 34);
 }; tick(); }
+
+
+// ═════ الأقسام الجديدة: جرّب تطلب، المصطلحات، أدواتي، البحث، الصفحات، الوضع الداكن ═════
+const X = window.CTM_X;
+let tryI = 0, gcat = 'all', gq = '', gHL = '';
+function renderTry() {
+  $('#tryChips').innerHTML = X.tryAsk.map((x, i) => `<button type="button" data-try="${i}" aria-pressed="${i === tryI}">${esc(lang === 'en' ? x.en : x.ar)}</button>`).join('');
+  $('#tryOut').textContent = X.tryAsk[tryI].p;
+}
+$('#tryCopy').addEventListener('click', () => copy($('#tryOut').textContent));
+function renderGlossary() {
+  $('#gfilters').innerHTML = ['all', 'motion', 'ai', 'dev'].map(c => `<button type="button" data-gcat="${c}" aria-pressed="${c === gcat}">${t('gc.' + c)}</button>`).join('');
+  const list = X.glossary.filter(([n, c, a, e]) => (gcat === 'all' || c === gcat) && (!gq || (n + ' ' + a + ' ' + e).toLowerCase().includes(gq)));
+  $('#glo').innerHTML = list.length ? list.map(([n, c, a, e, eg]) => `<article class="term-c ${slug(n) === gHL ? 'hl' : ''}" id="g-${slug(n)}"><h3>${esc(n)}</h3><p>${esc(lang === 'en' ? e : a)}</p>${eg && lang !== 'en' ? `<div class="eg">${t('glo.eg')}${esc(eg)}</div>` : ''}</article>`).join('') : `<div class="empty">${t('sr.none')}</div>`;
+}
+$('#gq').addEventListener('input', e => { gq = e.target.value.trim().toLowerCase(); gHL = ''; renderGlossary(); });
+function renderMyTools() {
+  $('#mytoolsGrid').innerHTML = X.tools.map(x => { const op = lang === 'en' ? x.opinionEn : x.opinion; return `<article class="card mt"><div class="top">${icon({motion: 'video', ai: 'dev', dev: 'docs', audio: 'video', video: 'design'}[x.cat] || 'dev')}<div><h3 class="lt" dir="ltr">${esc(x.n)}</h3><div class="src">${t('tc.' + x.cat)}</div></div></div><p>${esc(lang === 'en' ? x.den : x.d)}</p>${op ? `<div class="op">${t('mt.op')}${esc(op)}</div>` : ''}<div class="row"><a class="more" style="text-decoration:none" href="${esc(x.url)}" target="_blank" rel="noopener">${t('mt.visit')}</a></div></article>`; }).join('');
+}
+function renderSearch() {
+  const q = ($('#sq').value || '').trim().toLowerCase(), box = $('#sres');
+  if (q.length < 2) { box.innerHTML = `<p class="lead">${t('sr.hint')}</p>`; return; }
+  const has = (...f) => f.join(' ').toLowerCase().includes(q);
+  const groups = [
+    ['sr.les', C.LESSONS.map((l, k) => [l, k]).filter(([l]) => has(l.t, l.s, l.p.join(' '), LF(l, 't'), LF(l, 's'), LF(l, 'p').join(' '), l.code)).map(([l, k]) => ({t: LF(l, 't'), d: LF(l, 's'), go: 'lesson:' + k}))],
+    ['sr.lib', ALL.filter(i => has(i.n, i.d, F(i, 'd'), F(i, 'n'), i.src)).map(i => ({t: F(i, 'n'), d: F(i, 'd'), go: '#' + i.key}))],
+    ['sr.glo', X.glossary.filter(([n, c, a, e]) => has(n, a, e)).map(([n, c, a, e]) => ({t: n, d: lang === 'en' ? e : a, go: 'term:' + slug(n)}))],
+    ['sr.tools', X.tools.filter(x => has(x.n, x.d, x.den)).map(x => ({t: x.n, d: lang === 'en' ? x.den : x.d, go: '#mytools'}))],
+    ['sr.sc', M.SCENES.filter(s => has(s.ar, s.en, s.dar, s.den)).map(s => ({t: lang === 'en' ? s.en : s.ar, d: lang === 'en' ? s.den : s.dar, go: 'scenes'}))],
+  ].filter(g => g[1].length);
+  box.innerHTML = groups.length ? groups.map(([k, items]) => `<div class="sres-g"><h3>${t(k)} · ${items.length}</h3>${items.slice(0, 8).map(r => `<button type="button" class="sres-i" data-go="${esc(r.go)}"><b ${latin(r.t) ? 'dir="ltr" class="lt"' : ''}>${esc(r.t)}</b><span>${esc(r.d)}</span></button>`).join('')}</div>`).join('') : `<div class="empty">${t('sr.none')}</div>`;
+}
+$('#sq').addEventListener('input', renderSearch);
+function go(target) {
+  if (target.startsWith('lesson:')) { li = +target.split(':')[1]; renderLesson(); location.hash = 'lessons'; }
+  else if (target.startsWith('term:')) { gHL = target.split(':')[1]; gcat = 'all'; gq = ''; $('#gq').value = ''; renderGlossary(); location.hash = 'glossary'; route(); }
+  else if (target === 'scenes') { location.hash = 'tools'; setTab('scenes'); }
+  else location.hash = target.slice(1);
+}
+const PAGES = {
+  ar: {
+    about: `<h2>من أنا</h2><div class="cardx"><p>أنا <b>عبدالرحمن مصطفى</b>، مصمم جرافيك ومونتير، ومهتم بالذكاء الاصطناعي وريادة الأعمال والمشاريع الرقمية.</p><p>سويت ورشة <b>CODE TO MOTION</b> عشان أوري الناس كيف يصنعون موشن جرافيك احترافي بالكود وبمساعدة وكلاء الذكاء الاصطناعي، حتى لو ما عندهم خلفية برمجية.</p><p>وكاتب كتاب «قبل أن تبلغ العشرين».</p></div><h3>ليش هذا الموقع؟</h3><p>عشان يكون مرجع مجاني بالعربي: مكتبة أدوات جاهزة، ودروس، ومختبر تجرّب فيه الحركة لايف، ومكان تشارك فيه أعمالك.</p>`,
+    contact: `<h2>تواصل معي</h2><div class="cardx"><p>📧 الإيميل: <a class="mono" href="mailto:mostafaabodee9@gmail.com">mostafaabodee9@gmail.com</a></p><p>𝕏 / Instagram / Threads: <span class="mono">@mostafaabodee8</span></p><p>▶️ YouTube: <span class="mono">@abdulrahmanmostafa-f7c</span></p></div><p>للتعاون أو ورش للجهات، راسلني على الإيميل.</p>`,
+    privacy: `<h2>سياسة الخصوصية</h2><p>آخر تحديث: نوفمبر 2026</p><h3>وش نجمع؟</h3><ul><li><b>إيميلك</b> لو اشتركت في النشرة، عشان نرسل لك جديد الموقع بس.</li><li><b>اسمك وعملك</b> (فيديو أو رابط) لو رفعته في المعرض. يبقى مخفي لين أراجعه، ولا يظهر إلا لو اعتمدته.</li><li><b>مفتاح تصويت عشوائي</b> ينحفظ في متصفحك عشان ما يتكرر صوتك. ما فيه اسمك ولا أي معلومة عنك.</li></ul><h3>وش يبقى في جهازك بس؟</h3><p>تقدّمك في الدروس، وسلة التثبيت، واللغة والوضع اللي اخترته. هذي محفوظة في متصفحك، وما توصلنا.</p><h3>وين تنحفظ البيانات؟</h3><p>في Supabase، ومحمية بحيث ما يقرأ الإيميلات والأعمال غير المعتمدة إلا صاحب الموقع.</p><h3>ما نسوي</h3><p>ما نبيع بياناتك، ولا نشاركها مع أحد، ولا نستخدم إعلانات أو أدوات تتبّع.</p><h3>حذف بياناتك</h3><p>راسلني على <span class="mono">mostafaabodee9@gmail.com</span> وأحذف إيميلك أو عملك.</p>`,
+  },
+  en: {
+    about: `<h2>About me</h2><div class="cardx"><p>I'm <b>Abdulrahman Mostafa</b>, a graphic designer and video editor interested in AI, entrepreneurship and digital projects.</p><p>I created the <b>CODE TO MOTION</b> workshop to show people how to make professional motion graphics with code and AI agents, even without a coding background.</p><p>I'm also the author of the book "Before You Turn Twenty" (قبل أن تبلغ العشرين).</p></div><h3>Why this site?</h3><p>To be a free Arabic-first reference: ready tools, lessons, a live lab to try motion, and a place to share your work.</p>`,
+    contact: `<h2>Contact</h2><div class="cardx"><p>📧 Email: <a class="mono" href="mailto:mostafaabodee9@gmail.com">mostafaabodee9@gmail.com</a></p><p>𝕏 / Instagram / Threads: <span class="mono">@mostafaabodee8</span></p><p>▶️ YouTube: <span class="mono">@abdulrahmanmostafa-f7c</span></p></div><p>For collaborations or workshops for organizations, email me.</p>`,
+    privacy: `<h2>Privacy policy</h2><p>Last updated: November 2026</p><h3>What we collect</h3><ul><li><b>Your email</b> if you subscribe, only to send site updates.</li><li><b>Your name and work</b> (video or link) if you submit to the gallery. It stays hidden until reviewed and is shown only if approved.</li><li><b>A random voting key</b> stored in your browser so your vote is not repeated. It contains no name or personal details.</li></ul><h3>What stays on your device</h3><p>Lesson progress, your install stack, and your language and theme choices. They live in your browser and never reach us.</p><h3>Where data is stored</h3><p>In Supabase, protected so that only the site owner can read emails and unapproved works.</p><h3>What we don't do</h3><p>We don't sell or share your data, and we use no ads or trackers.</p><h3>Deleting your data</h3><p>Email <span class="mono">mostafaabodee9@gmail.com</span> and I'll delete your email or work.</p>`,
+  },
+};
+function renderPages() { const P = PAGES[lang] || PAGES.ar; $('#aboutPage').innerHTML = P.about; $('#contactPage').innerHTML = P.contact; $('#privacyPage').innerHTML = P.privacy; }
+// الوضع الداكن
+let theme = store.get('theme', '');
+function applyTheme() { if (theme) document.documentElement.dataset.theme = theme; else delete document.documentElement.dataset.theme; const dark = theme ? theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches; $('#theme').textContent = dark ? '☀️' : '🌙'; $('#theme').setAttribute('aria-label', t('theme')); }
+$('#theme').addEventListener('click', () => { const dark = theme ? theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches; theme = dark ? 'light' : 'dark'; store.set('theme', theme); applyTheme(); });
+function renderX() { renderTry(); renderGlossary(); renderMyTools(); renderSearch(); renderPages(); applyTheme(); }
+document.addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.try !== undefined) { tryI = +b.dataset.try; renderTry(); }
+  else if (b.dataset.gcat) { gcat = b.dataset.gcat; gHL = ''; renderGlossary(); }
+  else if (b.dataset.go) go(b.dataset.go);
+});
 
 applyLang(); route(); initDb();
 }

@@ -187,9 +187,13 @@ footer .wrap{display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-con
     <a href="#library" data-t="nav.library">المكتبة</a>
     <a href="#tools" data-t="nav.tools">الأدوات</a>
     <a href="#lessons" data-t="nav.lessons">الدروس</a>
+    <a href="#glossary" data-t="nav.glossary">المصطلحات</a>
+    <a href="#mytools" data-t="nav.mytools">أدواتي</a>
     <a href="#gallery" data-t="nav.gallery">معرض الأعمال</a>
     <a href="#project" data-t="nav.project">ملفات الورشة</a>
   </nav>
+  <a class="lang" href="#search" id="searchBtn" aria-label="Search">🔍</a>
+  <button class="lang" id="theme" type="button" aria-label="Theme">🌙</button>
   <button class="lang" id="lang" type="button">English</button>
 </div></header>
 
@@ -224,6 +228,13 @@ footer .wrap{display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-con
       <input class="field" id="nLink" type="url" dir="ltr" maxlength="300" placeholder="https://lu.ma/...">
       <div class="row"><button class="btn p" type="submit" data-t="save">احفظ</button><span class="msg" id="nMsg" role="status"></span></div>
     </form>
+  </div></div>
+  <div class="band" style="padding-top:0"><div class="wrap">
+    <div class="try">
+      <div><h2 data-t="try.h">جرّب تطلب</h2><p class="lead" data-t="try.p">اضغط على أي فكرة، وخذ برومبت جاهز تلصقه لوكيلك.</p><div class="trychips" id="tryChips"></div></div>
+      <div class="tryout"><div class="codebox"><pre id="tryOut"></pre><button class="ib" type="button" id="tryCopy" data-t="copy">نسخ</button></div>
+        <ol class="trysteps"><li data-t="try.s1">افتح الـ Terminal داخل مجلد مشروعك</li><li data-t="try.s2">اكتب claude (أو شغّل Codex)</li><li data-t="try.s3">الصق البرومبت واضغط Enter، وراجع النتيجة في Studio</li></ol></div>
+    </div>
   </div></div>
   <div class="band" style="padding-top:0"><div class="wrap">
     <h2 data-t="home.start">من وين تبدأ؟</h2>
@@ -389,9 +400,37 @@ npm install
 npm run dev<button class="ib" data-copy="cd code-to-motion&#10;npm install&#10;npm run dev" type="button" data-t="copy">نسخ</button></div>
   </div>
 </div></section>
+
+<!-- ═════ المصطلحات ═════ -->
+<section class="view band" data-view="glossary" hidden><div class="wrap">
+  <h2 data-t="glo.h">قاموس المصطلحات</h2>
+  <p class="lead" data-t="glo.p">كل كلمة تسمعها في الموشن والذكاء الاصطناعي، بشرح بسيط بجملتين.</p>
+  <div class="tools"><label class="search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="gq" type="search" data-tp="glo.search" placeholder="ابحث عن مصطلح…"></label><div class="filters" id="gfilters" role="group"></div></div>
+  <div class="glo" id="glo"></div>
+</div></section>
+
+<!-- ═════ أدواتي ═════ -->
+<section class="view band" data-view="mytools" hidden><div class="wrap">
+  <h2 data-t="mt.h">الأدوات اللي أستخدمها</h2>
+  <p class="lead" data-t="mt.p">الأدوات اللي نشتغل فيها في الورشة، وش تسوي كل وحدة، ومتى تحتاجها.</p>
+  <div class="grid" id="mytoolsGrid"></div>
+</div></section>
+
+<!-- ═════ البحث ═════ -->
+<section class="view band" data-view="search" hidden><div class="wrap">
+  <h2 data-t="sr.h">ابحث في الموقع</h2>
+  <label class="search" style="max-width:720px;margin-bottom:20px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="sq" type="search" data-tp="sr.ph" placeholder="دروس، Skills، مصطلحات، أدوات…"></label>
+  <div id="sres"></div>
+</div></section>
+
+<!-- ═════ صفحات ثابتة ═════ -->
+<section class="view band" data-view="about" hidden><div class="wrap page" id="aboutPage"></div></section>
+<section class="view band" data-view="contact" hidden><div class="wrap page" id="contactPage"></div></section>
+<section class="view band" data-view="privacy" hidden><div class="wrap page" id="privacyPage"></div></section>
 </main>
 
 <footer class="band"><div class="wrap">
+  <nav class="flinks" aria-label="Footer"><a href="#about" data-t="foot.about">من أنا</a><a href="#contact" data-t="foot.contact">تواصل</a><a href="#privacy" data-t="foot.privacy">الخصوصية</a></nav>
   <span><span data-t="foot.by">إعداد: عبدالرحمن مصطفى</span> · <span class="mono">@mostafaabodee8</span></span>
   <span><span data-t="foot.src">المصادر:</span> <a href="https://github.com/remotion-dev/skills">remotion-dev/skills</a> · <a href="https://github.com/anthropics/skills">anthropics/skills</a></span>
 </div></footer>
@@ -406,6 +445,7 @@ npm run dev<button class="ib" data-copy="cd code-to-motion&#10;npm install&#10;n
 <script src="scenes.js"></script>
 <script src="vendor/supabase-2.119.0.js"></script>
 <script src="backend.js"></script>
+<script src="extras.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
