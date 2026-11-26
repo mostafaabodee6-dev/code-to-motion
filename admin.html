@@ -91,6 +91,7 @@ a{color:var(--pink)}
       <button type="button" data-tab="works" aria-pressed="true">الأعمال<small id="cPending"></small></button>
       <button type="button" data-tab="subs" aria-pressed="false">المشتركين<small id="cSubs"></small></button>
       <button type="button" data-tab="next" aria-pressed="false">الورشة الجاية</button>
+      <button type="button" data-tab="challenge" aria-pressed="false">التحدي</button>
       <button type="button" data-tab="account" aria-pressed="false">الحساب</button>
     </div>
 
@@ -115,6 +116,16 @@ a{color:var(--pink)}
         <label>رابط التسجيل<input class="f" id="nLink" type="url" dir="ltr" placeholder="https://lu.ma/..."></label>
         <div class="bar"><button class="btn p" type="submit">احفظ</button><button class="btn" type="button" id="nClear">امسح الموعد (يطلع «قريبًا»)</button></div>
         <p class="msg" id="nMsg" role="status"></p>
+      </form>
+    </div>
+    <div data-panel="challenge" hidden>
+      <form class="form card" id="chAdmin">
+        <label>عنوان التحدي<input class="f" id="cTitle" maxlength="80" placeholder="مثال: فيديو «عني» في 10 ثواني"></label>
+        <label>الوصف (اختياري)<textarea class="f" id="cText" maxlength="400" rows="3"></textarea></label>
+        <label style="flex-direction:row;align-items:center;gap:10px"><input type="checkbox" id="cOpen" style="width:22px;height:22px">التحدي مفتوح لاستقبال الأعمال</label>
+        <div class="bar"><button class="btn p" type="submit">احفظ</button><a class="btn" href="index.html#live" target="_blank">افتح شاشة النتائج ↗</a></div>
+        <p class="msg" id="cMsg" role="status"></p>
+        <p class="mute">الأعمال توصلك في تبويب «الأعمال» وعليها اسم التحدي. اعتمدها عشان تدخل الترتيب. لو غيّرت عنوان التحدي، يبدأ ترتيب جديد.</p>
       </form>
     </div>
     <div data-panel="account" hidden>

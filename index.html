@@ -189,6 +189,8 @@ footer .wrap{display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-con
     <a href="#lessons" data-t="nav.lessons">الدروس</a>
     <a href="#glossary" data-t="nav.glossary">المصطلحات</a>
     <a href="#mytools" data-t="nav.mytools">أدواتي</a>
+    <a href="#make" data-t="nav.make">اصنع فيديوك</a>
+    <a href="#challenge" data-t="nav.challenge">التحدي</a>
     <a href="#workshops" data-t="nav.workshops">الورش</a>
     <a href="#gallery" data-t="nav.gallery">معرض الأعمال</a>
     <a href="#project" data-t="nav.project">ملفات الورشة</a>
@@ -394,6 +396,57 @@ npm run dev<button class="ib" data-copy="cd code-to-motion&#10;npm install&#10;n
 </div></section>
 
 
+
+<!-- ═════ اصنع فيديوك ═════ -->
+<section class="view band" data-view="make" id="makeView" hidden><div class="wrap">
+  <h2 data-t="mk.h">اصنع فيديوك</h2>
+  <p class="lead" data-t="mk.p">اكتب اسمك، اختار ألوانك ونمط الحركة، وشوف فيديو موشن معمول لك أنت. وبعدين صدّره وشاركه.</p>
+  <div class="mk">
+    <div class="mkctl">
+      <label><span data-t="mk.name">اسمك</span><input class="field" id="mkName" maxlength="40" data-tp="mk.nameP" placeholder="عبدالرحمن مصطفى"></label>
+      <label><span data-t="mk.role">وش تشتغل (اختياري)</span><input class="field" id="mkRole" maxlength="50" data-tp="mk.roleP" placeholder="مصمم وصانع محتوى"></label>
+      <div><span class="lbl" data-t="mk.colors">الألوان</span><div class="mkpal" id="mkPal"></div>
+        <div class="row mkcol"><label><input type="color" id="mkBg"><span data-t="mk.bg">الخلفية</span></label><label><input type="color" id="mkAc"><span data-t="mk.ac">اللون المميز</span></label></div></div>
+      <div><span class="lbl" data-t="mk.style">نمط الحركة</span><div class="chips" id="mkStyle"></div></div>
+      <div><span class="lbl" data-t="mk.size">المقاس</span><div class="chips" id="mkSize"></div></div>
+      <div class="row" style="flex-wrap:wrap;gap:10px"><button class="btn o" type="button" id="mkPlay" data-t="mk.play">▶ أعد التشغيل</button><button class="btn p" type="button" id="mkExport" data-t="mk.export">⬇ صدّر الفيديو</button></div>
+      <p class="msg" id="mkMsg" role="status"></p>
+      <button class="btn s" type="button" id="mkToChallenge" hidden data-t="mk.toCh">شارك فيه في تحدي الموشن ←</button>
+    </div>
+    <div class="mkstage"><canvas id="mkCanvas" width="1920" height="1080" aria-label="preview"></canvas></div>
+  </div>
+</div></section>
+
+<!-- ═════ تحدي الموشن ═════ -->
+<section class="view band" data-view="challenge" hidden><div class="wrap">
+  <h2 data-t="ch.h">تحدي الموشن</h2>
+  <p class="lead" data-t="ch.p">تحديات مباشرة وقت الورشة: ارفع عملك، وصوّت لأحلى فيديو، وتابع الترتيب لايف.</p>
+  <div class="ch">
+    <div>
+      <div class="chinfo" id="chInfo"></div>
+      <form class="admin chform" id="chForm" hidden>
+        <h3 data-t="ch.send">ارفع عملك</h3>
+        <label><span data-t="gal.f.name">اسم صاحب العمل</span><input id="chName" required maxlength="60"></label>
+        <label><span data-t="gal.f.title">عنوان العمل</span><input id="chTitle" required maxlength="80"></label>
+        <label class="full"><span data-t="ch.file">ملف الفيديو (أقل من 50MB)</span><input id="chFile" type="file" required accept="video/mp4,video/webm,video/quicktime"></label>
+        <label class="full" style="flex-direction:row;align-items:center;gap:10px"><input type="checkbox" required style="width:22px;height:22px;min-height:0;accent-color:var(--pink)"><span data-t="pub.ok2">أوافق على نشر عملي واسمي في المعرض</span></label>
+        <div class="full row"><button class="btn p" type="submit" id="chSave" data-t="pub.btn">أرسل عملي</button><span class="msg" id="chMsg" role="status"></span></div>
+      </form>
+      <p><a class="btn o" href="#make" data-t="ch.make">ما عندك فيديو؟ اصنعه هنا</a></p>
+    </div>
+    <div><h3 data-t="ch.board">الترتيب</h3><ol class="chboard" id="chBoard"></ol><a class="mono" href="#live" style="font-size:13px" data-t="ch.live">شاشة النتائج للبث ↗</a></div>
+  </div>
+</div></section>
+
+<!-- ═════ شاشة النتائج للبث ═════ -->
+<section class="view live" data-view="live" hidden>
+  <div class="livein">
+    <div class="livehead"><span>CODE TO MOTION · <b data-t="ch.h">تحدي الموشن</b></span><h2 id="liveTitle"></h2></div>
+    <ol id="liveBoard"></ol>
+    <div class="liveqr"><img src="img/qr-challenge.png" alt=""><span data-t="ch.scan">امسح وصوّت لعملك المفضّل</span></div>
+  </div>
+</section>
+
 <!-- ═════ القوالب والحزمة ═════ -->
 <section class="view band" data-view="project" hidden><div class="wrap">
   <h2 data-t="tpl.h">8 قوالب Remotion جاهزة</h2>
@@ -468,5 +521,6 @@ npm run dev<button class="ib" data-copy="cd code-to-motion&#10;npm install&#10;n
 <script src="backend.js"></script>
 <script src="extras.js"></script>
 <script src="app.js"></script>
+<script src="studio.js"></script>
 </body>
 </html>
