@@ -53,7 +53,7 @@
   <section class="wrap gate-wrap" id="gate-section">
     <div class="card gate" id="gate">
       <h2>دخول الحضور</h2>
-      <p class="muted">اكتب الرقم السري الذي وصلك لدخول قسم الأسئلة والمشاركة.</p>
+      <p class="muted">اكتب الرقم السري الذي وصلك لدخول قسم الأسئلة ولوحة المتفاعلين.</p>
       <form id="gate-form" class="row-form" autocomplete="off">
         <label class="sr" for="code">الرقم السري</label>
         <input id="code" name="code" inputmode="numeric" maxlength="12" class="input code" placeholder="الرقم السري" required>
@@ -66,25 +66,42 @@
   <section class="wrap qa" id="qa" hidden>
     <div class="qa-head">
       <div>
-        <h2>اسأل في الورشة</h2>
-        <p class="muted">اكتب سؤالك، واسمك يظهر مع السؤال.</p>
+        <h2>مساحة الحضور</h2>
+        <p class="muted">اسألنا، وشارك صورة مع سؤالك، وشوف الأكثر تفاعلًا.</p>
       </div>
       <button class="btn ghost small" id="lock" type="button">خروج</button>
     </div>
 
-    <form id="ask-form" class="card ask" autocomplete="off">
-      <label for="name">اسمك (يظهر مع سؤالك)</label>
-      <input id="name" name="name" class="input" maxlength="40" minlength="2" required placeholder="مثال: عبدالرحمن">
-      <label for="question">سؤالك</label>
-      <textarea id="question" name="question" class="input" rows="3" maxlength="500" minlength="3" required placeholder="اكتب سؤالك هنا"></textarea>
-      <div class="row-form end">
-        <span class="muted small" id="count">0 / 500</span>
-        <button class="btn primary" type="submit" id="send">أرسل السؤال</button>
-      </div>
-      <p class="msg" id="ask-msg" role="status"></p>
-    </form>
+    <div class="tabs" role="tablist">
+      <button type="button" role="tab" id="tab-q" aria-selected="true" aria-controls="panel-q" data-tab="q">الأسئلة</button>
+      <button type="button" role="tab" id="tab-l" aria-selected="false" aria-controls="panel-l" data-tab="l" tabindex="-1">الأكثر تفاعلًا</button>
+    </div>
 
-    <div class="list" id="list" aria-live="polite"></div>
+    <div id="panel-q" role="tabpanel" aria-labelledby="tab-q">
+      <form id="ask-form" class="card ask" autocomplete="off">
+        <label for="name">اسمك (يظهر مع سؤالك)</label>
+        <input id="name" name="name" class="input" maxlength="40" minlength="2" required placeholder="مثال: عبدالرحمن">
+        <label for="question">سؤالك</label>
+        <textarea id="question" name="question" class="input" rows="3" maxlength="500" minlength="3" required placeholder="اكتب سؤالك هنا"></textarea>
+        <label for="image">صورة (اختيارية، حتى 5 ميجابايت)</label>
+        <input id="image" name="image" type="file" accept="image/jpeg,image/png,image/webp" class="input file">
+        <div class="preview" id="preview" hidden>
+          <img id="preview-img" alt="معاينة الصورة">
+          <button type="button" class="btn ghost small" id="remove-img">إزالة الصورة</button>
+        </div>
+        <div class="row-form end">
+          <span class="muted small" id="count">0 / 500</span>
+          <button class="btn primary" type="submit" id="send">أرسل السؤال</button>
+        </div>
+        <p class="msg" id="ask-msg" role="status"></p>
+      </form>
+      <div class="list" id="list" aria-live="polite"></div>
+    </div>
+
+    <div id="panel-l" role="tabpanel" aria-labelledby="tab-l" hidden>
+      <p class="muted">الترتيب حسب عدد الأسئلة المرسلة، ثم عدد الصور.</p>
+      <ol class="board" id="board" aria-live="polite"></ol>
+    </div>
   </section>
 </main>
 
