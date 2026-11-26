@@ -39,8 +39,8 @@ const T = {
     'nav.workshops':'الورش','ai.pack':'حزمة CODE TO MOTION (20 Skill + 8 وكلاء) لـ Claude Code و Codex و Cursor','ai.agents':'الوكلاء',
     'tpl.h':'8 قوالب Remotion جاهزة','tpl.p':'كلها داخل المشروع في مجلد Templates. افتح القالب في Studio وغيّر النصوص والألوان من لوحة Props.','tpl.props':'تتغير من Props: ',
     'kit.h':'حزمة الورشة كاملة','kit.p':'حمّل الحزمة كلها مرة وحدة، أو القسم اللي تحتاجه بس.','kit.all':'حمّل الحزمة كاملة (ZIP)',
-    'ws.h':'الورش','ws.p':'كل ورشة بموعدها وملفاتها، ورأيك فيها.','ws.c2m':'اصنع موشن جرافيك بالكود مع Remotion','ws.date':'السبت 28 نوفمبر 2026','ws.time':'6:00 – 8:30 مساءً بتوقيت السعودية','ws.where':'أونلاين · بث مباشر','ws.files':'ملفات الورشة','ws.fb':'شاركنا رأيك في الورشة','ws.fbp':'أقل من دقيقتين، وبدون اسم أو إيميل.','ws.soon':'قريبًا','ws.live':'الحين مباشر','ws.done':'انتهت',
-    'md.vars':'المتغيرات (بدّلها بقيمك)','md.tools':'الأدوات','md.req':'المتطلبات','md.example':'مثال','md.preview':'معاينة قريبة من النتيجة','md.envs':'وين تحط الملف','md.skills':'يستخدم Skills',
+    'ws.h':'الورش','ws.p':'كل ورشة بموعدها وملفاتها، ورأيك فيها.','ws.c2m':'اصنع موشن جرافيك بالكود مع Remotion','ws.date':'السبت 28 نوفمبر 2026','ws.time':'6:00 – 8:30 مساءً بتوقيت السعودية','ws.where':'مجانية · أونلاين · بث مباشر','ws.files':'ملفات الورشة','ws.fb':'شاركنا رأيك في الورشة','ws.fbp':'أقل من دقيقتين، وبدون اسم أو إيميل.','ws.soon':'قريبًا','ws.live':'الحين مباشر','ws.done':'انتهت',
+    'md.vars':'عبّي المتغيرات ويتعدّل البرومبت تحت مباشرة','p.custom':'خصّصه ←','p.copyFilled':'انسخ البرومبت بقيمك','md.tools':'الأدوات','md.req':'المتطلبات','md.example':'مثال','md.preview':'معاينة قريبة من النتيجة','md.envs':'وين تحط الملف','md.skills':'يستخدم Skills',
     'les.h':'دروس الورشة','les.p':'كل درس فيه الفكرة والكود وتمرين قصير. علّم على الدرس لما تخلّصه، وتابع تقدّمك.','les.file':'الملف في المشروع: ','les.ex':'✍️ تمرين: ','les.prev':'→ الدرس السابق','les.next':'الدرس التالي ←','les.share':'شارك عملك ←','les.done':'✓ خلّصت الدرس','les.mark':'علّمه كمخلّص','les.prog':'تقدّمك: ',
     'faq.h':'أسئلة شائعة','gal.h':'معرض أعمال الحضور','gal.p':'فيديوهات سوّاها الحضور في تحدي الورشة. صوّت لأحلى عمل.','gal.share':'شارك عملك','gal.how':'سوّ فيديو «عن نفسي» من قالب AboutMe، وانشره على حساباتك مع منشن @mostafaabodee8. الأعمال المختارة تنضاف هنا.',
     'gal.add':'إضافة عمل (تظهر لك بس)','gal.f.name':'اسم صاحب العمل','gal.f.title':'عنوان العمل','gal.f.link':'رابط المنشور (اختياري، يبدأ بـ https://)','gal.f.file':'ملف الفيديو (اختياري، أقل من 20MB)','gal.f.save':'أضف للمعرض',
@@ -78,8 +78,8 @@ const T = {
     'nav.workshops':'Workshops','ai.pack':'CODE TO MOTION pack (20 skills + 8 agents) for Claude Code, Codex and Cursor','ai.agents':'Agents',
     'tpl.h':'8 ready Remotion templates','tpl.p':'All inside the project in the Templates folder. Open one in Studio and change texts and colors from the Props panel.','tpl.props':'Editable props: ',
     'kit.h':'The full workshop kit','kit.p':'Download the whole kit at once, or just the part you need.','kit.all':'Download the full kit (ZIP)',
-    'ws.h':'Workshops','ws.p':'Every workshop with its date, files and your feedback.','ws.c2m':'Make motion graphics with code using Remotion','ws.date':'Saturday, 28 November 2026','ws.time':'6:00 – 8:30 PM Saudi time','ws.where':'Online · live','ws.files':'Workshop files','ws.fb':'Tell us what you thought','ws.fbp':'Under two minutes, no name or email.','ws.soon':'Upcoming','ws.live':'Live now','ws.done':'Ended',
-    'md.vars':'Variables (replace with yours)','md.tools':'Tools','md.req':'Requirements','md.example':'Example','md.preview':'Preview of a similar result','md.envs':'Where the file goes','md.skills':'Uses skills',
+    'ws.h':'Workshops','ws.p':'Every workshop with its date, files and your feedback.','ws.c2m':'Make motion graphics with code using Remotion','ws.date':'Saturday, 28 November 2026','ws.time':'6:00 – 8:30 PM Saudi time','ws.where':'Free · online · live','ws.files':'Workshop files','ws.fb':'Tell us what you thought','ws.fbp':'Under two minutes, no name or email.','ws.soon':'Upcoming','ws.live':'Live now','ws.done':'Ended',
+    'md.vars':'Fill in the variables and the prompt below updates live','p.custom':'Customize →','p.copyFilled':'Copy your prompt','md.tools':'Tools','md.req':'Requirements','md.example':'Example','md.preview':'Preview of a similar result','md.envs':'Where the file goes','md.skills':'Uses skills',
     'les.h':'Workshop lessons','les.p':'Each lesson has the idea, the code and a short exercise. Mark lessons as done and track your progress.','les.file':'File in the project: ','les.ex':'✍️ Exercise: ','les.prev':'← Previous lesson','les.next':'Next lesson →','les.share':'Share your work →','les.done':'✓ Lesson done','les.mark':'Mark as done','les.prog':'Your progress: ',
     'faq.h':'FAQ','gal.h':'Attendee gallery','gal.p':'Videos attendees made for the workshop challenge. Vote for your favorite.','gal.share':'Share your work','gal.how':'Make an "About me" video from the AboutMe template and post it with a mention of @mostafaabodee8. Selected works are added here.',
     'gal.add':'Add a work (only you see this)','gal.f.name':'Creator name','gal.f.title':'Work title','gal.f.link':'Post link (optional, starts with https://)','gal.f.file':'Video file (optional, under 20MB)','gal.f.save':'Add to gallery',
@@ -140,7 +140,20 @@ function renderTypes() {
   $('#types').innerHTML = TYPES.map(tp => `<button type="button" data-type="${tp.id}" aria-pressed="${tp.id === type}">${t('type.' + tp.id)}<small>${tp.list.length}</small></button>`).join('');
   $('#filters').innerHTML = CATS.map(c => `<button type="button" data-cat="${c.id}" aria-pressed="${c.id === cat}">${t('cat.' + c.id)}</button>`).join('');
 }
+function promptCard(i) {
+  const name = F(i, 'n'), en = (i.src.split(' · ')[1] || '');
+  const thumb = i.preview ? `<img class="pthumb" loading="lazy" alt="" src="img/templates/${i.preview}.jpg">` : `<div class="pthumb pfake"><span dir="ltr">${esc(i.text.split('\n')[0].slice(0, 70))}…</span></div>`;
+  return `<article class="card pcard" data-open-card="${i.key}">
+    ${thumb}
+    <div class="pbody"><span class="tag">${t('cat.' + i.cat)}</span>
+    <h3 class="lt">${esc(name)}</h3>${en && lang !== 'en' ? `<div class="src" dir="ltr">${esc(en)}</div>` : ''}
+    <p>${esc(F(i, 'd'))}</p>
+    ${i.vars ? `<div class="pvars">${i.vars.slice(0, 4).map(v => `<code dir="ltr">${esc(v)}</code>`).join('')}${i.vars.length > 4 ? `<code>+${i.vars.length - 4}</code>` : ''}</div>` : ''}
+    <div class="row"><button class="btn p sm" type="button" data-open="${i.key}">${t(i.vars ? 'p.custom' : 'details')}</button><button class="ib" type="button" data-copyitem="${i.key}">${t('copyPrompt')}</button></div></div>
+  </article>`;
+}
 function card(i) {
+  if (i.type === 'prompt') return promptCard(i);
   const on = stack.includes(i.key), name = F(i, 'n');
   const snippet = i.cmd || i.path ? `<div class="cmd"><code>${esc(i.cmd || i.path)}</code></div>` : '';
   return `<article class="card">
@@ -156,6 +169,7 @@ function card(i) {
 function renderLib() {
   const list = ALL.filter(i => i.type === type && (cat === 'all' || i.cat === cat) && (!q || [i.n, i.d, i.src, i.long, i.text, F(i, 'd'), F(i, 'n')].join(' ').toLowerCase().includes(q)));
   list.sort((a, b) => (b.star || 0) - (a.star || 0));
+  $('#grid').classList.toggle('pgrid', type === 'prompt');
   $('#grid').innerHTML = list.length ? list.map(card).join('') : `<div class="empty">${t('lib.empty')}</div>`;
   const items = stack.map(k => ALL.find(i => i.key === k));
   $('#stackCount').textContent = items.length ? items.length + t('stack.n') : t('stack.empty');
@@ -165,6 +179,24 @@ function renderLib() {
   $('#copyAll').disabled = !items.length;
 }
 const copyText = i => i.cmd || i.text || i.file || '';
+
+// تعبئة متغيرات البرومبت: {{VAR}} يتبدّل بقيمتك، والفاضي يبقى ظاهر بلون
+function fillPrompt(i, vals, plain = false) {
+  return i.text.split(/(\{\{[A-Z_]+\}\})/).map(part => {
+    const m = part.match(/^\{\{([A-Z_]+)\}\}$/); if (!m) return plain ? part : esc(part);
+    const v = (vals[m[1]] || '').trim();
+    return plain ? (v || part) : (v ? `<mark class="on">${esc(v)}</mark>` : `<mark>${esc(part)}</mark>`);
+  }).join('');
+}
+const pVals = () => Object.fromEntries([...$$('.pform2 input')].map(x => [x.dataset.var, x.value]));
+document.addEventListener('input', e => {
+  if (!e.target.dataset.var) return;
+  const i = ALL.find(x => x.key === e.target.closest('form').dataset.pkey); if (i) $('#ptext').innerHTML = fillPrompt(i, pVals());
+});
+document.addEventListener('click', e => {
+  if (e.target.id === 'pcopy') { const i = ALL.find(x => x.key === $('.pform2').dataset.pkey); copy(fillPrompt(i, pVals(), true)); }
+  const c = e.target.closest('[data-open-card]'); if (c && !e.target.closest('button')) openItem(c.dataset.openCard);
+});
 
 // نافذة التفاصيل
 const dlg = $('#dlg');
@@ -180,11 +212,12 @@ function openItem(key, push = true) {
     ${i.envs ? `<h4>${t('md.envs')}</h4><ul class="envs">${Object.entries(i.envs).map(([k, v]) => `<li><b>${k}</b> <code>${esc(v)}</code></li>`).join('')}</ul>` : ''}
     ${i.skills ? `<p class="path">${t('md.skills')}: <code>${esc(i.skills.join(', '))}</code></p>` : ''}
     ${i.preview ? `<h4>${t('md.preview')}</h4><video class="pv" src="kit/previews/${i.preview}.mp4" poster="img/templates/${i.preview}.jpg" controls muted playsinline preload="none"></video>` : ''}
-    ${i.vars ? `<h4>${t('md.vars')}</h4><p class="vars">${i.vars.map(v => `<code dir="ltr">{{${esc(v)}}}</code>`).join(' ')}</p><p class="path"><b>${t('md.tools')}:</b> ${esc(i.tools)} · <b>${t('md.req')}:</b> ${esc(i.req)}<br><b>${t('md.example')}:</b> ${esc(i.example)}</p>` : ''}
-    ${i.text ? `<h4>${t('md.prompt')}</h4><p class="path">${esc(t('md.fill'))}</p><pre>${esc(i.text)}</pre>` : ''}
+    ${i.vars ? `<div class="pmeta"><div><b>${t('md.tools')}</b>${esc(i.tools)}</div><div><b>${t('md.req')}</b>${esc(i.req)}</div><div><b>${t('md.example')}</b>${esc(i.example)}</div></div>
+      <h4>${t('md.vars')}</h4><form class="pform2" data-pkey="${i.key}">${i.vars.map(v => `<label><span dir="ltr">${esc(v)}</span><input data-var="${esc(v)}" dir="auto" placeholder="${esc(v)}"></label>`).join('')}</form>` : ''}
+    ${i.text ? `<h4>${t('md.prompt')}</h4>${i.vars ? '' : `<p class="path">${esc(t('md.fill'))}</p>`}<pre class="ptext" id="ptext">${i.vars ? fillPrompt(i, {}) : esc(i.text)}</pre>` : ''}
     ${i.prompt ? `<h4>${t('md.try')}</h4><pre>${esc(i.prompt)}</pre>` : ''}
     <div class="acts">
-      <button class="btn p" type="button" data-copyitem="${i.key}">${t(i.cmd ? 'md.copyInstall' : i.text ? 'copyPrompt' : 'copyFile')}</button>
+      ${i.vars ? `<button class="btn p" type="button" id="pcopy">${t('p.copyFilled')}</button>` : `<button class="btn p" type="button" data-copyitem="${i.key}">${t(i.cmd ? 'md.copyInstall' : i.text ? 'copyPrompt' : 'copyFile')}</button>`}
       ${i.prompt ? `<button class="btn o" type="button" data-copy="${esc(i.prompt)}">${t('copyPrompt')}</button>` : ''}
       ${i.src.includes('/') ? `<a class="btn o" href="https://github.com/${esc(i.src.split(' ')[0])}">${t('md.src')}</a>` : ''}
     </div>`;
@@ -498,7 +531,9 @@ const VIEWS = ['home', 'library', 'tools', 'lessons', 'workshops', 'gallery', 'p
 let toolTab = 'play';
 function setTab(tab) { toolTab = tab; $$('#toolTabs button').forEach(b => b.setAttribute('aria-pressed', b.dataset.tab === tab)); $$('.panel').forEach(p => p.hidden = p.dataset.panel !== tab); observeStages(); if (tab === 'play') drawPlay(); }
 function route() {
-  const h = location.hash.slice(1), item = ALL.find(i => i.key === h);
+  let h = location.hash.slice(1); const LT = {prompts: 'prompt', skills: 'skill', agents: 'agent'};
+  if (LT[h]) { type = LT[h]; cat = 'all'; renderTypes(); renderLib(); h = 'library'; }
+  const item = ALL.find(i => i.key === h);
   const v = item ? 'library' : (VIEWS.includes(h) ? h : 'home');
   $$('.view').forEach(s => s.hidden = s.dataset.view !== v);
   $$('.nav nav a').forEach(a => a.setAttribute('aria-current', a.getAttribute('href') === '#' + v ? 'page' : 'false'));
