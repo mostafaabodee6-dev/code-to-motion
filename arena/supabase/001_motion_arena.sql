@@ -233,6 +233,5 @@ create policy arena_clips_remove on storage.objects for delete to authenticated
   using(bucket_id='arena-clips' and owner_id=auth.uid()::text and public.arena_storage_remove(name));
 
 insert into public.arena_events(slug,title_ar,title_en)
-  values('code-to-motion','�� ����� ��� ������','Code to Motion');
+  values('code-to-motion','من الكود إلى الموشن','Code to Motion');
 commit;
-

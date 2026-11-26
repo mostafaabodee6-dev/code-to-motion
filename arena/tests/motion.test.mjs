@@ -9,7 +9,7 @@ test('six templates create independent valid local projects in Arabic and Englis
     assert.notEqual(ar.id,en.id);
     assert.equal(validate(ar).template,t.id);
     assert.equal(validate(en).template,t.id);
-    assert.match(ar.layers[0].text,/������/);
+    assert.match(ar.layers[0].text,/الموشن/);
     assert.equal(en.layers[0].text,'MOTION ARENA');
     assert.ok(animations.includes(ar.layers[0].animation));
   }
@@ -47,6 +47,6 @@ test('renderer is deterministic for the same frame and honors hidden layers',()=
     assert.notDeepEqual(first.ops,other.ops);
     p.layers[0].hidden=true;
     const hidden=makeContext();draw(hidden.ctx,p,38);
-    assert.ok(!hidden.ops.some(op=>op[0]==='fillText'&&op[1]==='���� ������'));
+    assert.ok(!hidden.ops.some(op=>op[0]==='fillText'&&op[1]==='ساحة الموشن'));
   }
 });

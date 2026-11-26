@@ -14,23 +14,23 @@ try{
   page.on('pageerror',error=>errors.push(error.message));
   await page.goto(origin+'/arena/');
   await page.locator('h1').waitFor();
-  assert.equal(await page.locator('h1').textContent(),'���� ������');
+  assert.equal(await page.locator('h1').textContent(),'ساحة الموشن');
   assert.equal(await page.locator('[data-template]').count(),6);
   await page.locator('[data-template="kinetic"]').click();
   await page.locator('#stage').waitFor();
   const name=page.locator('.toolbar [data-key="name"]');
-  await name.fill('������ ���� ������');
+  await name.fill('اختبار ساحة الموشن');
   await name.press('Tab');
-  await page.locator('textarea[data-key="text"]').fill('����� ��� � CODE IN MOTION');
+  await page.locator('textarea[data-key="text"]').fill('الكود يتحرّك · CODE IN MOTION');
   await page.locator('textarea[data-key="text"]').press('Tab');
   await page.locator('input[data-key="duration"]').fill('3');
   await page.locator('input[data-key="duration"]').press('Tab');
   await page.locator('#save').click();
-  await page.waitForFunction(()=>document.querySelector('#save-state')?.textContent==='���� ����');
+  await page.waitForFunction(()=>document.querySelector('#save-state')?.textContent==='محفوظ محليًا');
   await page.reload();
   await page.locator('#stage').waitFor();
-  assert.equal(await name.inputValue(),'������ ���� ������');
-  assert.equal(await page.locator('textarea[data-key="text"]').inputValue(),'����� ��� � CODE IN MOTION');
+  assert.equal(await name.inputValue(),'اختبار ساحة الموشن');
+  assert.equal(await page.locator('textarea[data-key="text"]').inputValue(),'الكود يتحرّك · CODE IN MOTION');
   await page.locator('#language').click();
   await page.waitForFunction(()=>document.documentElement.dir==='ltr');
   await page.locator('#export').click();
@@ -52,7 +52,7 @@ try{
     }
     if(kind==='mp4')assert.equal(stream.codec_name,'h264');
     else assert.ok(['vp8','vp9'].includes(stream.codec_name));
-    console.log(kind+': '+stream.codec_name+' '+stream.width+'?'+stream.height+', '+stream.nb_read_frames+' frames decoded');
+    console.log(kind+': '+stream.codec_name+' '+stream.width+'×'+stream.height+', '+stream.nb_read_frames+' frames decoded');
   }
   await page.locator('#close-export').click();
   await page.setViewportSize({width:390,height:844});

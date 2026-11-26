@@ -1,10 +1,10 @@
 export const templates = [
-  {id:'kinetic', en:'Kinetic Typography', ar:'����䩟�� ����', subtitle:'WORDS IN MOTION', colors:['#15102a','#a78bfa','#6ee7f9']},
-  {id:'cinematic', en:'Cinematic Reveal', ar:'�� ���꟞�', subtitle:'A TITLE REVEAL', colors:['#11121b','#f0cd99','#717b9f']},
-  {id:'future', en:'Future Tech', ar:'���� ��ꫢ��', subtitle:'SYSTEM ONLINE', colors:['#071b23','#62f5da','#7df3ff']},
-  {id:'minimal', en:'Minimal Motion', ar:'��� ����', subtitle:'MOTION STUDIES', colors:['#f5eee2','#211932','#f47657']},
-  {id:'social', en:'Social Impact', ar:'��� ������', subtitle:'MAKE IT MATTER', colors:['#20102e','#ff86bd','#f4d56d']},
-  {id:'dimension', en:'Dimension', ar:'��㟧', subtitle:'STUDIES IN DEPTH', colors:['#110d25','#beb0ff','#7a5aff']}
+  {id:'kinetic', en:'Kinetic Typography', ar:'تايبوغرافي حركي', subtitle:'WORDS IN MOTION', colors:['#15102a','#a78bfa','#6ee7f9']},
+  {id:'cinematic', en:'Cinematic Reveal', ar:'كشف سينمائي', subtitle:'A TITLE REVEAL', colors:['#11121b','#f0cd99','#717b9f']},
+  {id:'future', en:'Future Tech', ar:'تقنية المستقبل', subtitle:'SYSTEM ONLINE', colors:['#071b23','#62f5da','#7df3ff']},
+  {id:'minimal', en:'Minimal Motion', ar:'حركة بسيطة', subtitle:'MOTION STUDIES', colors:['#f5eee2','#211932','#f47657']},
+  {id:'social', en:'Social Impact', ar:'أثر اجتماعي', subtitle:'MAKE IT MATTER', colors:['#20102e','#ff86bd','#f4d56d']},
+  {id:'dimension', en:'Dimension', ar:'أبعاد', subtitle:'STUDIES IN DEPTH', colors:['#110d25','#beb0ff','#7a5aff']}
 ];
 export const ratios={'16:9':[16,9],'9:16':[9,16],'1:1':[1,1]};
 export const animations=['none','fade','slide','scale','bounce','rotate','reveal','pulse'];
@@ -17,8 +17,8 @@ export function layer(type, text, color='#ffffff', end=10) {
 export function project(id='kinetic',lang='ar') {
   const template=templates.find(item=>item.id===id)??templates[0];
   const [background,accent,detail]=template.colors;
-  const headline=layer('text',lang==='ar'?'���� ������':'MOTION ARENA',accent);
-  const caption=layer('text',lang==='ar'?'���. ����. ��.':template.subtitle,detail);
+  const headline=layer('text',lang==='ar'?'ساحة الموشن':'MOTION ARENA',accent);
+  const caption=layer('text',lang==='ar'?'صمّم. حرّك. نافس.':template.subtitle,detail);
   Object.assign(caption,{size:4,y:68,start:.24,animation:'fade'});
   headline.animation={kinetic:'slide',cinematic:'fade',future:'reveal',minimal:'scale',social:'bounce',dimension:'rotate'}[template.id];
   return {schemaVersion:1,id:uid(),name:lang==='ar'?template.ar:template.en,template:template.id,ratio:'16:9',

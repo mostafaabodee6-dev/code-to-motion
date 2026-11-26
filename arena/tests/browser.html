@@ -11,7 +11,7 @@ import {project} from '../motion.mjs';
 import {save,get,remove} from '../persistence.mjs';
 const result=document.querySelector('#result');
 document.querySelector('#run').onclick=async ()=>{
-  result.textContent='Testing?';
+  result.textContent='Testing…';
   const p=project('kinetic','ar');
   p.duration=3;
   p.layers.forEach(l=>l.end=3);
@@ -34,7 +34,7 @@ document.querySelector('#run').onclick=async ()=>{
         });
         if(video.videoWidth!==1280||video.videoHeight!==720)throw Error('Unexpected dimensions');
         if(Number.isFinite(video.duration)&&Math.abs(video.duration-3)>.35)throw Error('Unexpected duration');
-        outputs.push(format.extension+': '+video.videoWidth+'?'+video.videoHeight+' � '+blob.size+' bytes');
+        outputs.push(format.extension+': '+video.videoWidth+'×'+video.videoHeight+' · '+blob.size+' bytes');
         const button=document.createElement('button');button.textContent='Download '+format.extension;
         button.onclick=()=>download(blob,'arena-smoke.'+format.extension);document.body.append(button);
       }finally{URL.revokeObjectURL(url);}

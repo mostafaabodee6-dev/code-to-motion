@@ -8,17 +8,17 @@ const select=(key,options,value)=>'<select data-key="'+key+'">'+options.map(([v,
 const color=(key,value)=>'<input type="color" data-key="'+key+'" value="'+value+'">';
 export async function editor(root,id,template) {
   const stored=id?await get(id):null;
-  if(id&&!stored)throw Error(tr('��ꬩ�� �� ����� ��� 쨟 ��쟪','Project not found on this device'));
+  if(id&&!stored)throw Error(tr('المشروع غير موجود على هذا الجهاز','Project not found on this device'));
   let p=stored?validate(stored):project(template,tr('ar','en'));
   let selected=p.layers[0]?.id;
   let frame=0,playing=false,loop=true,handle,started=0,anchor=0,timer,controller;
   let images=new Map(), disposed=false;
   const undo=[],redo=[];
-  root.innerHTML='<div class="editor"><div class="toolbar row space"><div class="row">'+label(tr('��� ��ꬩ��','Project name'),text('name',p.name))+
-    action('undo',tr('�����','Undo'))+action('redo',tr('�㟧�','Redo'))+action('save',tr('���','Save'))+'</div><div class="row"><span id="save-state" class="muted" role="status"></span>'+action('export',tr('����','Export'),true)+'</div></div>'+
-    '<div class="workspace"><aside class="panel stack" id="layers"></aside><section class="panel stage"><canvas id="stage" role="img" aria-label="'+tr('���� ������','Video preview')+'"></canvas><div class="row space">'+
-    '<div class="row">'+action('play',tr('�����','Play'))+action('restart',tr('�� �頧��','Restart'))+action('loop',tr('�詟�','Loop'))+'</div><output id="time" class="time"></output></div></section><aside class="panel stack" id="inspector"></aside></div>'+
-    '<section class="panel timeline"><div class="row space"><h3>'+tr('��� �����','Timeline')+'</h3><div id="duration"></div></div><input id="seek" aria-label="'+tr('���� �颬���','Playhead')+'" type="range" min="0" value="0"><div id="tracks"></div></section></div>';
+  root.innerHTML='<div class="editor"><div class="toolbar row space"><div class="row">'+label(tr('اسم المشروع','Project name'),text('name',p.name))+
+    action('undo',tr('تراجع','Undo'))+action('redo',tr('إعادة','Redo'))+action('save',tr('حفظ','Save'))+'</div><div class="row"><span id="save-state" class="muted" role="status"></span>'+action('export',tr('تصدير','Export'),true)+'</div></div>'+
+    '<div class="workspace"><aside class="panel stack" id="layers"></aside><section class="panel stage"><canvas id="stage" role="img" aria-label="'+tr('معاينة الفيديو','Video preview')+'"></canvas><div class="row space">'+
+    '<div class="row">'+action('play',tr('تشغيل','Play'))+action('restart',tr('من البداية','Restart'))+action('loop',tr('تكرار','Loop'))+'</div><output id="time" class="time"></output></div></section><aside class="panel stack" id="inspector"></aside></div>'+
+    '<section class="panel timeline"><div class="row space"><h3>'+tr('الخط الزمني','Timeline')+'</h3><div id="duration"></div></div><input id="seek" aria-label="'+tr('موضع التشغيل','Playhead')+'" type="range" min="0" value="0"><div id="tracks"></div></section></div>';
   const canvas=$('#stage'),ctx=canvas.getContext('2d',{alpha:false});
   const current=()=>p.layers.find(item=>item.id===selected);
   const length=()=>Math.ceil(p.duration*p.fps);
@@ -34,18 +34,18 @@ export async function editor(root,id,template) {
     frame=Math.max(0,Math.min(length()-1,frame));
     draw(ctx,p,frame,images);
     $('#seek').max=length()-1;$('#seek').value=frame;
-    $('#time').textContent=(frame/p.fps).toFixed(2)+' / '+p.duration.toFixed(2)+' s � '+frame+' f';
+    $('#time').textContent=(frame/p.fps).toFixed(2)+' / '+p.duration.toFixed(2)+' s · '+frame+' f';
   }
   async function persist(show=false) {
     clearTimeout(timer);timer=undefined;
     const snapshot=structuredClone(p);
     try{
       await save(snapshot);
-      if(!disposed){$('#save-state').textContent=tr('���� ����','Saved locally');if(show)toast(tr('�� ��� ��ꬩ��','Project saved'));}
-    }catch(e){if(!disposed){$('#save-state').textContent=tr('�㨑� ����','Save failed');err(e);}}
+      if(!disposed){$('#save-state').textContent=tr('محفوظ محليًا','Saved locally');if(show)toast(tr('تم حفظ المشروع','Project saved'));}
+    }catch(e){if(!disposed){$('#save-state').textContent=tr('تعذّر الحفظ','Save failed');err(e);}}
   }
   function changed(){
-    $('#save-state').textContent=tr('���� ����?','Saving?');
+    $('#save-state').textContent=tr('جارٍ الحفظ…','Saving…');
     clearTimeout(timer);timer=setTimeout(()=>persist(),450);
   }
   function update(change,refresh=true){
@@ -60,41 +60,41 @@ export async function editor(root,id,template) {
   }
   function panels() {
     const l=current();
-    const localizedType={text:tr('�','Text'),shape:tr('���','Shape'),image:tr('����','Image')};
+    const localizedType={text:tr('نص','Text'),shape:tr('شكل','Shape'),image:tr('صورة','Image')};
     const layerName=x=>x.type==='shape'?localizedType.shape:(x.text||localizedType[x.type]);
     $('.toolbar input').value=p.name;
     $('#undo').disabled=!undo.length;$('#redo').disabled=!redo.length;
-    $('#layers').innerHTML='<h3>'+tr('���矢','Layers')+'</h3>'+
+    $('#layers').innerHTML='<h3>'+tr('الطبقات','Layers')+'</h3>'+
       p.layers.slice().reverse().map(x=>'<button class="layer" type="button" data-select="'+e(x.id)+'" aria-pressed="'+(x===l)+'">'+e(layerName(x))+'</button>').join('')+
-      '<div class="row">'+action('add-text',tr('+ �','+ Text'))+action('add-shape',tr('+ ���','+ Shape'))+action('add-image',tr('+ ����','+ Image'))+
+      '<div class="row">'+action('add-text',tr('+ نص','+ Text'))+action('add-shape',tr('+ شكل','+ Shape'))+action('add-image',tr('+ صورة','+ Image'))+
       '</div><input id="upload-image" type="file" accept="image/png,image/jpeg,image/webp" hidden>';
-    $('#inspector').innerHTML='<h3>'+tr('����� ��ꬩ��','Project settings')+'</h3><div class="cols">'+
-      label(tr('�隠㟧','Aspect'),select('ratio',Object.keys(ratios).map(x=>[x,x]),p.ratio))+
+    $('#inspector').innerHTML='<h3>'+tr('خصائص المشروع','Project settings')+'</h3><div class="cols">'+
+      label(tr('الأبعاد','Aspect'),select('ratio',Object.keys(ratios).map(x=>[x,x]),p.ratio))+
       label('FPS',select('fps',[24,30,60].map(x=>[x,x]),p.fps))+
-      label(tr('�����','Background'),color('background',p.background))+label(tr('����� �����','Accent'),color('accent',p.accent))+'</div>'+
-      (l?'<h3>'+tr('����� ����','Layer properties')+'</h3><div class="row">'+action('above',tr('���','Forward'))+action('below',tr('���','Backward'))+
-      action('duplicate',tr('뫦','Duplicate'))+action('delete',tr('���','Delete'))+'</div>'+
-      '<label><input data-layer="hidden" type="checkbox" '+(l.hidden?'checked':'')+'>'+tr('��埘','Hide')+'</label>'+
-      '<label><input data-layer="locked" type="checkbox" '+(l.locked?'checked':'')+'>'+tr('���','Lock')+'</label>'+
-      (l.locked?'':(l.type==='shape'?label(tr('����','Shape'),select('text',[['rectangle',tr('ꫢ���','Rectangle')],['circle',tr('�����','Circle')],['triangle',tr('��','Triangle')]],l.text)):
-        label(l.type==='text'?tr('���','Text'):tr('��� �����','Image name'),'<textarea data-key="text" maxlength="240" rows="2" dir="auto">'+e(l.text)+'</textarea>'))+
-      label(tr('�饩�','Animation'),select('animation',animations.map((name,i)=>[name,tr(['����','�韬�','����','���','������','�����','��','��'][i],name)]),l.animation))+
+      label(tr('الخلفية','Background'),color('background',p.background))+label(tr('اللون المميز','Accent'),color('accent',p.accent))+'</div>'+
+      (l?'<h3>'+tr('خصائص الطبقة','Layer properties')+'</h3><div class="row">'+action('above',tr('أمام','Forward'))+action('below',tr('خلف','Backward'))+
+      action('duplicate',tr('نسخ','Duplicate'))+action('delete',tr('حذف','Delete'))+'</div>'+
+      '<label><input data-layer="hidden" type="checkbox" '+(l.hidden?'checked':'')+'>'+tr('إخفاء','Hide')+'</label>'+
+      '<label><input data-layer="locked" type="checkbox" '+(l.locked?'checked':'')+'>'+tr('قفل','Lock')+'</label>'+
+      (l.locked?'':(l.type==='shape'?label(tr('الشكل','Shape'),select('text',[['rectangle',tr('مستطيل','Rectangle')],['circle',tr('دائرة','Circle')],['triangle',tr('مثلث','Triangle')]],l.text)):
+        label(l.type==='text'?tr('النص','Text'):tr('اسم الصورة','Image name'),'<textarea data-key="text" maxlength="240" rows="2" dir="auto">'+e(l.text)+'</textarea>'))+
+      label(tr('الحركة','Animation'),select('animation',animations.map((name,i)=>[name,tr(['ثابت','تلاشي','انزلاق','تكبير','ارتداد','دوران','كشف','نبض'][i],name)]),l.animation))+
       '<div class="cols">'+label('X',number('x',l.x,-100,200))+label('Y',number('y',l.y,-100,200))+
-      label(tr('�饤�','Size'),number('size',l.size,1,150))+label(tr('������','Rotation'),number('rotation',l.rotation,-360,360))+
-      label(tr('�����','Opacity'),number('opacity',l.opacity,0,100))+label(tr('�����','Color'),color('color',l.color))+
-      label(tr('���� (�)','Start (s)'),number('start',l.start,0,l.end,.01))+label(tr('��� (�)','End (s)'),number('end',l.end,l.start,p.duration,.01))+'</div>'):'');
-    $('#duration').innerHTML=label(tr('��ꧡ (�)','Duration (s)'),number('duration',p.duration,3,30,.01));
+      label(tr('الحجم','Size'),number('size',l.size,1,150))+label(tr('الدوران','Rotation'),number('rotation',l.rotation,-360,360))+
+      label(tr('الشفافية','Opacity'),number('opacity',l.opacity,0,100))+label(tr('اللون','Color'),color('color',l.color))+
+      label(tr('بداية (ث)','Start (s)'),number('start',l.start,0,l.end,.01))+label(tr('نهاية (ث)','End (s)'),number('end',l.end,l.start,p.duration,.01))+'</div>'):'');
+    $('#duration').innerHTML=label(tr('المدة (ث)','Duration (s)'),number('duration',p.duration,3,30,.01));
     $('#tracks').innerHTML=p.layers.slice().reverse().map(x=>'<div class="track"><button data-select="'+e(x.id)+'" type="button">'+e(layerName(x))+'</button><div class="rail"><span data-track="'+e(x.id)+'" style="left:'+100*x.start/p.duration+'%;width:'+100*(x.end-x.start)/p.duration+'%"></span></div></div>').join('');
   }
   function add(item) {
-    if(p.layers.length>=24){toast(tr('�饧 ���� 24 ��','Maximum 24 layers'));return;}
+    if(p.layers.length>=24){toast(tr('الحد الأقصى 24 طبقة','Maximum 24 layers'));return;}
     update(()=>{p.layers.push(item);selected=item.id;});
   }
   const onChange=event=>{
     const target=event.target;
     if(target.id==='upload-image'){
       const file=target.files[0];if(!file)return;
-      if(!['image/png','image/jpeg','image/webp'].includes(file.type)||file.size>2_000_000){toast(tr('���� PNG �� JPEG �� WebP ���� � ��� 2 �蘭���','Choose PNG, JPEG or WebP up to 2 MB'));return;}
+      if(!['image/png','image/jpeg','image/webp'].includes(file.type)||file.size>2_000_000){toast(tr('اختر PNG أو JPEG أو WebP بحجم لا يتجاوز 2 ميجابايت','Choose PNG, JPEG or WebP up to 2 MB'));return;}
       const reader=new FileReader();
       reader.onload=async()=>{
         try{
@@ -126,14 +126,14 @@ export async function editor(root,id,template) {
   }
   function setPlaying(value) {
     playing=value;cancelAnimationFrame(handle);
-    $('#play').textContent=playing?tr('���� ��','Pause'):tr('�����','Play');
+    $('#play').textContent=playing?tr('إيقاف مؤقت','Pause'):tr('تشغيل','Play');
     if(playing){anchor=frame>=length()-1?0:frame;started=performance.now();handle=requestAnimationFrame(animate);}
   }
   const controls={
     undo:()=>history(undo,redo),redo:()=>history(redo,undo),save:()=>persist(true),
     play:()=>setPlaying(!playing),restart:()=>{frame=0;setPlaying(playing);paint();},
     loop:()=>{loop=!loop;$('#loop').setAttribute('aria-pressed',String(loop));},
-    'add-text':()=>add(layer('text',tr('� ���','New text'),p.accent,p.duration)),
+    'add-text':()=>add(layer('text',tr('نص جديد','New text'),p.accent,p.duration)),
     'add-shape':()=>add(layer('shape','rectangle',p.accent,p.duration)),
     'add-image':()=>$('#upload-image').click(),
     duplicate:()=>{const l=current();if(l)add({...l,id:crypto.randomUUID(),locked:false});},
@@ -196,13 +196,13 @@ export async function editor(root,id,template) {
     const formats=availableFormats();
     const dialog=document.createElement('dialog');dialog.className='export';
     const base=(p.name||'motion-arena').replace(/[<>:"/\\|?*]/g,'_');
-    dialog.innerHTML='<div class="stack"><h2>'+tr('���� ��ꬩ��','Export project')+'</h2>'+
-      (formats.length?'<div class="cols">'+label(tr('����','Format'),'<select id="format">'+formats.map(f=>choice(f.extension,f.extension.toUpperCase())).join('')+'</select>')+
-      label(tr('���','Resolution'),'<select id="quality"><option value="720">720p</option><option value="1080">1080p</option></select>')+'</div>'+
-      '<p>'+tr('������� ������ ��럘 �颬���. ���� �� �颠� ����� ��� ���� �����.','The video records in real time. Keep this tab visible until the download finishes.')+'</p>':
-      '<p>'+tr('���� ������ �� ꢟ� �� 쨟 ��ꢭ�. ����� ���� ��ꬩ�� �� ���� �����.','This browser cannot export video. You can download the project or a still image.')+'</p>')+
-      '<progress max="1" value="0" hidden aria-label="'+tr('��� �颭��','Export progress')+'"></progress><p id="export-error" class="danger" role="status"></p><div class="row">'+
-      action('video',tr('���� ������','Download video'),true)+action('png','PNG')+action('json','JSON')+action('prompt',tr('�頩�ꠢ','Prompt'))+action('close-export',tr('����','Close'))+'</div></div>';
+    dialog.innerHTML='<div class="stack"><h2>'+tr('تصدير المشروع','Export project')+'</h2>'+
+      (formats.length?'<div class="cols">'+label(tr('الصيغة','Format'),'<select id="format">'+formats.map(f=>choice(f.extension,f.extension.toUpperCase())).join('')+'</select>')+
+      label(tr('الدقة','Resolution'),'<select id="quality"><option value="720">720p</option><option value="1080">1080p</option></select>')+'</div>'+
+      '<p>'+tr('يُسجَّل الفيديو أثناء التشغيل. أبقِ هذه التبويبة مفتوحة حتى يكتمل التنزيل.','The video records in real time. Keep this tab visible until the download finishes.')+'</p>':
+      '<p>'+tr('تصدير الفيديو غير متاح في هذا المتصفح. يمكنك تنزيل المشروع أو صورة ثابتة.','This browser cannot export video. You can download the project or a still image.')+'</p>')+
+      '<progress max="1" value="0" hidden aria-label="'+tr('تقدم التصدير','Export progress')+'"></progress><p id="export-error" class="danger" role="status"></p><div class="row">'+
+      action('video',tr('تنزيل الفيديو','Download video'),true)+action('png','PNG')+action('json','JSON')+action('prompt',tr('البرومبت','Prompt'))+action('close-export',tr('إغلاق','Close'))+'</div></div>';
     root.append(dialog);dialog.showModal();
     const stop=()=>controller?.abort();
     dialog.addEventListener('close',()=>{stop();dialog.remove();},{once:true});
@@ -212,7 +212,7 @@ export async function editor(root,id,template) {
     $('#png',dialog).onclick=()=>canvas.toBlob(blob=>blob&&download(blob,base+'.png'),'image/png');
     $('#prompt',dialog).onclick=()=>{
       const prompt='Create a '+p.duration+' second motion composition at '+p.fps+' FPS in '+p.ratio+'. Template: '+p.template+
-        '. Background: '+p.background+'; accent: '+p.accent+'.\n'+p.layers.filter(l=>!l.hidden).map(l=>l.type+' "'+l.text+'" at '+l.x+'%, '+l.y+'%; '+l.animation+' motion, '+l.start+'?'+l.end+' seconds.').join('\n');
+        '. Background: '+p.background+'; accent: '+p.accent+'.\n'+p.layers.filter(l=>!l.hidden).map(l=>l.type+' "'+l.text+'" at '+l.x+'%, '+l.y+'%; '+l.animation+' motion, '+l.start+'–'+l.end+' seconds.').join('\n');
       download(new Blob([prompt],{type:'text/plain'}),base+'-prompt.txt');
     };
     video.onclick=async()=>{
@@ -220,13 +220,13 @@ export async function editor(root,id,template) {
       controller=new AbortController();
       const bar=$('progress',dialog);const error=$('#export-error',dialog);
       error.textContent='';bar.hidden=false;bar.value=0;
-      video.textContent=tr('��䟘 �颭��','Cancel export');
+      video.textContent=tr('إلغاء التصدير','Cancel export');
       try{
         const format=formats.find(f=>f.extension===$('#format',dialog).value);
         const blob=await renderVideo(p,{format,quality:Number($('#quality',dialog).value),progress:n=>bar.value=n,signal:controller.signal});
         download(blob,base+'.'+format.extension);
       }catch(e){if(e.name!=='AbortError')error.textContent=e.message;}
-      finally{controller=undefined;video.textContent=tr('���� ������','Download video');bar.hidden=true;}
+      finally{controller=undefined;video.textContent=tr('تنزيل الفيديو','Download video');bar.hidden=true;}
     };
   }
   root.addEventListener('click',click);root.addEventListener('change',onChange);
