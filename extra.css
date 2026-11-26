@@ -59,12 +59,6 @@
 .ltoc button.done span{background:#00a37a;color:#fff}
 .donebtn{min-height:46px;padding:8px 18px;border-radius:999px;border:1.5px solid #00a37a;background:transparent;color:inherit;font-weight:900}
 .donebtn[aria-pressed=true]{background:#00a37a;color:#fff}
-.cert{margin-top:28px;background:linear-gradient(135deg,#2a0a73,#14063f 60%,#3a0c5c);color:#fff;border-radius:24px;padding:clamp(20px,3vw,32px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:center}
-.cert h3{margin:0 0 6px;font-size:26px}
-.cert p{margin:0 0 14px;color:#d8d0ff}
-.cert input{min-height:48px;border-radius:12px;border:0;padding:0 14px;font:16px Cairo,sans-serif;width:100%;margin-bottom:12px}
-.cert img{width:100%;border-radius:14px;box-shadow:0 20px 50px #0008;display:block}
-.cert .lock{border:1.5px dashed #ffffff55;border-radius:14px;aspect-ratio:1.414;display:grid;place-items:center;text-align:center;padding:20px;color:#d8d0ff}
 /* next workshop + newsletter */
 .next{background:linear-gradient(120deg,#ff2e9a,#7b2cff 55%,#2f6bff);color:#fff;border-radius:28px;padding:clamp(22px,4vw,44px);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:24px;align-items:center}
 .next h2{color:#fff;margin-bottom:4px}
@@ -80,7 +74,7 @@
 .ownerbox{margin-top:14px;padding:14px;border:1.5px dashed var(--pink);border-radius:16px;display:grid;gap:10px}
 .ownerbox h4{margin:0}
 .ownerbox .row{flex-wrap:wrap}
-@media(max-width:960px){.play,.pf,.cert,.next,.news{grid-template-columns:minmax(0,1fr)}.pout{position:static}}
+@media(max-width:960px){.play,.pf,.next,.news{grid-template-columns:minmax(0,1fr)}.pout{position:static}}
 @media(max-width:600px){.pf form{grid-template-columns:minmax(0,1fr)}.scgrid{grid-template-columns:minmax(0,1fr)}}
 /* v4: جرّب تطلب، المصطلحات، أدواتي، البحث، الصفحات */
 a.lang{text-decoration:none;display:inline-grid;place-items:center}
@@ -111,3 +105,26 @@ a.lang{text-decoration:none;display:inline-grid;place-items:center}
 @media(max-width:960px){.try{grid-template-columns:minmax(0,1fr)}}
 .nav .wrap{gap:10px}.nav nav a{padding:7px 11px;font-size:14px}.nav .lang{min-height:38px;padding:4px 12px}
 @media(max-width:1180px){.nav nav{order:3;width:100%;margin:0;overflow-x:auto;flex-wrap:nowrap}.nav nav a{flex:none}.brand{margin-inline-end:auto}}
+
+/* القوالب والحزمة والورش */
+.aipack{margin-top:14px;padding-top:14px;border-top:1px solid #ffffff22;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.aipack b{width:100%;font-size:14px;line-height:1.5}
+.aipack .btn{flex:1;min-height:40px;font-size:14px}
+.tpls{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;margin-top:20px}
+.tpl{background:var(--card,#fff);border:1px solid var(--line,#e6e0fa);border-radius:18px;overflow:hidden}
+.tpl video{width:100%;aspect-ratio:16/9;background:#14063f;display:block;object-fit:contain}
+.tpl .in{padding:12px 16px 16px}.tpl h3{margin:0 0 4px;font-size:17px}.tpl p{margin:0 0 6px}
+.kitlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;margin-top:18px}
+.kitem{display:flex;align-items:center;gap:12px;padding:12px 16px;border:1px solid var(--line,#e6e0fa);border-radius:14px;text-decoration:none;color:inherit;background:var(--card,#fff)}
+.kitem b{background:#7b2cff;color:#fff;border-radius:10px;min-width:38px;height:38px;display:grid;place-items:center;font-size:15px}
+.kitem span{flex:1;font-weight:700}.kitem i{font-style:normal;font-size:12px;color:var(--mute)}
+.kitem:hover{border-color:#ff2e9a}
+.ws{background:var(--card,#fff);border:1px solid var(--line,#e6e0fa);border-radius:24px;padding:clamp(18px,3vw,32px);margin-top:20px}
+.wshead{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;margin-bottom:16px}
+.wshead h3{font-size:clamp(26px,4vw,38px);margin:6px 0 2px;direction:ltr;text-align:right}
+.wsmeta{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-weight:700}
+.ws h4{margin:28px 0 2px;font-size:22px}.ws .mute{color:var(--mute);margin:0 0 8px}
+.tally{border:0;width:100%;min-height:800px;border-radius:14px;background:transparent}
+.envs{list-style:none;padding:0}.envs li{margin:4px 0}.envs code,.vars code{direction:ltr;unicode-bidi:embed}
+.vars{display:flex;flex-wrap:wrap;gap:6px}
+dialog video.pv{width:100%;border-radius:12px;background:#14063f}

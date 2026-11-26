@@ -189,6 +189,7 @@ footer .wrap{display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-con
     <a href="#lessons" data-t="nav.lessons">الدروس</a>
     <a href="#glossary" data-t="nav.glossary">المصطلحات</a>
     <a href="#mytools" data-t="nav.mytools">أدواتي</a>
+    <a href="#workshops" data-t="nav.workshops">الورش</a>
     <a href="#gallery" data-t="nav.gallery">معرض الأعمال</a>
     <a href="#project" data-t="nav.project">ملفات الورشة</a>
   </nav>
@@ -269,6 +270,7 @@ footer .wrap{display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-con
       <div id="stackBody"></div>
       <button class="btn p" id="copyAll" type="button" style="width:100%" data-t="stack.copy">انسخ كل الأوامر</button>
       <button class="btn s" id="zipAgents" type="button" style="width:100%;margin-top:10px" data-t="stack.zip">حمّل كل الوكلاء والأوامر (ZIP)</button>
+      <div class="aipack"><b data-t="ai.pack">حزمة CODE TO MOTION (20 Skill + 8 وكلاء)</b><a class="btn o" href="kit/06-AI-Skills.zip" download>Skills</a><a class="btn o" href="kit/07-AI-Agents.zip" download data-t="ai.agents">الوكلاء</a></div>
       <p class="note" id="zipMsg" data-t="stack.note">فك الضغط داخل مجلد مشروعك، وتنحط الملفات في .claude تلقائيًا.</p>
     </aside>
   </div>
@@ -339,23 +341,13 @@ footer .wrap{display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-con
 <!-- ═════ الدروس ═════ -->
 <section class="view band" data-view="lessons" hidden><div class="wrap">
   <h2 data-t="les.h">دروس الورشة</h2>
-  <p class="lead" data-t="les.p">كل درس فيه الفكرة والكود وتمرين قصير. علّم على الدرس لما تخلّصه، وفي الآخر تاخذ شهادتك.</p>
+  <p class="lead" data-t="les.p">كل درس فيه الفكرة والكود وتمرين قصير. علّم على الدرس لما تخلّصه، وتابع تقدّمك.</p>
   <div class="lessons">
     <div>
       <div class="progt" id="progT"></div><div class="prog"><i id="progBar"></i></div>
       <div class="ltoc" id="ltoc" role="tablist"></div>
     </div>
     <article class="lesson" id="lesson" aria-live="polite"></article>
-  </div>
-  <div class="cert" id="cert">
-    <div>
-      <h3 data-t="cert.h">شهادة إتمام الدروس</h3>
-      <p id="certP"></p>
-      <input id="certName" maxlength="40" data-tp="cert.name" placeholder="اكتب اسمك كما تبغاه في الشهادة">
-      <div class="row" style="flex-wrap:wrap"><button class="btn p" id="certMake" type="button" data-t="cert.make">اصنع الشهادة</button><button class="btn s" id="certSave" type="button" hidden data-t="cert.save">حمّل الشهادة</button></div>
-      <div class="msg" id="certMsg" role="status"></div>
-    </div>
-    <div id="certView"></div>
   </div>
   <div class="faq"><h2 data-t="faq.h">أسئلة شائعة</h2><div id="faq"></div></div>
 </div></section>
@@ -391,7 +383,7 @@ footer .wrap{display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-con
   <div><video src="final.mp4" controls playsinline preload="metadata"></video></div>
   <div>
     <h2 data-t="proj.h">ملفات ورشة CODE TO MOTION</h2>
-    <p class="lead" data-t="proj.p">المشروع كامل جاهز للتشغيل: كل الدروس، والمشروع النهائي اللي في الفيديو، وقالب التحدي.</p>
+    <p class="lead" data-t="proj.p">المشروع كامل جاهز للتشغيل: كل الدروس، والمشروع النهائي اللي في الفيديو، و8 قوالب، وشاشات البث.</p>
     <ul class="inside" id="inside"></ul>
     <button class="btn p" id="dl" type="button" data-t="proj.dl">حمّل المشروع (ZIP)</button>
     <div class="msg" id="dlMsg" role="status"></div>
@@ -399,6 +391,34 @@ footer .wrap{display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-con
 npm install
 npm run dev<button class="ib" data-copy="cd code-to-motion&#10;npm install&#10;npm run dev" type="button" data-t="copy">نسخ</button></div>
   </div>
+</div></section>
+
+
+<!-- ═════ القوالب والحزمة ═════ -->
+<section class="view band" data-view="project" hidden><div class="wrap">
+  <h2 data-t="tpl.h">8 قوالب Remotion جاهزة</h2>
+  <p class="lead" data-t="tpl.p">كلها داخل المشروع في مجلد Templates. افتح القالب في Studio وغيّر النصوص والألوان من لوحة Props.</p>
+  <div class="tpls" id="tpls"></div>
+  <h2 style="margin-top:48px" data-t="kit.h">حزمة الورشة كاملة</h2>
+  <p class="lead" data-t="kit.p">حمّل الحزمة كلها مرة وحدة، أو القسم اللي تحتاجه بس.</p>
+  <a class="btn p" href="kit/CODE-TO-MOTION-KIT.zip" download id="kitAll" data-t="kit.all">حمّل الحزمة كاملة (ZIP)</a>
+  <div class="kitlist" id="kitlist"></div>
+</div></section>
+
+<!-- ═════ الورش ═════ -->
+<section class="view band" data-view="workshops" hidden><div class="wrap">
+  <h2 data-t="ws.h">الورش</h2>
+  <p class="lead" data-t="ws.p">كل ورشة بموعدها وملفاتها، ورأيك فيها.</p>
+  <article class="ws" id="ws-code-to-motion">
+    <div class="wshead">
+      <div><span class="tag" id="wsBadge"></span><h3>CODE TO MOTION</h3><p data-t="ws.c2m">اصنع موشن جرافيك بالكود مع Remotion</p></div>
+      <ul class="wsmeta"><li data-t="ws.date">السبت 28 نوفمبر 2026</li><li data-t="ws.time">6:00 – 8:30 مساءً بتوقيت السعودية</li><li data-t="ws.where">أونلاين · بث مباشر</li></ul>
+    </div>
+    <div class="row" style="flex-wrap:wrap;gap:10px"><a class="btn p" href="https://lu.ma/34qf5z1h" data-t="next.cta">صفحة الورشة على Luma</a><a class="btn o" href="#project" data-t="ws.files">ملفات الورشة</a><a class="btn o" href="#lessons" data-t="nav.lessons">الدروس</a></div>
+    <h4 data-t="ws.fb">شاركنا رأيك في الورشة</h4>
+    <p class="mute" data-t="ws.fbp">أقل من دقيقتين، وبدون اسم أو إيميل.</p>
+    <iframe class="tally" data-src="https://tally.so/embed/NqoljG?transparentBackground=1" width="100%" height="800" frameborder="0" title="CODE TO MOTION Feedback" loading="lazy"></iframe>
+  </article>
 </div></section>
 
 <!-- ═════ المصطلحات ═════ -->
@@ -437,11 +457,12 @@ npm run dev<button class="ib" data-copy="cd code-to-motion&#10;npm install&#10;n
 
 <dialog id="dlg" aria-labelledby="dTitle"><div class="md" id="md"></div></dialog>
 <div class="toast" id="toast" role="status"></div>
-<canvas id="certCanvas" width="1600" height="1131" hidden></canvas>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="catalog.js"></script>
 <script src="catalog_en.js"></script>
+<script src="ai.js"></script>
+<script src="ai_merge.js"></script>
 <script src="scenes.js"></script>
 <script src="vendor/supabase-2.119.0.js"></script>
 <script src="backend.js"></script>

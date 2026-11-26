@@ -36,13 +36,17 @@ const T = {
     'tools.h':'أدوات تجربة لايف','tools.p':'غيّر الأرقام وشوف الحركة تتغيّر قدامك، وانسخ كود Remotion جاهز.','tab.play':'ملعب الحركة','tab.scenes':'مشاهد جاهزة','tab.prompt':'مولّد البرومبت',
     'play.prop':'الخاصية','play.from':'من فريم','play.to':'إلى فريم','sc.text':'غيّر النص','sc.code':'انسخ الكود',
     'pg.type':'نوع الفيديو','pg.dur':'المدة (ثواني)','pg.size':'المقاس','pg.lang':'لغة النص','pg.text':'النص أو الفكرة الأساسية','pg.c1':'اللون الأساسي','pg.c2':'لون التمييز','pg.style':'الستايل','pg.audio':'الصوت','pg.extras':'إضافات','pg.tip':'البرومبت بالإنجليزي لأن الوكلاء يفهمونه أدق، والنص اللي في الفيديو يطلع باللغة اللي اخترتها.','pg.ph':'مثال: إعلان لورشة موشن جرافيك بالكود، يوم السبت',
-    'les.h':'دروس الورشة','les.p':'كل درس فيه الفكرة والكود وتمرين قصير. علّم على الدرس لما تخلّصه، وفي الآخر تاخذ شهادتك.','les.file':'الملف في المشروع: ','les.ex':'✍️ تمرين: ','les.prev':'→ الدرس السابق','les.next':'الدرس التالي ←','les.share':'شارك عملك ←','les.done':'✓ خلّصت الدرس','les.mark':'علّمه كمخلّص','les.prog':'تقدّمك: ',
-    'cert.h':'شهادة إتمام الدروس','cert.lockP':'خلّص الدروس السبعة وتنفتح لك الشهادة.','cert.openP':'مبروك! خلّصت كل الدروس. اكتب اسمك واصنع شهادتك.','cert.name':'اكتب اسمك كما تبغاه في الشهادة','cert.make':'اصنع الشهادة','cert.save':'حمّل الشهادة','cert.needName':'اكتب اسمك أول','cert.lock':'🔒 باقي ','cert.lock2':' دروس','cert.ok':'تم ✓','cert.dlno':'اضغط على الصورة بالزر اليمين واحفظها',
+    'nav.workshops':'الورش','ai.pack':'حزمة CODE TO MOTION (20 Skill + 8 وكلاء) لـ Claude Code و Codex و Cursor','ai.agents':'الوكلاء',
+    'tpl.h':'8 قوالب Remotion جاهزة','tpl.p':'كلها داخل المشروع في مجلد Templates. افتح القالب في Studio وغيّر النصوص والألوان من لوحة Props.','tpl.props':'تتغير من Props: ',
+    'kit.h':'حزمة الورشة كاملة','kit.p':'حمّل الحزمة كلها مرة وحدة، أو القسم اللي تحتاجه بس.','kit.all':'حمّل الحزمة كاملة (ZIP)',
+    'ws.h':'الورش','ws.p':'كل ورشة بموعدها وملفاتها، ورأيك فيها.','ws.c2m':'اصنع موشن جرافيك بالكود مع Remotion','ws.date':'السبت 28 نوفمبر 2026','ws.time':'6:00 – 8:30 مساءً بتوقيت السعودية','ws.where':'أونلاين · بث مباشر','ws.files':'ملفات الورشة','ws.fb':'شاركنا رأيك في الورشة','ws.fbp':'أقل من دقيقتين، وبدون اسم أو إيميل.','ws.soon':'قريبًا','ws.live':'الحين مباشر','ws.done':'انتهت',
+    'md.vars':'المتغيرات (بدّلها بقيمك)','md.tools':'الأدوات','md.req':'المتطلبات','md.example':'مثال','md.preview':'معاينة قريبة من النتيجة','md.envs':'وين تحط الملف','md.skills':'يستخدم Skills',
+    'les.h':'دروس الورشة','les.p':'كل درس فيه الفكرة والكود وتمرين قصير. علّم على الدرس لما تخلّصه، وتابع تقدّمك.','les.file':'الملف في المشروع: ','les.ex':'✍️ تمرين: ','les.prev':'→ الدرس السابق','les.next':'الدرس التالي ←','les.share':'شارك عملك ←','les.done':'✓ خلّصت الدرس','les.mark':'علّمه كمخلّص','les.prog':'تقدّمك: ',
     'faq.h':'أسئلة شائعة','gal.h':'معرض أعمال الحضور','gal.p':'فيديوهات سوّاها الحضور في تحدي الورشة. صوّت لأحلى عمل.','gal.share':'شارك عملك','gal.how':'سوّ فيديو «عن نفسي» من قالب AboutMe، وانشره على حساباتك مع منشن @mostafaabodee8. الأعمال المختارة تنضاف هنا.',
     'gal.add':'إضافة عمل (تظهر لك بس)','gal.f.name':'اسم صاحب العمل','gal.f.title':'عنوان العمل','gal.f.link':'رابط المنشور (اختياري، يبدأ بـ https://)','gal.f.file':'ملف الفيديو (اختياري، أقل من 20MB)','gal.f.save':'أضف للمعرض',
     'gal.loading':'أجهّز المعرض…','gal.empty':'المعرض ينتظر أول عمل. كن أول واحد يشارك!','gal.out':'المعرض يشتغل لما تفتح الصفحة من رابطها على claude.ai.','gal.signin':'سجّل دخولك في claude.ai عشان تشوف المعرض.','gal.fail':'ما قدرت أحمّل المعرض حاليًا.','gal.watch':'شاهد المنشور ←','gal.voteNo':'التصويت متاح للحضور المسجلين بس','gal.https':'الرابط لازم يبدأ بـ https://','gal.big':'الفيديو أكبر من 20MB','gal.up':'أرفع الفيديو…','gal.ok':'انضاف ✓',
-    'proj.h':'ملفات ورشة CODE TO MOTION','proj.p':'المشروع كامل جاهز للتشغيل: كل الدروس، والمشروع النهائي اللي في الفيديو، وقالب التحدي.','proj.dl':'حمّل المشروع (ZIP)','proj.prep':'أجهّز الملف…','proj.ok':'تم ✓ فك الضغط وشغّل الأوامر اللي تحت.','proj.alt':'لو ما بدأ التحميل، افتح الصفحة في تبويب جديد وجرّب.','proj.fail':'ما اكتمل التحميل. جرّب مرة ثانية.',
-    'in1':'6 دروس|من useCurrentFrame إلى الصوت','in2':'المشروع النهائي|فيديو 12 ثانية بـ 4 مشاهد','in3':'قالب AboutMe|فيديو 10 ثواني عن نفسك','in4':'خطوط ومؤثرات|Cairo وأصوات جاهزة',
+    'proj.h':'ملفات ورشة CODE TO MOTION','proj.p':'المشروع كامل جاهز للتشغيل: كل الدروس، والمشروع النهائي اللي في الفيديو، و8 قوالب، وشاشات البث.','proj.dl':'حمّل المشروع (ZIP)','proj.prep':'أجهّز الملف…','proj.ok':'تم ✓ فك الضغط وشغّل الأوامر اللي تحت.','proj.alt':'لو ما بدأ التحميل، افتح الصفحة في تبويب جديد وجرّب.','proj.fail':'ما اكتمل التحميل. جرّب مرة ثانية.',
+    'in1':'6 دروس|من useCurrentFrame إلى الصوت','in2':'المشروع النهائي|فيديو 12 ثانية بـ 4 مشاهد','in3':'8 قوالب|About Me، Logo Reveal، Reel، Countdown وغيرها','in4':'خطوط ومؤثرات|Cairo وأصوات جاهزة',
     'foot.by':'إعداد: عبدالرحمن مصطفى','foot.src':'المصادر:','copied':'تم النسخ ✓','copyFail':'ما قدرت أنسخ، حدّد النص وانسخه يدوي','langBtn':'English',
   },
   en: {
@@ -71,13 +75,17 @@ const T = {
     'tools.h':'Live playgrounds','tools.p':'Change the numbers, watch the motion change, and copy ready Remotion code.','tab.play':'Motion playground','tab.scenes':'Ready scenes','tab.prompt':'Prompt generator',
     'play.prop':'Property','play.from':'From frame','play.to':'To frame','sc.text':'Change the text','sc.code':'Copy code',
     'pg.type':'Video type','pg.dur':'Duration (seconds)','pg.size':'Size','pg.lang':'Text language','pg.text':'Main text or idea','pg.c1':'Main color','pg.c2':'Accent color','pg.style':'Style','pg.audio':'Audio','pg.extras':'Extras','pg.tip':'The prompt is in English because agents follow it more precisely; the on-screen text uses the language you chose.','pg.ph':'Example: an ad for a motion-graphics-with-code workshop on Saturday',
-    'les.h':'Workshop lessons','les.p':'Each lesson has the idea, the code and a short exercise. Mark lessons as done and get your certificate at the end.','les.file':'File in the project: ','les.ex':'✍️ Exercise: ','les.prev':'← Previous lesson','les.next':'Next lesson →','les.share':'Share your work →','les.done':'✓ Lesson done','les.mark':'Mark as done','les.prog':'Your progress: ',
-    'cert.h':'Lessons completion certificate','cert.lockP':'Finish all seven lessons to unlock your certificate.','cert.openP':'Congratulations! You finished every lesson. Type your name and make your certificate.','cert.name':'Your name as it should appear','cert.make':'Make certificate','cert.save':'Download certificate','cert.needName':'Type your name first','cert.lock':'🔒 ','cert.lock2':' lessons left','cert.ok':'Done ✓','cert.dlno':'Right-click the image to save it',
+    'nav.workshops':'Workshops','ai.pack':'CODE TO MOTION pack (20 skills + 8 agents) for Claude Code, Codex and Cursor','ai.agents':'Agents',
+    'tpl.h':'8 ready Remotion templates','tpl.p':'All inside the project in the Templates folder. Open one in Studio and change texts and colors from the Props panel.','tpl.props':'Editable props: ',
+    'kit.h':'The full workshop kit','kit.p':'Download the whole kit at once, or just the part you need.','kit.all':'Download the full kit (ZIP)',
+    'ws.h':'Workshops','ws.p':'Every workshop with its date, files and your feedback.','ws.c2m':'Make motion graphics with code using Remotion','ws.date':'Saturday, 28 November 2026','ws.time':'6:00 – 8:30 PM Saudi time','ws.where':'Online · live','ws.files':'Workshop files','ws.fb':'Tell us what you thought','ws.fbp':'Under two minutes, no name or email.','ws.soon':'Upcoming','ws.live':'Live now','ws.done':'Ended',
+    'md.vars':'Variables (replace with yours)','md.tools':'Tools','md.req':'Requirements','md.example':'Example','md.preview':'Preview of a similar result','md.envs':'Where the file goes','md.skills':'Uses skills',
+    'les.h':'Workshop lessons','les.p':'Each lesson has the idea, the code and a short exercise. Mark lessons as done and track your progress.','les.file':'File in the project: ','les.ex':'✍️ Exercise: ','les.prev':'← Previous lesson','les.next':'Next lesson →','les.share':'Share your work →','les.done':'✓ Lesson done','les.mark':'Mark as done','les.prog':'Your progress: ',
     'faq.h':'FAQ','gal.h':'Attendee gallery','gal.p':'Videos attendees made for the workshop challenge. Vote for your favorite.','gal.share':'Share your work','gal.how':'Make an "About me" video from the AboutMe template and post it with a mention of @mostafaabodee8. Selected works are added here.',
     'gal.add':'Add a work (only you see this)','gal.f.name':'Creator name','gal.f.title':'Work title','gal.f.link':'Post link (optional, starts with https://)','gal.f.file':'Video file (optional, under 20MB)','gal.f.save':'Add to gallery',
     'gal.loading':'Loading the gallery…','gal.empty':'The gallery is waiting for its first work. Be the first to share!','gal.out':'The gallery works when you open the page from its claude.ai link.','gal.signin':'Sign in to claude.ai to see the gallery.','gal.fail':'Could not load the gallery right now.','gal.watch':'Watch the post →','gal.voteNo':'Voting is open to registered attendees only','gal.https':'The link must start with https://','gal.big':'The video is larger than 20MB','gal.up':'Uploading video…','gal.ok':'Added ✓',
-    'proj.h':'CODE TO MOTION workshop files','proj.p':'The full project, ready to run: every lesson, the final project from the video, and the challenge template.','proj.dl':'Download the project (ZIP)','proj.prep':'Preparing the file…','proj.ok':'Done ✓ Unzip and run the commands below.','proj.alt':'If the download did not start, open the page in a new tab and try again.','proj.fail':'The download did not finish. Try again.',
-    'in1':'6 lessons|From useCurrentFrame to audio','in2':'Final project|A 12-second video in 4 scenes','in3':'AboutMe template|A 10-second video about you','in4':'Fonts & sounds|Cairo and ready sound effects',
+    'proj.h':'CODE TO MOTION workshop files','proj.p':'The full project, ready to run: every lesson, the final project from the video, 8 templates and the live screens.','proj.dl':'Download the project (ZIP)','proj.prep':'Preparing the file…','proj.ok':'Done ✓ Unzip and run the commands below.','proj.alt':'If the download did not start, open the page in a new tab and try again.','proj.fail':'The download did not finish. Try again.',
+    'in1':'6 lessons|From useCurrentFrame to audio','in2':'Final project|A 12-second video in 4 scenes','in3':'8 templates|About Me, Logo Reveal, Reel, Countdown and more','in4':'Fonts & sounds|Cairo and ready sound effects',
     'foot.by':'By Abdulrahman Mostafa','foot.src':'Sources:','copied':'Copied ✓','copyFail':'Could not copy; select the text and copy it manually','langBtn':'عربي',
   },
 };
@@ -92,7 +100,7 @@ function applyLang() {
   $('#lang').textContent = t('langBtn');
   $('#g_text').placeholder = t('pg.ph');
   $('#inside').innerHTML = ['in1', 'in2', 'in3', 'in4'].map(k => { const [b, s] = t(k).split('|'); return `<li><b>${esc(b)}</b>${esc(s)}</li>`; }).join('');
-  renderHome(); renderTypes(); renderLib(); renderLesson(); renderFaq(); renderScenes(); setupPromptForm(); renderCertPanel(); renderNext(); renderGallery(); drawPlay(); renderX();
+  renderHome(); renderTypes(); renderLib(); renderLesson(); renderFaq(); renderScenes(); setupPromptForm(); renderNext(); renderTpls(); renderKit(); renderWs(); renderGallery(); drawPlay(); renderX();
 }
 $('#lang').addEventListener('click', () => { lang = lang === 'ar' ? 'en' : 'ar'; store.set('lang', lang); applyLang(); });
 
@@ -169,6 +177,10 @@ function openItem(key, push = true) {
     ${use ? `<h4>${t('md.use')}</h4><ul>${use.map(u => `<li>${esc(u)}</li>`).join('')}</ul>` : ''}
     ${i.cmd ? `<h4>${t('md.install')}</h4><pre>${esc(i.cmd)}</pre>` : ''}
     ${i.file ? `<h4>${t('md.file')}</h4><p class="path">${t('md.saveTo')}<code>${esc(i.path)}</code></p><pre>${esc(i.file)}</pre>` : ''}
+    ${i.envs ? `<h4>${t('md.envs')}</h4><ul class="envs">${Object.entries(i.envs).map(([k, v]) => `<li><b>${k}</b> <code>${esc(v)}</code></li>`).join('')}</ul>` : ''}
+    ${i.skills ? `<p class="path">${t('md.skills')}: <code>${esc(i.skills.join(', '))}</code></p>` : ''}
+    ${i.preview ? `<h4>${t('md.preview')}</h4><video class="pv" src="kit/previews/${i.preview}.mp4" poster="img/templates/${i.preview}.jpg" controls muted playsinline preload="none"></video>` : ''}
+    ${i.vars ? `<h4>${t('md.vars')}</h4><p class="vars">${i.vars.map(v => `<code dir="ltr">{{${esc(v)}}}</code>`).join(' ')}</p><p class="path"><b>${t('md.tools')}:</b> ${esc(i.tools)} · <b>${t('md.req')}:</b> ${esc(i.req)}<br><b>${t('md.example')}:</b> ${esc(i.example)}</p>` : ''}
     ${i.text ? `<h4>${t('md.prompt')}</h4><p class="path">${esc(t('md.fill'))}</p><pre>${esc(i.text)}</pre>` : ''}
     ${i.prompt ? `<h4>${t('md.try')}</h4><pre>${esc(i.prompt)}</pre>` : ''}
     <div class="acts">
@@ -295,7 +307,7 @@ function genPrompt() {
 $('#pform').addEventListener('input', genPrompt);
 $('#g_copy').addEventListener('click', () => copy($('#g_out').textContent));
 
-// ═════ الدروس والتقدّم والشهادة ═════
+// ═════ الدروس والتقدّم ═════
 let li = Math.min(store.get('lesson', 0), C.LESSONS.length - 1), done = store.get('done', []);
 function renderLesson() {
   const n = C.LESSONS.length, d = done.length;
@@ -308,46 +320,40 @@ function renderLesson() {
     <div class="ex">${t('les.ex')}${esc(LF(l, 'ex'))}</div>
     <div class="lnav"><button class="donebtn" type="button" data-done="${l.id}" aria-pressed="${isDone}">${t(isDone ? 'les.done' : 'les.mark')}</button>
     <span style="display:flex;gap:10px;flex-wrap:wrap">${li > 0 ? `<button class="btn o" type="button" data-lesson="${li - 1}">${t('les.prev')}</button>` : ''}${li < n - 1 ? `<button class="btn p" type="button" data-lesson="${li + 1}">${t('les.next')}</button>` : `<a class="btn p" href="#gallery">${t('les.share')}</a>`}</span></div></div>`;
-  store.set('lesson', li); renderCertPanel();
+  store.set('lesson', li);
 }
 function renderFaq() { const list = lang === 'en' ? EN.faq : C.FAQ; $('#faq').innerHTML = list.map(([qq, a]) => `<details><summary>${esc(qq)}</summary><p>${esc(a)}</p></details>`).join(''); }
-let certBlob = null;
-function renderCertPanel() {
-  const left = C.LESSONS.length - done.length, open = left <= 0;
-  $('#certP').textContent = t(open ? 'cert.openP' : 'cert.lockP');
-  $('#certName').hidden = !open; $('#certMake').hidden = !open;
-  if (!certBlob) $('#certView').innerHTML = `<div class="lock">${open ? '🎓' : t('cert.lock') + left + t('cert.lock2')}</div>`;
+// ═════ القوالب والحزمة والورش ═════
+const TPLS = [
+  ['T01-AboutMe', 'About Me', 'فيديو «عني»: اسمك ومهاراتك', 'name, role, skills, accent'],
+  ['T02-LogoReveal', 'Logo Reveal', 'كشف شعار بانفجار دوائر', 'logo, brand, tagline, bg, accent'],
+  ['T03-LowerThird', 'Lower Third', 'شريط تعريفي بخلفية شفافة', 'name, title, accent'],
+  ['T04-AppPromo', 'App Promo', 'إعلان تطبيق بجوال ولقطة شاشتك', 'appName, headline, screenshot, features, cta'],
+  ['T05-SocialReel', 'Social Reel 9:16', 'ريل عمودي: هوك و3 نقاط وحسابك', 'hook, points, handle, accent'],
+  ['T06-Explainer', 'Explainer', 'فيديو شرح: سؤال و3 خطوات وخلاصة', 'question, steps, summary'],
+  ['T07-Countdown', 'Countdown', 'عداد تنازلي بصوت، مدته من Props', 'title, seconds, endText'],
+  ['T08-Stats', 'Statistics', 'أرقام تعد وأعمدة بيانية', 'title, stats, source'],
+];
+const TPL_EN = {'T01-AboutMe': 'An "about me" video: your name and skills', 'T02-LogoReveal': 'Logo reveal with expanding rings', 'T03-LowerThird': 'Name strap with transparent background', 'T04-AppPromo': 'App promo with a phone and your screenshot', 'T05-SocialReel': 'Vertical reel: hook, 3 points, your handle', 'T06-Explainer': 'Explainer: a question, 3 steps, a summary', 'T07-Countdown': 'Countdown with sound; length set from props', 'T08-Stats': 'Counting numbers and bar charts'};
+function renderTpls() {
+  $('#tpls').innerHTML = TPLS.map(([id, n, d, props]) => `<article class="tpl"><video src="kit/previews/${id}.mp4" poster="img/templates/${id}.jpg" muted loop playsinline preload="none" controls></video>
+    <div class="in"><h3 dir="ltr">${id.slice(0, 3)} · ${n}</h3><p>${esc(lang === 'en' ? TPL_EN[id] : d)}</p><p class="mono" style="font-size:13px;color:var(--mute)">${t('tpl.props')}<span dir="ltr">${props}</span></p></div></article>`).join('');
 }
-async function makeCert() {
-  const name = $('#certName').value.trim(); if (!name) { $('#certMsg').textContent = t('cert.needName'); return; }
-  await document.fonts.load('900 80px Cairo'); await document.fonts.load('700 40px Cairo');
-  const cv = $('#certCanvas'), x = cv.getContext('2d'), W = cv.width, H = cv.height;
-  const g = x.createLinearGradient(0, 0, W, H); g.addColorStop(0, '#2a0a73'); g.addColorStop(.55, '#14063f'); g.addColorStop(1, '#3a0c5c'); x.fillStyle = g; x.fillRect(0, 0, W, H);
-  const blob = (cx, cy, r, c) => { const rg = x.createRadialGradient(cx, cy, 0, cx, cy, r); rg.addColorStop(0, c); rg.addColorStop(1, 'transparent'); x.fillStyle = rg; x.fillRect(0, 0, W, H); };
-  blob(W * .9, H * .1, 600, '#ff2e9a66'); blob(W * .1, H * .95, 600, '#2f6bff77');
-  x.strokeStyle = '#ffffff55'; x.lineWidth = 3; x.strokeRect(50, 50, W - 100, H - 100);
-  x.strokeStyle = '#ffd84d'; x.lineWidth = 2; x.strokeRect(70, 70, W - 140, H - 140);
-  const logo = new Image(); logo.src = 'logo.png'; await logo.decode().catch(() => {});
-  if (logo.complete && logo.naturalWidth) { x.save(); x.beginPath(); x.roundRect(W / 2 - 80, 120, 160, 160, 34); x.clip(); x.drawImage(logo, W / 2 - 80, 120, 160, 160); x.restore(); }
-  x.textAlign = 'center'; x.direction = 'rtl';
-  x.fillStyle = '#4ff0ff'; x.font = '700 40px Cairo'; x.fillText('CODE TO MOTION', W / 2, 345);
-  x.fillStyle = '#fff'; x.font = '900 76px Cairo'; x.fillText(lang === 'en' ? 'Certificate of Completion' : 'شهادة إتمام', W / 2, 450);
-  x.fillStyle = '#d3caf2'; x.font = '400 34px Cairo'; x.fillText(lang === 'en' ? 'This certifies that' : 'تشهد ورشة CODE TO MOTION بأن', W / 2, 530);
-  x.fillStyle = '#ffd84d'; x.font = '900 92px Cairo'; x.direction = /[؀-ۿ]/.test(name) ? 'rtl' : 'ltr'; x.fillText(name, W / 2, 650); x.direction = 'rtl';
-  x.fillStyle = '#d3caf2'; x.font = '400 34px Cairo';
-  x.fillText(lang === 'en' ? 'completed all lessons of the CODE TO MOTION workshop:' : 'أتم جميع دروس ورشة صناعة الموشن جرافيك بالكود باستخدام', W / 2, 740);
-  x.fillStyle = '#fff'; x.font = '700 40px Cairo'; x.fillText(lang === 'en' ? 'Motion graphics with code using Remotion' : 'Remotion والذكاء الاصطناعي', W / 2, 800);
-  const date = new Date().toLocaleDateString(lang === 'en' ? 'en-US' : 'ar-SA-u-nu-latn', {year: 'numeric', month: 'long', day: 'numeric'});
-  x.font = '400 28px Cairo'; x.fillStyle = '#d3caf2';
-  x.fillText(date, W * .27, 960); x.fillText(lang === 'en' ? 'Abdulrahman Mostafa' : 'عبدالرحمن مصطفى', W * .73, 960);
-  x.strokeStyle = '#ffffff66'; x.lineWidth = 2; [W * .27, W * .73].forEach(cx => { x.beginPath(); x.moveTo(cx - 170, 910); x.lineTo(cx + 170, 910); x.stroke(); });
-  x.font = '700 22px Cairo'; x.fillStyle = '#ffffff88'; x.fillText(lang === 'en' ? 'Date' : 'التاريخ', W * .27, 1000); x.fillText(lang === 'en' ? 'Instructor' : 'المدرب', W * .73, 1000);
-  certBlob = await new Promise(r => cv.toBlob(r, 'image/png'));
-  $('#certView').innerHTML = `<img alt="" src="${URL.createObjectURL(certBlob)}">`;
-  $('#certSave').hidden = false; $('#certMsg').textContent = t('cert.ok');
+const KIT = [
+  ['01-Workshop-Guide', 'الدليل التعليمي PDF', 'Workshop guide (PDF)'], ['02-Starter-Project', 'مشروع البداية', 'Starter project'], ['03-Final-Project', 'المشروع النهائي كامل', 'Full final project'],
+  ['04-Project-Checkpoints', 'حل كل مرحلة', 'Checkpoints (solution per stage)'], ['05-Remotion-Templates', '8 قوالب + معاينات', '8 templates + previews'], ['06-AI-Skills', '20 Skill', '20 skills'],
+  ['07-AI-Agents', '8 وكلاء', '8 agents'], ['08-Prompt-Library', 'مكتبة البرومبتات', 'Prompt library'], ['09-Agent-Setup', 'ربط الوكيل بـ Remotion', 'Agent setup for Remotion'],
+  ['10-Sample-Assets', 'خطوط ومؤثرات صوتية', 'Fonts and sound effects'], ['11-Exercises', '8 تمارين', '8 exercises'], ['12-Troubleshooting', 'حل المشاكل', 'Troubleshooting'],
+  ['13-Challenge-Project', 'تحدي «عني»', 'The "about me" challenge'], ['14-Sample-Outputs', 'فيديوهات نموذجية', 'Sample videos'],
+];
+function renderKit() {
+  $('#kitlist').innerHTML = KIT.map(([f, a, e]) => `<a class="kitem" href="kit/${f}.zip" download><b dir="ltr">${f.slice(0, 2)}</b><span>${esc(lang === 'en' ? e : a)}</span><i>ZIP ↓</i></a>`).join('') +
+    `<a class="kitem" href="kit/CHEAT-SHEET.pdf" download><b>★</b><span>${lang === 'en' ? 'One-page cheat sheet (PDF)' : 'ورقة المراجعة السريعة (PDF)'}</span><i>PDF ↓</i></a>`;
 }
-$('#certMake').addEventListener('click', makeCert);
-$('#certSave').addEventListener('click', async () => { if (!certBlob) return; try { const ok = await saveFile('certificate-code-to-motion.png', certBlob); if (!ok) $('#certMsg').textContent = t('cert.dlno'); } catch (e) { $('#certMsg').textContent = t('cert.dlno'); } });
+function renderWs() {
+  const start = new Date('2026-11-28T18:00:00+03:00').getTime(), end = start + 150 * 60000, now = Date.now();
+  $('#wsBadge').textContent = t(now < start ? 'ws.soon' : now < end ? 'ws.live' : 'ws.done');
+}
 
 // ═════ قاعدة البيانات: الورشة الجاية، النشرة، المعرض ═════
 const B = window.CTM_BACKEND;
@@ -488,7 +494,7 @@ $('#dl').addEventListener('click', async () => {
 });
 
 // ═════ التنقل ═════
-const VIEWS = ['home', 'library', 'tools', 'lessons', 'gallery', 'project', 'glossary', 'mytools', 'search', 'about', 'contact', 'privacy'];
+const VIEWS = ['home', 'library', 'tools', 'lessons', 'workshops', 'gallery', 'project', 'glossary', 'mytools', 'search', 'about', 'contact', 'privacy'];
 let toolTab = 'play';
 function setTab(tab) { toolTab = tab; $$('#toolTabs button').forEach(b => b.setAttribute('aria-pressed', b.dataset.tab === tab)); $$('.panel').forEach(p => p.hidden = p.dataset.panel !== tab); observeStages(); if (tab === 'play') drawPlay(); }
 function route() {
@@ -500,6 +506,7 @@ function route() {
   else { if (dlg.open) dlg.close(); window.scrollTo(0, 0); }
   if (v === 'tools') { observeStages(); drawPlay(); }
   if (v === 'search') setTimeout(() => $('#sq').focus(), 60);
+  if (v === 'workshops') $$('iframe.tally').forEach(f => { if (!f.src) f.src = f.dataset.src; });
   if (v === 'glossary' && gHL) setTimeout(() => { const el = document.getElementById('g-' + gHL); if (el) el.scrollIntoView({block: 'center'}); }, 60);
 }
 addEventListener('hashchange', route);
@@ -598,12 +605,12 @@ const PAGES = {
   ar: {
     about: `<h2>من أنا</h2><div class="cardx"><p>أنا <b>عبدالرحمن مصطفى</b>، مصمم جرافيك ومونتير، ومهتم بالذكاء الاصطناعي وريادة الأعمال والمشاريع الرقمية.</p><p>سويت ورشة <b>CODE TO MOTION</b> عشان أوري الناس كيف يصنعون موشن جرافيك احترافي بالكود وبمساعدة وكلاء الذكاء الاصطناعي، حتى لو ما عندهم خلفية برمجية.</p><p>وكاتب كتاب «قبل أن تبلغ العشرين».</p></div><h3>ليش هذا الموقع؟</h3><p>عشان يكون مرجع مجاني بالعربي: مكتبة أدوات جاهزة، ودروس، ومختبر تجرّب فيه الحركة لايف، ومكان تشارك فيه أعمالك.</p>`,
     contact: `<h2>تواصل معي</h2><div class="cardx"><p>📧 الإيميل: <a class="mono" href="mailto:mostafaabodee9@gmail.com">mostafaabodee9@gmail.com</a></p><p>𝕏 / Instagram / Threads: <span class="mono">@mostafaabodee8</span></p><p>▶️ YouTube: <span class="mono">@abdulrahmanmostafa-f7c</span></p></div><p>للتعاون أو ورش للجهات، راسلني على الإيميل.</p>`,
-    privacy: `<h2>سياسة الخصوصية</h2><p>آخر تحديث: نوفمبر 2026</p><h3>وش نجمع؟</h3><ul><li><b>إيميلك</b> لو اشتركت في النشرة، عشان نرسل لك جديد الموقع بس.</li><li><b>اسمك وعملك</b> (فيديو أو رابط) لو رفعته في المعرض. يبقى مخفي لين أراجعه، ولا يظهر إلا لو اعتمدته.</li><li><b>مفتاح تصويت عشوائي</b> ينحفظ في متصفحك عشان ما يتكرر صوتك. ما فيه اسمك ولا أي معلومة عنك.</li></ul><h3>وش يبقى في جهازك بس؟</h3><p>تقدّمك في الدروس، وسلة التثبيت، واللغة والوضع اللي اخترته. هذي محفوظة في متصفحك، وما توصلنا.</p><h3>وين تنحفظ البيانات؟</h3><p>في Supabase، ومحمية بحيث ما يقرأ الإيميلات والأعمال غير المعتمدة إلا صاحب الموقع.</p><h3>ما نسوي</h3><p>ما نبيع بياناتك، ولا نشاركها مع أحد، ولا نستخدم إعلانات أو أدوات تتبّع.</p><h3>حذف بياناتك</h3><p>راسلني على <span class="mono">mostafaabodee9@gmail.com</span> وأحذف إيميلك أو عملك.</p>`,
+    privacy: `<h2>سياسة الخصوصية</h2><p>آخر تحديث: نوفمبر 2026</p><h3>وش نجمع؟</h3><ul><li><b>إيميلك</b> لو اشتركت في النشرة، عشان نرسل لك جديد الموقع بس.</li><li><b>اسمك وعملك</b> (فيديو أو رابط) لو رفعته في المعرض. يبقى مخفي لين أراجعه، ولا يظهر إلا لو اعتمدته.</li><li><b>مفتاح تصويت عشوائي</b> ينحفظ في متصفحك عشان ما يتكرر صوتك. ما فيه اسمك ولا أي معلومة عنك.</li></ul><h3>وش يبقى في جهازك بس؟</h3><p>تقدّمك في الدروس، وسلة التثبيت، واللغة والوضع اللي اخترته. هذي محفوظة في متصفحك، وما توصلنا.</p><h3>وين تنحفظ البيانات؟</h3><p>في Supabase، ومحمية بحيث ما يقرأ الإيميلات والأعمال غير المعتمدة إلا صاحب الموقع.</p><h3>استبيان التقييم</h3><p>استبيان الورشة في صفحة «الورش» مستضاف على Tally، وما يطلب اسمك ولا إيميلك. ما يتحمّل إلا لما تفتح صفحة الورش.</p><h3>ما نسوي</h3><p>ما نبيع بياناتك، ولا نشاركها مع أحد، ولا نستخدم إعلانات أو أدوات تتبّع.</p><h3>حذف بياناتك</h3><p>راسلني على <span class="mono">mostafaabodee9@gmail.com</span> وأحذف إيميلك أو عملك.</p>`,
   },
   en: {
     about: `<h2>About me</h2><div class="cardx"><p>I'm <b>Abdulrahman Mostafa</b>, a graphic designer and video editor interested in AI, entrepreneurship and digital projects.</p><p>I created the <b>CODE TO MOTION</b> workshop to show people how to make professional motion graphics with code and AI agents, even without a coding background.</p><p>I'm also the author of the book "Before You Turn Twenty" (قبل أن تبلغ العشرين).</p></div><h3>Why this site?</h3><p>To be a free Arabic-first reference: ready tools, lessons, a live lab to try motion, and a place to share your work.</p>`,
     contact: `<h2>Contact</h2><div class="cardx"><p>📧 Email: <a class="mono" href="mailto:mostafaabodee9@gmail.com">mostafaabodee9@gmail.com</a></p><p>𝕏 / Instagram / Threads: <span class="mono">@mostafaabodee8</span></p><p>▶️ YouTube: <span class="mono">@abdulrahmanmostafa-f7c</span></p></div><p>For collaborations or workshops for organizations, email me.</p>`,
-    privacy: `<h2>Privacy policy</h2><p>Last updated: November 2026</p><h3>What we collect</h3><ul><li><b>Your email</b> if you subscribe, only to send site updates.</li><li><b>Your name and work</b> (video or link) if you submit to the gallery. It stays hidden until reviewed and is shown only if approved.</li><li><b>A random voting key</b> stored in your browser so your vote is not repeated. It contains no name or personal details.</li></ul><h3>What stays on your device</h3><p>Lesson progress, your install stack, and your language and theme choices. They live in your browser and never reach us.</p><h3>Where data is stored</h3><p>In Supabase, protected so that only the site owner can read emails and unapproved works.</p><h3>What we don't do</h3><p>We don't sell or share your data, and we use no ads or trackers.</p><h3>Deleting your data</h3><p>Email <span class="mono">mostafaabodee9@gmail.com</span> and I'll delete your email or work.</p>`,
+    privacy: `<h2>Privacy policy</h2><p>Last updated: November 2026</p><h3>What we collect</h3><ul><li><b>Your email</b> if you subscribe, only to send site updates.</li><li><b>Your name and work</b> (video or link) if you submit to the gallery. It stays hidden until reviewed and is shown only if approved.</li><li><b>A random voting key</b> stored in your browser so your vote is not repeated. It contains no name or personal details.</li></ul><h3>What stays on your device</h3><p>Lesson progress, your install stack, and your language and theme choices. They live in your browser and never reach us.</p><h3>Where data is stored</h3><p>In Supabase, protected so that only the site owner can read emails and unapproved works.</p><h3>Feedback form</h3><p>The workshop feedback form on the Workshops page is hosted by Tally and asks for no name or email. It only loads when you open that page.</p><h3>What we don't do</h3><p>We don't sell or share your data, and we use no ads or trackers.</p><h3>Deleting your data</h3><p>Email <span class="mono">mostafaabodee9@gmail.com</span> and I'll delete your email or work.</p>`,
   },
 };
 function renderPages() { const P = PAGES[lang] || PAGES.ar; $('#aboutPage').innerHTML = P.about; $('#contactPage').innerHTML = P.contact; $('#privacyPage').innerHTML = P.privacy; }
