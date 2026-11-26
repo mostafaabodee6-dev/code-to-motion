@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ورشة CODE TO MOTION · الورشة الجديدة</title>
+<meta name="description" content="ورشة CODE TO MOTION — موشن جرافيك بالكود مع Remotion وAI Agents">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="workshop.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="../"><span class="dot"></span> CODE TO MOTION</a>
+    <nav aria-label="التنقل">
+      <a href="../">الرئيسية</a>
+      <a href="../#lessons">الدروس</a>
+      <a href="../#project">ملفات الورشة</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="pill">ورشة مجانية · أونلاين · بث مباشر</span>
+        <h1>CODE TO MOTION</h1>
+        <p class="sub">اصنع موشن جرافيك بالكود مع Remotion، ووظّف AI Agents يكتبون معك. من الصفر إلى فيديو جاهز.</p>
+        <div class="meta">
+          <div><b>السبت 28 نوفمبر 2026</b><span>6:00 – 8:30 مساءً · بتوقيت السعودية</span></div>
+        </div>
+        <div class="cta">
+          <a class="btn primary" href="https://lu.ma/34qf5z1h" target="_blank" rel="noopener">سجّل على Luma</a>
+          <a class="btn ghost" href="../#project">ملفات الورشة</a>
+        </div>
+        <div class="countdown" id="countdown" aria-live="polite"></div>
+      </div>
+      <div class="visual" aria-hidden="true">
+        <div class="term">
+          <div class="term-bar"><i></i><i></i><i></i></div>
+          <pre><span class="c">$</span> npx create-video@latest
+<span class="g">✓</span> مشروع Remotion جاهز
+<span class="c">$</span> npm run dev
+<span class="g">✓</span> المعاينة تعمل على localhost:3000
+<span class="d">// حرّك الشعار بالكود، وصدّر MP4</span></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap gate-wrap" id="gate-section">
+    <div class="card gate" id="gate">
+      <h2>دخول الحضور</h2>
+      <p class="muted">اكتب الرقم السري الذي وصلك لدخول قسم الأسئلة والمشاركة.</p>
+      <form id="gate-form" class="row-form" autocomplete="off">
+        <label class="sr" for="code">الرقم السري</label>
+        <input id="code" name="code" inputmode="numeric" maxlength="12" class="input code" placeholder="الرقم السري" required>
+        <button class="btn primary" type="submit">دخول</button>
+      </form>
+      <p class="msg" id="gate-msg" role="status"></p>
+    </div>
+  </section>
+
+  <section class="wrap qa" id="qa" hidden>
+    <div class="qa-head">
+      <div>
+        <h2>اسأل في الورشة</h2>
+        <p class="muted">اكتب سؤالك، واسمك يظهر مع السؤال.</p>
+      </div>
+      <button class="btn ghost small" id="lock" type="button">خروج</button>
+    </div>
+
+    <form id="ask-form" class="card ask" autocomplete="off">
+      <label for="name">اسمك (يظهر مع سؤالك)</label>
+      <input id="name" name="name" class="input" maxlength="40" minlength="2" required placeholder="مثال: عبدالرحمن">
+      <label for="question">سؤالك</label>
+      <textarea id="question" name="question" class="input" rows="3" maxlength="500" minlength="3" required placeholder="اكتب سؤالك هنا"></textarea>
+      <div class="row-form end">
+        <span class="muted small" id="count">0 / 500</span>
+        <button class="btn primary" type="submit" id="send">أرسل السؤال</button>
+      </div>
+      <p class="msg" id="ask-msg" role="status"></p>
+    </form>
+
+    <div class="list" id="list" aria-live="polite"></div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">CODE TO MOTION · إعداد عبدالرحمن مصطفى</div>
+</footer>
+
+<script src="../vendor/supabase-2.119.0.js"></script>
+<script src="../backend.js"></script>
+<script src="workshop.js"></script>
+</body>
+</html>

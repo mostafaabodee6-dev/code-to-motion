@@ -1,0 +1,26 @@
+/* تصميم عصري: طبقة فوق الستايل الحالي — بطاقات أنظف، مسافات أوسع، أزرار واضحة */
+:root{--radius-lg:24px;--radius-md:16px;--shadow-soft:0 18px 50px #0b0620 22%}
+body{letter-spacing:0;line-height:1.75}
+.nav{background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(14px)}
+.nav .wrap{min-height:68px;gap:18px}
+.brand img{box-shadow:0 8px 24px #ff2e9a40}
+.nav nav a{transition:background .2s,color .2s}
+.nav nav a:hover{background:color-mix(in srgb,var(--pink) 18%,transparent)}
+.band{padding:clamp(40px,6vw,88px) max(5vw,20px)}
+h2{letter-spacing:-.2px}
+.lead{font-size:clamp(16px,1.6vw,18px);color:var(--mute)}
+.btn{transition:transform .15s,box-shadow .2s,background .2s}
+.btn.p{box-shadow:0 10px 30px #ff2e9a33}
+.btn:hover{transform:translateY(-1px)}
+.btn.p:hover{box-shadow:0 14px 36px #ff2e9a55}
+.card,.ws,.tool,.item{border-radius:var(--radius-lg)}
+.card:hover{border-color:color-mix(in srgb,var(--cyan) 45%,var(--line))}
+.hero{padding-block:clamp(56px,9vw,120px)}
+.hero h1{letter-spacing:-.5px}
+.stats b{font-variant-numeric:tabular-nums}
+footer,.foot{border-top:1px solid var(--line)}
+/* بطاقة الورشة الجديدة في الصفحة الرئيسية */
+.ws-new{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-top:18px;padding:18px 22px;border-radius:var(--radius-md);border:1.5px dashed var(--pink);background:color-mix(in srgb,var(--pink) 8%,transparent)}
+.ws-new strong{display:block;font-size:18px}
+.ws-new span{color:var(--mute);font-size:15px}
+@media (max-width:640px){.hero .wrap{grid-template-columns:1fr}}
