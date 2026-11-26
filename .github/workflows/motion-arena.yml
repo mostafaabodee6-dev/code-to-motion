@@ -1,0 +1,35 @@
+name: Motion Arena checks
+on:
+  push:
+    branches: [motion-arena]
+    paths:
+      - 'arena/**'
+      - '.github/workflows/motion-arena.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  studio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Verify JavaScript and renderer
+        run: |
+          for file in arena/*.mjs; do node --check "$file"; done
+          node --test arena/tests/motion.test.mjs
+      - name: Install browser test runtime
+        run: |
+          npm install --prefix arena --no-save playwright@1.65.1
+          npx --prefix arena playwright install --with-deps chromium
+          ffprobe -version
+      - name: Verify editor, storage and video files
+        run: |
+          python3 -m http.server 8766 --bind 127.0.0.1 &
+          server=$!
+          trap 'kill "$server"' EXIT
+          for attempt in {1..15}; do
+            if curl -fsS http://127.0.0.1:8766/arena/ >/dev/null; then break; fi
+            sleep 1
+          done
+          node arena/tests/e2e.mjs

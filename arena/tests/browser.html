@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Motion Arena export and storage check</title>
+<h1>Motion Arena check</h1>
+<button id="run">Run browser check</button>
+<pre id="result" aria-live="polite"></pre>
+<script type="module">
+import {renderVideo,availableFormats,download} from '../export.mjs';
+import {project} from '../motion.mjs';
+import {save,get,remove} from '../persistence.mjs';
+const result=document.querySelector('#result');
+document.querySelector('#run').onclick=async ()=>{
+  result.textContent='Testing?';
+  const p=project('kinetic','ar');
+  p.duration=3;
+  p.layers.forEach(l=>l.end=3);
+  try{
+    await save(p);
+    if((await get(p.id)).layers[0].text!==p.layers[0].text)throw Error('IndexedDB Arabic text was not round-tripped');
+    const formats=availableFormats();
+    if(!formats.length)throw Error('There is no supported video codec');
+    const outputs=[];
+    for(const format of formats){
+      const blob=await renderVideo(p,{format,quality:720,progress:()=>{}});
+      const url=URL.createObjectURL(blob);
+      try{
+        const video=document.createElement('video');
+        await new Promise((resolve,reject)=>{
+          const timeout=setTimeout(()=>reject(Error('Video metadata timed out')),5000);
+          video.onloadeddata=()=>{clearTimeout(timeout);resolve();};
+          video.onerror=()=>{clearTimeout(timeout);reject(Error('Video did not decode'));};
+          video.src=url;
+        });
+        if(video.videoWidth!==1280||video.videoHeight!==720)throw Error('Unexpected dimensions');
+        if(Number.isFinite(video.duration)&&Math.abs(video.duration-3)>.35)throw Error('Unexpected duration');
+        outputs.push(format.extension+': '+video.videoWidth+'?'+video.videoHeight+' � '+blob.size+' bytes');
+        const button=document.createElement('button');button.textContent='Download '+format.extension;
+        button.onclick=()=>download(blob,'arena-smoke.'+format.extension);document.body.append(button);
+      }finally{URL.revokeObjectURL(url);}
+    }
+    result.textContent='PASS\n'+outputs.join('\n');
+  }catch(error){result.textContent='FAIL: '+error.message;}
+  finally{await remove(p.id);}
+};
+</script>
+</html>
