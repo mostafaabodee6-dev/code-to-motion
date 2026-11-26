@@ -1,7 +1,7 @@
-import {project,templates,ratios,animations,layer,validate,draw,dimensions} from './motion.mjs';
-import {save,get} from './persistence.mjs';
-import {availableFormats,download,renderVideo,imageMap} from './export.mjs';
-import {$,$$,tr,escape as e,choice,label,action,toast,err} from './ui.mjs';
+import {project,templates,ratios,animations,layer,validate,draw,dimensions} from './motion.mjs?v=2';
+import {save,get} from './persistence.mjs?v=2';
+import {availableFormats,download,renderVideo,imageMap} from './export.mjs?v=2';
+import {$,$$,tr,escape as e,choice,label,action,toast,err} from './ui.mjs?v=2';
 const text=(key,value,max=120)=>'<input data-key="'+key+'" value="'+e(value)+'" maxlength="'+max+'">';
 const number=(key,value,min,max,step=1)=>'<input type="number" data-key="'+key+'" min="'+min+'" max="'+max+'" step="'+step+'" value="'+value+'">';
 const select=(key,options,value)=>'<select data-key="'+key+'">'+options.map(([v,n])=>choice(v,n,value)).join('')+'</select>';

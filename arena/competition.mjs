@@ -1,4 +1,4 @@
-import {$,$$,tr,escape as e,section,action,label,clock,err,toast} from './ui.mjs';
+import {$,$$,tr,escape as e,section,action,label,clock,err,toast} from './ui.mjs?v=2';
 const DEFAULT_EVENT='code-to-motion';
 const scenes=['countdown','gallery','leaderboard','winners','break'];
 const states=()=>({draft:tr('مسودة','Draft'),active:tr('التحدي مفتوح','Challenge open'),paused:tr('متوقف مؤقتًا','Paused'),review:tr('قيد المراجعة','In review'),voting:tr('التصويت مفتوح','Voting open'),complete:tr('أُعلنت النتائج','Results published'),cancelled:tr('ملغى','Cancelled')});
