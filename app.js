@@ -36,8 +36,6 @@ const T = {
     'tools.h':'أدوات تجربة لايف','tools.p':'غيّر الأرقام وشوف الحركة تتغيّر قدامك، وانسخ كود Remotion جاهز.','tab.play':'ملعب الحركة','tab.scenes':'مشاهد جاهزة','tab.prompt':'مولّد البرومبت',
     'play.prop':'الخاصية','play.from':'من فريم','play.to':'إلى فريم','sc.text':'غيّر النص','sc.code':'انسخ الكود',
     'pg.type':'نوع الفيديو','pg.dur':'المدة (ثواني)','pg.size':'المقاس','pg.lang':'لغة النص','pg.text':'النص أو الفكرة الأساسية','pg.c1':'اللون الأساسي','pg.c2':'لون التمييز','pg.style':'الستايل','pg.audio':'الصوت','pg.extras':'إضافات','pg.tip':'البرومبت بالإنجليزي لأن الوكلاء يفهمونه أدق، والنص اللي في الفيديو يطلع باللغة اللي اخترتها.','pg.ph':'مثال: إعلان لورشة موشن جرافيك بالكود، يوم السبت',
-    'nav.make':'اصنع فيديوك','nav.challenge':'التحدي','mk.h':'اصنع فيديوك','mk.p':'اكتب اسمك، اختار ألوانك ونمط الحركة، وشوف فيديو موشن معمول لك أنت. وبعدين صدّره وشاركه.','mk.name':'اسمك','mk.nameP':'عبدالرحمن مصطفى','mk.role':'وش تشتغل (اختياري)','mk.roleP':'مصمم وصانع محتوى','mk.colors':'الألوان','mk.bg':'الخلفية','mk.ac':'اللون المميز','mk.style':'نمط الحركة','mk.size':'المقاس','mk.play':'▶ أعد التشغيل','mk.export':'⬇ صدّر الفيديو','mk.toCh':'شارك فيه في تحدي الموشن ←',
-    'ch.h':'تحدي الموشن','ch.p':'تحديات مباشرة وقت الورشة: ارفع عملك، وصوّت لأحلى فيديو، وتابع الترتيب لايف.','ch.send':'ارفع عملك','ch.file':'ملف الفيديو (أقل من 50MB)','ch.make':'ما عندك فيديو؟ اصنعه هنا','ch.board':'الترتيب','ch.live':'شاشة النتائج للبث ↗','ch.scan':'امسح وصوّت لعملك المفضّل',
     'nav.workshops':'الورش','ai.pack':'حزمة CODE TO MOTION (20 Skill + 8 وكلاء) لـ Claude Code و Codex و Cursor','ai.agents':'الوكلاء',
     'tpl.h':'8 قوالب Remotion جاهزة','tpl.p':'كلها داخل المشروع في مجلد Templates. افتح القالب في Studio وغيّر النصوص والألوان من لوحة Props.','tpl.props':'تتغير من Props: ',
     'kit.h':'حزمة الورشة كاملة','kit.p':'حمّل الحزمة كلها مرة وحدة، أو القسم اللي تحتاجه بس.','kit.all':'حمّل الحزمة كاملة (ZIP)',
@@ -77,8 +75,6 @@ const T = {
     'tools.h':'Live playgrounds','tools.p':'Change the numbers, watch the motion change, and copy ready Remotion code.','tab.play':'Motion playground','tab.scenes':'Ready scenes','tab.prompt':'Prompt generator',
     'play.prop':'Property','play.from':'From frame','play.to':'To frame','sc.text':'Change the text','sc.code':'Copy code',
     'pg.type':'Video type','pg.dur':'Duration (seconds)','pg.size':'Size','pg.lang':'Text language','pg.text':'Main text or idea','pg.c1':'Main color','pg.c2':'Accent color','pg.style':'Style','pg.audio':'Audio','pg.extras':'Extras','pg.tip':'The prompt is in English because agents follow it more precisely; the on-screen text uses the language you chose.','pg.ph':'Example: an ad for a motion-graphics-with-code workshop on Saturday',
-    'nav.make':'Make your video','nav.challenge':'Challenge','mk.h':'Make your video','mk.p':'Type your name, pick your colors and motion style, and watch a motion video made for you. Then export and share it.','mk.name':'Your name','mk.nameP':'Your name','mk.role':'What you do (optional)','mk.roleP':'Designer & creator','mk.colors':'Colors','mk.bg':'Background','mk.ac':'Accent','mk.style':'Motion style','mk.size':'Size','mk.play':'▶ Replay','mk.export':'⬇ Export video','mk.toCh':'Enter it in the Motion Challenge →',
-    'ch.h':'Motion Challenge','ch.p':'Live challenges during the workshop: submit your work, vote for the best video, and follow the ranking live.','ch.send':'Submit your work','ch.file':'Video file (under 50MB)','ch.make':'No video yet? Make one here','ch.board':'Ranking','ch.live':'Results screen for the stream ↗','ch.scan':'Scan and vote for your favourite',
     'nav.workshops':'Workshops','ai.pack':'CODE TO MOTION pack (20 skills + 8 agents) for Claude Code, Codex and Cursor','ai.agents':'Agents',
     'tpl.h':'8 ready Remotion templates','tpl.p':'All inside the project in the Templates folder. Open one in Studio and change texts and colors from the Props panel.','tpl.props':'Editable props: ',
     'kit.h':'The full workshop kit','kit.p':'Download the whole kit at once, or just the part you need.','kit.all':'Download the full kit (ZIP)',
@@ -104,7 +100,7 @@ function applyLang() {
   $('#lang').textContent = t('langBtn');
   $('#g_text').placeholder = t('pg.ph');
   $('#inside').innerHTML = ['in1', 'in2', 'in3', 'in4'].map(k => { const [b, s] = t(k).split('|'); return `<li><b>${esc(b)}</b>${esc(s)}</li>`; }).join('');
-  renderHome(); renderTypes(); renderLib(); renderLesson(); renderFaq(); renderScenes(); setupPromptForm(); renderNext(); renderTpls(); renderKit(); renderWs(); if (window.CTM_STUDIO) window.CTM_STUDIO.render(); renderGallery(); drawPlay(); renderX();
+  renderHome(); renderTypes(); renderLib(); renderLesson(); renderFaq(); renderScenes(); setupPromptForm(); renderNext(); renderTpls(); renderKit(); renderWs(); renderGallery(); drawPlay(); renderX();
 }
 $('#lang').addEventListener('click', () => { lang = lang === 'ar' ? 'en' : 'ar'; store.set('lang', lang); applyLang(); });
 
@@ -531,7 +527,7 @@ $('#dl').addEventListener('click', async () => {
 });
 
 // ═════ التنقل ═════
-const VIEWS = ['home', 'library', 'tools', 'lessons', 'make', 'challenge', 'live', 'workshops', 'gallery', 'project', 'glossary', 'mytools', 'search', 'about', 'contact', 'privacy'];
+const VIEWS = ['home', 'library', 'tools', 'lessons', 'workshops', 'gallery', 'project', 'glossary', 'mytools', 'search', 'about', 'contact', 'privacy'];
 let toolTab = 'play';
 function setTab(tab) { toolTab = tab; $$('#toolTabs button').forEach(b => b.setAttribute('aria-pressed', b.dataset.tab === tab)); $$('.panel').forEach(p => p.hidden = p.dataset.panel !== tab); observeStages(); if (tab === 'play') drawPlay(); }
 function route() {
@@ -545,7 +541,6 @@ function route() {
   else { if (dlg.open) dlg.close(); window.scrollTo(0, 0); }
   if (v === 'tools') { observeStages(); drawPlay(); }
   if (v === 'search') setTimeout(() => $('#sq').focus(), 60);
-  if (window.CTM_STUDIO) window.CTM_STUDIO.onRoute(v);
   if (v === 'workshops') $$('iframe.tally').forEach(f => { if (!f.src) f.src = f.dataset.src; });
   if (v === 'glossary' && gHL) setTimeout(() => { const el = document.getElementById('g-' + gHL); if (el) el.scrollIntoView({block: 'center'}); }, 60);
 }
@@ -667,5 +662,4 @@ document.addEventListener('click', e => {
 });
 
 applyLang(); route(); initDb();
-window.CTM_APP = {get lang() { return lang; }, $, $$, esc, toast, saveFile, M, B};
 }

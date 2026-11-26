@@ -34,7 +34,7 @@ async function start(session) {
   $('#me').textContent = session.user.email; $('#out').hidden = false;
   const {data: ok} = await sb.rpc('is_admin');
   if (!ok) { show2('denied'); return; }
-  show2('panel'); loadWorks(); loadSubs(); loadNext(); loadCh(); counts();
+  show2('panel'); loadWorks(); loadSubs(); loadNext(); counts();
 }
 sb.auth.onAuthStateChange((ev, session) => { if (ev === 'PASSWORD_RECOVERY') { show2('setpw'); return; } start(session); });
 
@@ -63,7 +63,7 @@ async function loadWorks() {
     const url = urls[w.video_path] || '', link = /^https:\/\//.test(w.link || '') ? w.link : '';
     return `<article class="work">${url ? `<video src="${esc(url)}" controls playsinline preload="metadata"></video>` : '<div class="ph">بدون فيديو</div>'}
       <div class="in"><span class="badge ${w.status}">${{pending: 'تنتظر', approved: 'معتمد', rejected: 'مرفوض'}[w.status]}</span>
-      <h3>${esc(w.title)}</h3><div class="mute">${esc(w.name)} · ${fmt(w.created_at)}${w.challenge ? ` · 🏆 ${esc(w.challenge)}` : ''}</div>
+      <h3>${esc(w.title)}</h3><div class="mute">${esc(w.name)} · ${fmt(w.created_at)}</div>
       ${link ? `<a href="${esc(link)}" target="_blank" rel="noopener">فتح المنشور ↗</a>` : ''}
       <div class="acts">
         ${w.status !== 'approved' ? `<button class="btn ok sm" data-act="approve" data-id="${w.id}">اعتماد ✓</button>` : `<button class="btn sm" data-act="hide" data-id="${w.id}">إخفاء من المعرض</button>`}
@@ -122,18 +122,5 @@ async function saveNext(clear) {
   if (clear && !error) $('#nDate').value = '';
 }
 $('#nextForm').addEventListener('submit', e => { e.preventDefault(); saveNext(false); });
-
-// ── تحدي الموشن
-async function loadCh() {
-  const d = await B.getSettings().catch(() => null); if (!d) return;
-  $('#cTitle').value = d.challenge_title || ''; $('#cText').value = d.challenge_text || ''; $('#cOpen').checked = !!d.challenge_open;
-}
-$('#chAdmin').addEventListener('submit', async e => {
-  e.preventDefault();
-  const title = $('#cTitle').value.trim();
-  if ($('#cOpen').checked && !title) { $('#cMsg').textContent = 'اكتب عنوان التحدي قبل ما تفتحه'; return; }
-  const {error} = await sb.from('site_settings').update({challenge_title: title || null, challenge_text: $('#cText').value.trim() || null, challenge_open: $('#cOpen').checked, updated_at: new Date().toISOString()}).eq('id', 1);
-  $('#cMsg').textContent = error ? 'ما انحفظ: ' + error.message : 'انحفظ ✓ يظهر في صفحة التحدي خلال ثواني.';
-});
 $('#nClear').addEventListener('click', () => saveNext(true));
 }
