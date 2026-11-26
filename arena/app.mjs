@@ -1,7 +1,7 @@
 import {project,templates,draw,validate} from './motion.mjs?v=2';
 import {all,save,remove} from './persistence.mjs?v=2';
 import {editor} from './editor.mjs?v=2';
-import {competition} from './competition.mjs?v=2';
+import {competition} from './competition.mjs?v=3';
 import {$,$$,tr,language,escape as e,section,action,toast,err} from './ui.mjs?v=2';
 const root=$('#main');
 let dispose,rendering=false,pending=false;
@@ -103,7 +103,7 @@ async function render(){
 const routeChanged=()=>{render();root.focus({preventScroll:true});window.scrollTo(0,0);};
 window.addEventListener('hashchange',routeChanged);
 if(location.search.includes('arena_auth=1')){
-  import('./competition.mjs?v=2').then(async m=>{
+  import('./competition.mjs?v=3').then(async m=>{
     const client=await m.client();const {data,error}=await client.auth.getSession();
     const candidate=localStorage.getItem('arena-auth-return');
     localStorage.removeItem('arena-auth-return');

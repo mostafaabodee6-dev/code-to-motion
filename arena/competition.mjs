@@ -6,8 +6,16 @@ const sceneName=s=>({countdown:tr('العد التنازلي','Countdown'),galle
 let loadingClient;
 function load(url){
   return new Promise((resolve,reject)=>{
-    const script=document.createElement('script');script.src=url;script.onload=resolve;
-    script.onerror=()=>{script.remove();reject(Error(tr('تعذّر الاتصال بخدمات الورشة','Unable to load the workshop services')));};
+    const script=document.createElement('script');
+    const fail=()=>{
+      clearTimeout(timer);
+      script.remove();
+      reject(Error(tr('تعذّر الاتصال بخدمات الورشة','Unable to load the workshop services')));
+    };
+    const timer=setTimeout(fail,7000);
+    script.src=url;
+    script.onload=()=>{clearTimeout(timer);resolve();};
+    script.onerror=fail;
     document.head.append(script);
   });
 }
@@ -22,7 +30,7 @@ export function client(){
 }
 async function unwrap(promise){
   const {data,error}=await promise;
-  if(error)throw Error(error.message);
+  if(error)throw Object.assign(new Error(error.message),{code:error.code});
   return data;
 }
 const title=event=>tr(event.title_ar,event.title_en);
@@ -55,13 +63,52 @@ function formAction(id,act){
     finally{button.disabled=false;}
   };
 }
+function withDeadline(promise){
+  let timer;
+  const deadline=new Promise((_,reject)=>{
+    timer=setTimeout(()=>reject(new Error('Competition request timed out')),8000);
+  });
+  return Promise.race([promise,deadline]).finally(()=>clearTimeout(timer));
+}
+
+function showUnavailable(root,page,error,rerender){
+  const titles={
+    challenges:tr('التحديات','Challenges'),
+    gallery:tr('معرض الأعمال','Gallery'),
+    leaderboard:tr('لوحة الترتيب','Leaderboard'),
+    admin:tr('إدارة المسابقة','Competition admin'),
+    broadcast:tr('بث المسابقة','Competition broadcast')
+  };
+  const setup=error.code==='PGRST202';
+  const message=setup
+    ?tr('المسابقة بانتظار تفعيل قاعدة البيانات. يمكنك إنشاء عملك وحفظه في الاستوديو الآن.',
+      'The competition database is pending setup. You can create and save your work in the studio now.')
+    :tr('تعذّر الاتصال بخدمة المسابقة حاليًا. جرّب مرة أخرى.',
+      'Unable to reach the competition service right now. Please try again.');
+  if(page==='broadcast'){
+    root.innerHTML='<section class="broadcast"><h2>'+e(titles[page])+'</h2><p role="status">'+e(message)+'</p></section>';
+    const retry=setTimeout(()=>rerender(),20000);
+    return ()=>clearTimeout(retry);
+  }
+  root.innerHTML=section(titles[page],'<div class="card compact stack section"><p role="status">'+e(message)+'</p>'+
+    '<div class="row">'+action('arena-retry',tr('إعادة المحاولة','Try again'))+
+    '<a class="button primary" href="#/studio">'+tr('افتح الاستوديو','Open studio')+'</a></div></div>');
+  $('#arena-retry',root).onclick=rerender;
+}
+
 export async function competition(root,page,slug=DEFAULT_EVENT,scene,rerender){
   if(!/^[a-z][a-z0-9-]{2,50}$/.test(slug))throw Error('Invalid event slug');
-  const sb=await client();
+  let sb,session,current;
   const rpc=(name,args)=>unwrap(sb.rpc('arena_'+name,args));
-  const session=page==='broadcast'?null:(await unwrap(sb.auth.getSession())).session;
-  const state=()=>rpc('state',{p_slug:slug,p_public:page==='broadcast'});
-  let current=await state(), offset=0, stopped=false, poll,tick, cacheKey='';
+  const state=()=>withDeadline(rpc('state',{p_slug:slug,p_public:page==='broadcast'}));
+  try{
+    sb=await withDeadline(client());
+    session=page==='broadcast'?null:(await withDeadline(unwrap(sb.auth.getSession()))).session;
+    current=await state();
+  }catch(error){
+    return showUnavailable(root,page,error,rerender);
+  }
+  let offset=0, stopped=false, poll,tick, cacheKey='';
   const signed=new Map();
   const localTime=()=>Date.now()+offset;
   let disableAtDeadline=false;
