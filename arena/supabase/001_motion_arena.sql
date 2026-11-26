@@ -180,9 +180,9 @@ begin
       update public.arena_challenges set state='voting',deadline=clock_timestamp()+make_interval(secs=>p_seconds) where id=c.id;
     elsif p_action='complete' and c.state='voting' then
       insert into public.arena_results(submission_id,votes)
-        select s.id,count(v.submission_id)::int
-        from public.arena_submissions s left join public.arena_votes v on v.submission_id=s.id
-        where s.challenge_id=c.id and s.status='approved' group by s.id;
+        select entry.id,count(v.submission_id)::int
+        from public.arena_submissions entry left join public.arena_votes v on v.submission_id=entry.id
+        where entry.challenge_id=c.id and entry.status='approved' group by entry.id;
       update public.arena_challenges set state='complete',deadline=null where id=c.id;
     elsif p_action='cancel' and c.state in ('draft','active','paused','review','voting') then
       update public.arena_challenges set state='cancelled',deadline=null,paused_seconds=null where id=c.id;
@@ -235,3 +235,4 @@ create policy arena_clips_remove on storage.objects for delete to authenticated
 insert into public.arena_events(slug,title_ar,title_en)
   values('code-to-motion','�� ����� ��� ������','Code to Motion');
 commit;
+
