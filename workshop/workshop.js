@@ -1,9 +1,12 @@
 (() => {
   const KEY = 'ctm-ws-code';
+  const MOD_KEY = 'ctm-ws-mod';
   const NAME_KEY = 'ctm-ws-name';
+  const VOTER_KEY = 'ctm-ws-voter';
   const BUCKET = 'workshop-images';
   const MAX_IMG = 5 * 1024 * 1024;
   const TYPES = ['image/jpeg', 'image/png', 'image/webp'];
+  const POLL_MS = 5000;
   const $ = (id) => document.getElementById(id);
   const sb = window.CTM_BACKEND && window.CTM_BACKEND.sb;
 
@@ -14,6 +17,16 @@
   function setMsg(el, text, ok) {
     el.textContent = text;
     el.className = 'msg ' + (ok ? 'ok' : 'bad');
+  }
+
+  // مفتاح تصويت ثابت لكل متصفح
+  function voterKey() {
+    let k = localStorage.getItem(VOTER_KEY);
+    if (!k) {
+      k = crypto.randomUUID().replace(/-/g, '') + crypto.randomUUID().replace(/-/g, '').slice(0, 16);
+      localStorage.setItem(VOTER_KEY, k);
+    }
+    return k;
   }
 
   // العد التنازلي — السبت 28 نوفمبر 2026 الساعة 6 مساءً بتوقيت الرياض
@@ -31,25 +44,98 @@
   setInterval(tick, 30000);
 
   // ---------- الأسئلة ----------
+  let modCode = sessionStorage.getItem(MOD_KEY);
+
+  function modButtons(r) {
+    if (!modCode) return '';
+    const b = (action, label) => `<button type="button" class="btn ghost small" data-act="${action}" data-id="${r.id}">${label}</button>`;
+    return `<div class="mod-actions">${b(r.pinned ? 'unpin' : 'pin', r.pinned ? 'إلغاء التثبيت' : 'ثبّت')}
+      ${b(r.answered ? 'unanswered' : 'answered', r.answered ? 'رجّعه' : 'تمت الإجابة')}
+      ${b('hide', 'إخفاء')}</div>`;
+  }
+
   function renderList(rows) {
     const list = $('list');
     if (!rows.length) { list.innerHTML = '<div class="card empty">لا توجد أسئلة بعد. كن أول من يسأل.</div>'; return; }
     list.innerHTML = rows.map((r) =>
-      `<article class="card q">
+      `<article class="card q ${r.pinned ? 'pinned' : ''} ${r.answered ? 'answered' : ''}">
          <header><strong>${esc(r.name)}</strong><time>${esc(fmt(r.created_at))}</time></header>
+         <div class="badges">${r.pinned ? '<span class="badge">مثبّت</span>' : ''}${r.answered ? '<span class="badge ok">تمت الإجابة</span>' : ''}</div>
          <p>${esc(r.question)}</p>
          ${r.image_path ? `<img class="qimg" src="${esc(imgUrl(r.image_path))}" alt="صورة مرفقة مع السؤال" loading="lazy">` : ''}
+         <div class="vote-row">
+           <button type="button" class="vote ${r.voted ? 'on' : ''}" data-vote="${r.id}" aria-pressed="${r.voted}">▲ ${Number(r.votes)}</button>
+         </div>
+         ${modButtons(r)}
        </article>`
     ).join('');
   }
 
+  let loading = false;
   async function loadQuestions() {
     const code = sessionStorage.getItem(KEY);
-    if (!code) return;
-    const {data, error} = await sb.rpc('workshop_list_questions', {p_code: code});
-    if (error) throw error;
-    renderList(data || []);
+    if (!code || loading) return;
+    loading = true;
+    try {
+      const {data, error} = await sb.rpc('workshop_list_questions', {p_code: code, p_voter: voterKey()});
+      if (error) throw error;
+      renderList(data || []);
+    } finally {
+      loading = false;
+    }
   }
+
+  // تحديث تلقائي كل بضع ثوانٍ، ويتوقف إذا الصفحة مو ظاهرة
+  setInterval(() => {
+    if (document.hidden || $('qa').hidden || $('panel-q').hidden) return;
+    loadQuestions().catch(() => {});
+  }, POLL_MS);
+
+  $('list').addEventListener('click', async (e) => {
+    const vote = e.target.closest('[data-vote]');
+    const act = e.target.closest('[data-act]');
+    const code = sessionStorage.getItem(KEY);
+    if (!code) return lock();
+    if (vote) {
+      vote.disabled = true;
+      const {error} = await sb.rpc('workshop_vote', {p_code: code, p_question: vote.dataset.vote, p_voter: voterKey()});
+      if (error && String(error.message).includes('invalid_code')) return lock();
+      loadQuestions().catch(() => {});
+    }
+    if (act) {
+      if (!modCode) return;
+      act.disabled = true;
+      const {error} = await sb.rpc('workshop_mod_action', {p_mod: modCode, p_question: act.dataset.id, p_action: act.dataset.act});
+      if (error) { setMsg($('mod-msg'), 'تعذّر تنفيذ الإجراء.', false); return; }
+      loadQuestions().catch(() => {});
+    }
+  });
+
+  // ---------- المشرف ----------
+  function setModOn(on) {
+    $('mod-hint').hidden = !on;
+    $('mod-code').value = '';
+    $('mod-box').open = on;
+    if (!on) sessionStorage.removeItem(MOD_KEY);
+  }
+  if (modCode) setModOn(true);
+
+  $('mod-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const code = $('mod-code').value.trim();
+    const msg = $('mod-msg');
+    const {data, error} = await sb.rpc('workshop_mod_check', {p_mod: code});
+    if (error) { setMsg(msg, 'تعذّر التحقق.', false); return; }
+    if (data === true) {
+      modCode = code;
+      sessionStorage.setItem(MOD_KEY, code);
+      setMsg(msg, 'تم تفعيل وضع المشرف.', true);
+      setModOn(true);
+      loadQuestions().catch(() => {});
+    } else {
+      setMsg(msg, 'الرمز غير صحيح.', false);
+    }
+  });
 
   // ---------- لوحة المتفاعلين ----------
   async function loadBoard() {
@@ -89,6 +175,9 @@
 
   function lock() {
     sessionStorage.removeItem(KEY);
+    sessionStorage.removeItem(MOD_KEY);
+    modCode = null;
+    setModOn(false);
     $('qa').hidden = true;
     $('gate-section').hidden = false;
     $('gate-msg').textContent = '';

@@ -96,6 +96,17 @@
         <p class="msg" id="ask-msg" role="status"></p>
       </form>
       <div class="list" id="list" aria-live="polite"></div>
+
+      <details class="mod card" id="mod-box">
+        <summary>وضع المشرف</summary>
+        <form id="mod-form" class="row-form" autocomplete="off">
+          <label class="sr" for="mod-code">رمز المشرف</label>
+          <input id="mod-code" class="input code" inputmode="numeric" maxlength="12" placeholder="رمز المشرف">
+          <button class="btn primary small" type="submit">تفعيل</button>
+        </form>
+        <p class="msg" id="mod-msg" role="status"></p>
+        <p class="muted small" id="mod-hint" hidden>المشرف مفعّل: تقدر تثبّت الأسئلة وتعلّمها كمُجاب أو تخفيها.</p>
+      </details>
     </div>
 
     <div id="panel-l" role="tabpanel" aria-labelledby="tab-l" hidden>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>شاشة الأسئلة · CODE TO MOTION</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="workshop.css">
+<style>
+  body{overflow:hidden;background:#0a0618;margin:0}
+  .screen{min-height:100vh;padding:48px 64px;display:flex;flex-direction:column;gap:24px;box-sizing:border-box}
+  .screen h1{font-size:44px;margin:0;color:var(--mute);font-weight:700}
+  .big{background:var(--card);border:2px solid var(--pink);border-radius:28px;padding:40px 48px;box-shadow:0 30px 80px -20px #ff2e9a55}
+  .big .who{font-size:30px;font-weight:900;color:var(--yel)}
+  .big .txt{font-size:48px;font-weight:900;line-height:1.35;margin:12px 0 0;white-space:pre-wrap;overflow-wrap:anywhere}
+  .big img{margin-top:18px;max-height:340px;border-radius:18px;border:1px solid var(--line)}
+  .small-list{display:grid;gap:14px}
+  .item{background:var(--bg2);border:1px solid var(--line);border-radius:18px;padding:18px 26px;display:flex;gap:18px;align-items:center}
+  .item .v{font-weight:900;color:var(--cyan);font-size:26px;min-width:70px}
+  .item .t{font-size:24px;font-weight:700;overflow-wrap:anywhere}
+  .item .w{color:var(--mute);font-size:18px}
+  .gatebox{margin:auto;max-width:560px;width:100%}
+  .gatebox input{font-size:24px}
+  .empty-screen{font-size:36px;color:var(--mute);margin:auto;text-align:center}
+</style>
+</head>
+<body>
+<div class="screen" id="screen" hidden>
+  <h1>اسألنا الآن · CODE TO MOTION</h1>
+  <div id="top"></div>
+</div>
+
+<div class="gatebox card" id="gatebox" hidden>
+  <h2>شاشة البث</h2>
+  <p class="muted">اكتب الرقم السري لعرض الأسئلة.</p>
+  <form id="gate-form" class="row-form" autocomplete="off">
+    <label class="sr" for="code">الرقم السري</label>
+    <input id="code" class="input code" inputmode="numeric" maxlength="12" placeholder="الرقم السري" required>
+    <button class="btn primary" type="submit">عرض</button>
+  </form>
+  <p class="msg" id="gate-msg" role="status"></p>
+</div>
+
+<script src="../vendor/supabase-2.119.0.js"></script>
+<script src="../backend.js"></script>
+<script>
+(() => {
+  const KEY = 'ctm-ws-screen-code';
+  const sb = window.CTM_BACKEND && window.CTM_BACKEND.sb;
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+  const imgUrl = (p) => sb.storage.from('workshop-images').getPublicUrl(p).data.publicUrl;
+
+  function render(rows) {
+    if (!rows.length) {
+      $('top').innerHTML = '<div class="empty-screen">بانتظار الأسئلة…</div>';
+      return;
+    }
+    const [first, ...rest] = rows;
+    $('top').innerHTML =
+      `<div class="big"><div class="who">${esc(first.name)}${first.pinned ? ' · مثبّت' : ''}</div>
+         <p class="txt">${esc(first.question)}</p>
+         ${first.image_path ? `<img src="${esc(imgUrl(first.image_path))}" alt="">` : ''}</div>` +
+      (rest.length ? `<div class="small-list">${rest.map((r) =>
+        `<div class="item"><span class="v">▲ ${Number(r.votes)}</span><span class="t">${esc(r.question)}</span><span class="w">${esc(r.name)}</span></div>`
+      ).join('')}</div>` : '');
+  }
+
+  async function load(code) {
+    const {data, error} = await sb.rpc('workshop_top_questions', {p_code: code});
+    if (error) {
+      if (String(error.message).includes('invalid_code')) { localStorage.removeItem(KEY); showGate(); }
+      return;
+    }
+    render(data || []);
+  }
+
+  function showScreen(code) {
+    $('gatebox').hidden = true;
+    $('screen').hidden = false;
+    load(code);
+    setInterval(() => { if (!document.hidden) load(code); }, 4000);
+  }
+
+  function showGate() {
+    $('screen').hidden = true;
+    $('gatebox').hidden = false;
+  }
+
+  if (!sb) { showGate(); $('gate-msg').textContent = 'تعذّر الاتصال بالخادم.'; return; }
+
+  $('gate-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const code = $('code').value.trim();
+    const {data, error} = await sb.rpc('workshop_check_code', {p_code: code});
+    if (error || data !== true) { $('gate-msg').textContent = 'الرقم السري غير صحيح.'; return; }
+    localStorage.setItem(KEY, code);
+    showScreen(code);
+  });
+
+  const saved = localStorage.getItem(KEY);
+  if (saved) showScreen(saved); else showGate();
+})();
+</script>
+</body>
+</html>
