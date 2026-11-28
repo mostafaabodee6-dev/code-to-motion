@@ -47,6 +47,6 @@ test('renderer is deterministic for the same frame and honors hidden layers',()=
     assert.notDeepEqual(first.ops,other.ops);
     p.layers[0].hidden=true;
     const hidden=makeContext();draw(hidden.ctx,p,38);
-    assert.ok(!hidden.ops.some(op=>op[0]==='fillText'&&op[1]==='ساحة الموشن'));
+    assert.ok(!hidden.ops.some(op=>op[0]==='fillText'&&op[1]==='ريل ستوديو'));
   }
 });
