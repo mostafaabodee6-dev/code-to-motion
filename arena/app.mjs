@@ -11,7 +11,7 @@ function route(){return location.hash.startsWith('#/')?location.hash.slice(2):''
 function go(path){if(route()===path)render();else location.hash='/'+path;}
 function header(page) {
   const entries=[['',tr('الرئيسية','Home')],['templates',tr('القوالب','Templates')],['projects',tr('مشاريعي','My projects')],['challenges',tr('التحديات','Challenges')],['gallery',tr('المعرض','Gallery')],['learn',tr('تعلّم','Learn')]];
-  $('#header').innerHTML='<div class="bar"><a class="logo" href="#/"><span aria-hidden="true">◩</span> MOTION ARENA</a>'+
+  $('#header').innerHTML='<div class="bar"><a class="logo" href="#/"><span aria-hidden="true">◩</span> REAL STUDIO</a>'+
     '<nav class="nav" aria-label="'+tr('التنقل الرئيسي','Main navigation')+'">'+entries.map(([path,title])=>'<a href="'+href(path)+'"'+(page===path?' aria-current="page"':'')+'>'+title+'</a>').join('')+'</nav><div class="row">'+
     action('language',tr('English','العربية'))+action('theme',tr('المظهر','Theme'))+'</div></div>';
   $('#language').onclick=()=>{localStorage.setItem('arena-lang',tr('en','ar'));render();};
@@ -32,7 +32,7 @@ async function newProject(template){
   const p=project(template,language());await save(p);go('studio/'+p.id);
 }
 function home(){
-  root.innerHTML='<section class="wrap"><div class="hero"><div><span class="eyebrow">CODE TO MOTION</span><h1>'+tr('ساحة الموشن','Motion Arena')+'</h1><p>'+tr('صمّم. حرّك. نافس. افتح قالبًا، حوّله إلى فيديو خاص بك وشاركه في تحديات الورشة.','Create. Animate. Compete. Make a motion piece, export your video, and enter a workshop challenge.')+'</p>'+
+  root.innerHTML='<section class="wrap"><div class="hero"><div><span class="eyebrow">CODE TO MOTION</span><h1>'+tr('ريل ستوديو','Real Studio')+'</h1><p>'+tr('صمّم. حرّك. نافس. افتح قالبًا، حوّله إلى فيديو خاص بك وشاركه في تحديات الورشة.','Create. Animate. Compete. Make a motion piece, export your video, and enter a workshop challenge.')+'</p>'+
     '<div class="row"><a class="button primary" href="#/templates">'+tr('ابدأ التصميم','Start creating')+'</a><a class="button" href="#/challenges">'+tr('انضم إلى التحدي','Join a challenge')+'</a></div></div>'+
     '<div class="hero-art"><canvas id="hero-preview" width="960" height="540" aria-label="'+tr('عرض موشن من قالب أبعاد','Animated Dimension template preview')+'"></canvas></div></div>'+
     '<section><h2>'+tr('اختر نقطة البداية','Pick a starting point')+'</h2>'+cards()+'</section>'+

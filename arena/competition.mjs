@@ -189,7 +189,7 @@ export async function competition(root,page,slug=DEFAULT_EVENT,scene,rerender){
       else if(active==='break')body='<h1>'+tr('استراحة','Break')+'</h1><p>'+e(title(event))+'</p>';
       else if(active==='gallery')body='<h2>'+tr('معرض الأعمال','Gallery')+'</h2><div class="grid">'+visible.slice(0,6).map(s=>'<article class="card"><video muted loop autoplay playsinline data-video="'+e(s.video_path)+'"></video>'+clipTitle(s)+'</article>').join('')+'</div>';
       else body='<h2>'+sceneName(active)+'</h2>'+((c?.state==='complete'&&ranks(visible,active==='winners'?3:8))||'<p>'+tr('بانتظار إعلان النتائج','Waiting for results')+'</p>');
-      root.innerHTML='<section class="broadcast"><span class="eyebrow">MOTION ARENA · CODE TO MOTION</span>'+body+note()+'</section>';
+      root.innerHTML='<section class="broadcast"><span class="eyebrow">REAL STUDIO · CODE TO MOTION</span>'+body+note()+'</section>';
     } else if(page==='gallery'){
       root.innerHTML=section(tr('معرض الأعمال','Gallery'),nav+'<div class="section grid">'+(visible.map(s=>'<article class="card stack"><video controls preload="metadata" playsinline data-video="'+e(s.video_path)+'"></video>'+clipTitle(s)+
         (voting&&!s.own&&(!current.has_voted||s.voted)?'<button class="primary" data-vote="'+e(s.id)+'" data-deadline-action '+(s.voted?'disabled':'')+'>'+tr(s.voted?'تم التصويت':'صوّت',s.voted?'Voted':'Vote')+'</button>':'')+'</article>').join('')||empty(tr('الأعمال المعتمدة ستظهر هنا.','Approved work will appear here.')))+'</div>'+note());

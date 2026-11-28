@@ -17,7 +17,7 @@ export function layer(type, text, color='#ffffff', end=10) {
 export function project(id='kinetic',lang='ar') {
   const template=templates.find(item=>item.id===id)??templates[0];
   const [background,accent,detail]=template.colors;
-  const headline=layer('text',lang==='ar'?'ساحة الموشن':'MOTION ARENA',accent);
+  const headline=layer('text',lang==='ar'?'ريل ستوديو':'REAL STUDIO',accent);
   const caption=layer('text',lang==='ar'?'صمّم. حرّك. نافس.':template.subtitle,detail);
   Object.assign(caption,{size:4,y:68,start:.24,animation:'fade'});
   headline.animation={kinetic:'slide',cinematic:'fade',future:'reveal',minimal:'scale',social:'bounce',dimension:'rotate'}[template.id];
@@ -35,7 +35,7 @@ export function validate(value) {
   if(!value||value.schemaVersion!==1||!str(value.id,80)||!str(value.name,120)||
     !Object.hasOwn(ratios,value.ratio)||!templates.some(t=>t.id===value.template)||
     ![24,30,60].includes(value.fps)||!n(value.duration,3,30)||!colors.test(value.background)||
-    !colors.test(value.accent)||!Array.isArray(value.layers)||value.layers.length>24) throw Error('Invalid Motion Arena project');
+    !colors.test(value.accent)||!Array.isArray(value.layers)||value.layers.length>24) throw Error('Invalid Real Studio project');
   const layers=value.layers.map(item=>{
     if(!item||!str(item.id,80)||!['text','shape','image'].includes(item.type)||!str(item.text,240)||
       !colors.test(item.color)||!n(item.x,-100,200)||!n(item.y,-100,200)||!n(item.size,1,150)||
