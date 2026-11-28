@@ -9,8 +9,8 @@ test('six templates create independent valid local projects in Arabic and Englis
     assert.notEqual(ar.id,en.id);
     assert.equal(validate(ar).template,t.id);
     assert.equal(validate(en).template,t.id);
-    assert.match(ar.layers[0].text,/الموشن/);
-    assert.equal(en.layers[0].text,'MOTION ARENA');
+    assert.match(ar.layers[0].text,/ستوديو/);
+    assert.equal(en.layers[0].text,'REAL STUDIO');
     assert.ok(animations.includes(ar.layers[0].animation));
   }
 });
